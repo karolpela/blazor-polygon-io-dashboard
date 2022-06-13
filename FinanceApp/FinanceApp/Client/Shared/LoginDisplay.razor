@@ -6,6 +6,21 @@
 
 <AuthorizeView>
     <Authorized>
+        <div class="pa-4 justify-center my-4 mud-text-align-center">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="authentication/profile">Hi, @context.User.Identity.Name!</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="BeginSignOut">Log Out</MudButton>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="pa-4 justify-center my-4 mud-text-align-center">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="authentication/register">Register</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" Link="authentication/login">Log in</MudButton>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+@*<AuthorizeView>
+    <Authorized>
         <a href="authentication/profile">Hello, @context.User.Identity?.Name!</a>
         <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>
     </Authorized>
@@ -13,7 +28,7 @@
         <a href="authentication/register">Register</a>
         <a href="authentication/login">Log in</a>
     </NotAuthorized>
-</AuthorizeView>
+</AuthorizeView>*@
 
 @code{
     private async Task BeginSignOut(MouseEventArgs args)
