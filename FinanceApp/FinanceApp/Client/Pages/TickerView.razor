@@ -1,0 +1,40 @@
+﻿@using FinanceApp.Shared.Models.TickerDetails
+@using FinanceApp.Shared.Models.Tickers
+@inject HttpClient httpClient
+<h3>TickerDetails</h3>
+
+@if (TickerDetails != null)
+{
+    <p>
+        Ticker: @TickerDetails!.Results.Ticker
+        Name: @TickerDetails!.Results.Name
+    </p>
+} else
+{
+    <p>
+        Select a stock!
+    </p>
+}
+
+
+
+@code {
+    [Parameter]
+    public Result? SelectedTicker { get; set; }
+    private TickerDetails? TickerDetails;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (SelectedTicker != null)
+        {
+            try
+            {
+                TickerDetails = await httpClient.GetFromJsonAsync<TickerDetails>($"api/tickers/{SelectedTicker.Ticker}");
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
+}
