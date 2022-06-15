@@ -1,0 +1,55 @@
+﻿@using System.Text.Json
+@using System.Linq
+@using FinanceApp.Shared.Models.Tickers
+@using FinanceApp.Shared.Models.TickerDetails
+@inject IHttpClientFactory ClientFactory
+@inject IConfiguration Configuration
+@page "/stocks"
+
+<h1>Stocks</h1>
+
+@if (tickers != null)
+{
+    <MudAutocomplete T="Result" Label="NASDAQ common stocks" @bind-Value="selectedTicker"
+                 AutoFocus=true
+                 SearchFunc="@SearchStock" ResetValueOnEmptyText=true
+                 ToStringFunc="@(r => r == null ? null : $"{r.Ticker} - {r.Name}")" />
+
+    <StockDetails SelectedTicker="@selectedTicker" />
+}
+else
+{
+    <p>Loading stock search...</p>
+}
+
+@code {
+    private Tickers? tickers;
+    private Result? selectedTicker;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = ClientFactory.CreateClient();
+        tickers = await client.GetFromJsonAsync<Tickers>("api/tickers/");
+    }
+
+    private async Task<IEnumerable<Result>> SearchStock(string value)
+    {
+        return await Task.Run(() =>
+        {
+            if (tickers == null)
+            {
+                return Array.Empty<Result>();
+            }
+
+            if (string.IsNullOrEmpty(value))
+            {
+                return tickers.Results;
+            }
+            else
+            {
+                return tickers.Results.Where(r => r.Ticker.Contains(value, StringComparison.InvariantCultureIgnoreCase) ||
+                r.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+            }
+        });
+    }
+}

@@ -1,27 +1,19 @@
 ﻿@using FinanceApp.Shared.Models.TickerDetails
 @using FinanceApp.Shared.Models.Tickers
-@inject HttpClient httpClient
-<h3>TickerDetails</h3>
+@inject IHttpClientFactory ClientFactory
 
-@if (TickerDetails != null)
-{
-    <p>
-        Ticker: @TickerDetails!.Results.Ticker
-        Name: @TickerDetails!.Results.Name
-    </p>
-} else
-{
-    <p>
-        Select a stock!
-    </p>
-}
-
-
+<MudItem Class="mt-4">
+    @if (tickerDetails != null)
+    {
+        <StockOpenClose SelectedTicker="@SelectedTicker"> </StockOpenClose>
+    }
+</MudItem>
 
 @code {
     [Parameter]
     public Result? SelectedTicker { get; set; }
-    private TickerDetails? TickerDetails;
+
+    private TickerDetails? tickerDetails;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -29,7 +21,8 @@
         {
             try
             {
-                TickerDetails = await httpClient.GetFromJsonAsync<TickerDetails>($"api/tickers/{SelectedTicker.Ticker}");
+                var client = ClientFactory.CreateClient();
+                tickerDetails = await client.GetFromJsonAsync<TickerDetails>($"api/tickers/{SelectedTicker.Ticker}");
             }
             catch (HttpRequestException ex)
             {
