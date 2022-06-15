@@ -28,7 +28,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var client = ClientFactory.CreateClient();
+        var client = ClientFactory.CreateClient("FinanceApp.ServerAPI");
         tickers = await client.GetFromJsonAsync<Tickers>("api/tickers/");
     }
 

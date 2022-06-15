@@ -5,6 +5,7 @@
 <MudItem Class="mt-4">
     @if (tickerDetails != null)
     {
+        @*<p>CEO: @tickerDetails.ResultsDto. </p>*@
         <StockOpenClose SelectedTicker="@SelectedTicker"> </StockOpenClose>
     }
 </MudItem>
@@ -13,7 +14,7 @@
     [Parameter]
     public Result? SelectedTicker { get; set; }
 
-    private TickerDetails? tickerDetails;
+    private TickerDetailsDto? tickerDetails;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -21,8 +22,8 @@
         {
             try
             {
-                var client = ClientFactory.CreateClient();
-                tickerDetails = await client.GetFromJsonAsync<TickerDetails>($"api/tickers/{SelectedTicker.Ticker}");
+                var client = ClientFactory.CreateClient("FinanceApp.ServerAPI");
+                tickerDetails = await client.GetFromJsonAsync<TickerDetailsDto>($"api/tickers/{SelectedTicker.Ticker}");
             }
             catch (HttpRequestException ex)
             {

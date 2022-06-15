@@ -38,7 +38,7 @@
         {
             try
             {
-                var client = ClientFactory.CreateClient();
+                var client = ClientFactory.CreateClient("FinanceApp.ServerAPI");
                 dailyOpenClose = await client.GetFromJsonAsync<DailyOpenClose>($"api/tickers/{SelectedTicker.Ticker}/open-close/");
 
                 var logoArray = await client.GetByteArrayAsync("https://localhost:7144/api/tickers/AAPL/logo/");
