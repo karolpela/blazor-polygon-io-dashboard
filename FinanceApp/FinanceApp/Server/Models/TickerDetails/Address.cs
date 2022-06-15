@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
-namespace FinanceApp.Shared.Models.TickerDetails
+namespace FinanceApp.Server.Models.TickerDetails
 {
     public class Address
     {
@@ -20,6 +15,11 @@ namespace FinanceApp.Shared.Models.TickerDetails
 
         [JsonPropertyName("postal_code")]
         public string PostalCode { get; set; }
+
+        public Address()
+        {
+            
+        }
 
         public Address(string address1, string city, string state, string postalCode)
         {

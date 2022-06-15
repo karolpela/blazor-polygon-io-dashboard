@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinanceApp.Shared.Models.TickerDetails
 {
-    public class Branding
+    public class BrandingDto
     {
         [JsonPropertyName("logo_url")]
         public string LogoUrl { get; set; }
@@ -15,7 +15,7 @@ namespace FinanceApp.Shared.Models.TickerDetails
         [JsonPropertyName("icon_url")]
         public string IconUrl { get; set; }
 
-        public Branding(string logoUrl, string iconUrl)
+        public BrandingDto(string logoUrl, string iconUrl)
         {
             LogoUrl = logoUrl;
             IconUrl = iconUrl;

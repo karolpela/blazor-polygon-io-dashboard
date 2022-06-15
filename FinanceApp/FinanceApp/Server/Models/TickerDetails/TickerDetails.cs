@@ -5,11 +5,17 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace FinanceApp.Shared.Models.TickerDetails
+namespace FinanceApp.Server.Models.TickerDetails
 {
     public class TickerDetails
     {
-        [JsonPropertyName("results")]
+        public string TickerId
+        {
+            get => Results.Ticker;
+            set => Results.Ticker = value;
+        }
+
+        [JsonPropertyName("resultsDto")]
         public Results Results { get; set; }
 
         [JsonPropertyName("status")]
@@ -18,11 +24,19 @@ namespace FinanceApp.Shared.Models.TickerDetails
         [JsonPropertyName("request_id")]
         public string RequestId { get; set; }
 
+        public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
+
+        public TickerDetails()
+        {
+            ApplicationUsers = new HashSet<ApplicationUser>();
+        }
+
         public TickerDetails(Results results, string status, string requestId)
         {
             Results = results;
             Status = status;
             RequestId = requestId;
+            ApplicationUsers = new HashSet<ApplicationUser>();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinanceApp.Shared.Models.TickerDetails
 {
-    public class Results
+    public class ResultsDto
     {
         [JsonPropertyName("ticker")]
         public string Ticker { get; set; }
@@ -48,8 +48,8 @@ namespace FinanceApp.Shared.Models.TickerDetails
         [JsonPropertyName("phone_number")]
         public string PhoneNumber { get; set; }
 
-        [JsonPropertyName("address")]
-        public Address Address { get; set; }
+        [JsonPropertyName("addressDto")]
+        public AddressDto AddressDto { get; set; }
 
         [JsonPropertyName("description")]
         public string Description { get; set; }
@@ -72,8 +72,8 @@ namespace FinanceApp.Shared.Models.TickerDetails
         [JsonPropertyName("list_date")]
         public string ListDate { get; set; }
 
-        [JsonPropertyName("branding")]
-        public Branding Branding { get; set; }
+        [JsonPropertyName("brandingDto")]
+        public BrandingDto BrandingDto { get; set; }
 
         [JsonPropertyName("share_class_shares_outstanding")]
         public long ShareClassSharesOutstanding { get; set; }
@@ -81,7 +81,7 @@ namespace FinanceApp.Shared.Models.TickerDetails
         [JsonPropertyName("weighted_shares_outstanding")]
         public long WeightedSharesOutstanding { get; set; }
 
-        public Results(string ticker, string name, string market, string locale, string primaryExchange, string type, bool active, string currencyName, string cik, string compositeFigi, string shareClassFigi, double marketCap, string phoneNumber, Address address, string description, string sicCode, string sicDescription, string tickerRoot, string homepageUrl, int totalEmployees, string listDate, Branding branding, long shareClassSharesOutstanding, long weightedSharesOutstanding)
+        public ResultsDto(string ticker, string name, string market, string locale, string primaryExchange, string type, bool active, string currencyName, string cik, string compositeFigi, string shareClassFigi, double marketCap, string phoneNumber, AddressDto addressDto, string description, string sicCode, string sicDescription, string tickerRoot, string homepageUrl, int totalEmployees, string listDate, BrandingDto brandingDto, long shareClassSharesOutstanding, long weightedSharesOutstanding)
         {
             Ticker = ticker;
             Name = name;
@@ -96,7 +96,7 @@ namespace FinanceApp.Shared.Models.TickerDetails
             ShareClassFigi = shareClassFigi;
             MarketCap = marketCap;
             PhoneNumber = phoneNumber;
-            Address = address;
+            AddressDto = addressDto;
             Description = description;
             SicCode = sicCode;
             SicDescription = sicDescription;
@@ -104,7 +104,7 @@ namespace FinanceApp.Shared.Models.TickerDetails
             HomepageUrl = homepageUrl;
             TotalEmployees = totalEmployees;
             ListDate = listDate;
-            Branding = branding;
+            BrandingDto = brandingDto;
             ShareClassSharesOutstanding = shareClassSharesOutstanding;
             WeightedSharesOutstanding = weightedSharesOutstanding;
         }
