@@ -1,4 +1,5 @@
-﻿using FinanceApp.Shared.Models;
+﻿using AutoMapper;
+using FinanceApp.Shared.Models;
 using FinanceApp.Shared.Models.TickerDetails;
 using FinanceApp.Shared.Models.Tickers;
 using Microsoft.AspNetCore.Authorization;
@@ -14,11 +15,13 @@ namespace FinanceApp.Server.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IHttpClientFactory _clientFactory;
+        private readonly IMapper _mapper;
 
-        public TickersController(IConfiguration configuration, IHttpClientFactory clientFactory)
+        public TickersController(IConfiguration configuration, IHttpClientFactory clientFactory, IMapper mapper)
         {
             _configuration = configuration;
             _clientFactory = clientFactory;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -34,11 +37,12 @@ namespace FinanceApp.Server.Controllers
         [HttpGet("{ticker}")]
         public async Task<IActionResult> GetTickerDetailsAsync(string ticker)
         {
-            
+
             var client = _clientFactory.CreateClient();
-            var tickerDetails = await client.GetFromJsonAsync<TickerDetails>(
+            var tickerDetails = await client.GetFromJsonAsync<TickerDetailsDto>(
                 $"https://api.polygon.io/v3/reference/tickers/{ticker}?apiKey={_configuration["Polygon:ApiKey"]}");
-            return Ok(tickerDetails);
+            var tickerDetailsDto = _mapper.Map<TickerDetailsDto>(tickerDetails);
+            return Ok(tickerDetailsDto);
         }
 
         [HttpGet("{ticker}/open-close")]
@@ -46,7 +50,9 @@ namespace FinanceApp.Server.Controllers
         {
             var client = _clientFactory.CreateClient();
             var dailyOpenClose = await client.GetFromJsonAsync<DailyOpenClose>(
-                $"https://api.polygon.io/v1/open-close/{ticker}/{DateTime.Now.AddDays(-4):yyyy-MM-dd}?apiKey={_configuration["Polygon:ApiKey"]}");
+                $"https://api.polygon.io/v1/open-close/{ticker}/2022-06-02?apiKey={_configuration["Polygon:ApiKey"]}");
+            //var dailyOpenClose = await client.GetFromJsonAsync<DailyOpenClose>(
+            //$"https://api.polygon.io/v1/open-close/{ticker}/{DateTime.Now.AddDays(-4):yyyy-MM-dd}?apiKey={_configuration["Polygon:ApiKey"]}");
             return Ok(dailyOpenClose);
         }
 
