@@ -2,7 +2,7 @@
 @using System.Linq
 @using FinanceApp.Shared.Models.Tickers
 @using FinanceApp.Shared.Models.TickerDetails
-@inject IHttpClientFactory ClientFactory
+@inject HttpClient Http
 @inject IConfiguration Configuration
 @page "/stocks"
 
@@ -28,8 +28,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var client = ClientFactory.CreateClient("FinanceApp.ServerAPI");
-        tickers = await client.GetFromJsonAsync<Tickers>("api/tickers/");
+        tickers = await Http.GetFromJsonAsync<Tickers>("api/tickers/");
     }
 
     private async Task<IEnumerable<Result>> SearchStock(string value)

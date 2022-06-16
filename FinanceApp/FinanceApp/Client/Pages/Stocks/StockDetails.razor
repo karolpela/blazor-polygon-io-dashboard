@@ -1,6 +1,6 @@
 ﻿@using FinanceApp.Shared.Models.TickerDetails
 @using FinanceApp.Shared.Models.Tickers
-@inject IHttpClientFactory ClientFactory
+@inject HttpClient Http
 
 <MudItem Class="mt-4">
     @if (tickerDetails != null)
@@ -22,8 +22,7 @@
         {
             try
             {
-                var client = ClientFactory.CreateClient("FinanceApp.ServerAPI");
-                tickerDetails = await client.GetFromJsonAsync<TickerDetailsDto>($"api/tickers/{SelectedTicker.Ticker}");
+                tickerDetails = await Http.GetFromJsonAsync<TickerDetailsDto>($"api/tickers/{SelectedTicker.Ticker}");
             }
             catch (HttpRequestException ex)
             {

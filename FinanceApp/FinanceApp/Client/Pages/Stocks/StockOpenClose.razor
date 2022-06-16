@@ -1,7 +1,7 @@
 ﻿@using FinanceApp.Shared.Models
 @using FinanceApp.Shared.Models.Tickers
 @using static System.Net.Mime.MediaTypeNames
-@inject IHttpClientFactory ClientFactory
+@inject HttpClient Http
 
 @if (dailyOpenClose != null && logoString != null)
 {
@@ -38,11 +38,10 @@
         {
             try
             {
-                var client = ClientFactory.CreateClient("FinanceApp.ServerAPI");
-                dailyOpenClose = await client.GetFromJsonAsync<DailyOpenClose>($"api/tickers/{SelectedTicker.Ticker}/open-close/");
+                dailyOpenClose = await Http.GetFromJsonAsync<DailyOpenClose>($"api/tickers/{SelectedTicker.Ticker}/open-close/");
 
-                var logoArray = await client.GetByteArrayAsync("https://localhost:7144/api/tickers/AAPL/logo/");
-                logoString = $"data:image/svg+xml;base64,{@System.Convert.ToBase64String(logoArray)}";
+                var logoArray = await Http.GetByteArrayAsync("https://localhost:7144/api/tickers/AAPL/logo/");
+                logoString = $"data:image/svg+xml;base64,{Convert.ToBase64String(logoArray)}";
             }
             catch (HttpRequestException ex)
             {
