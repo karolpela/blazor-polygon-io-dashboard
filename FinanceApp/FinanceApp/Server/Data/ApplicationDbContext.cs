@@ -10,7 +10,7 @@ namespace FinanceApp.Server.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
-        public DbSet<TickerDetails> TickerDetails { get; set; }
+        public DbSet<TickerDetails> TickerDetails { get; set; } = null!;
 
         public ApplicationDbContext(
             DbContextOptions options,

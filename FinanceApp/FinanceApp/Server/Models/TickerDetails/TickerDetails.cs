@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinanceApp.Server.Models.TickerDetails
 {
-    public class TickerDetails
+    public sealed class TickerDetails
     {
         public string TickerId
         {
@@ -15,16 +15,16 @@ namespace FinanceApp.Server.Models.TickerDetails
             set => Results.Ticker = value;
         }
 
-        [JsonPropertyName("resultsDto")]
-        public Results Results { get; set; }
+        [JsonPropertyName("results")]
+        public Results Results { get; set; } = null!;
 
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string Status { get; set; } = null!;
 
         [JsonPropertyName("request_id")]
-        public string RequestId { get; set; }
+        public string RequestId { get; set; } = null!;
 
-        public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
+        public ICollection<ApplicationUser> ApplicationUsers { get; set; }
 
         public TickerDetails()
         {

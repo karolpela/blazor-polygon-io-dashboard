@@ -10,10 +10,10 @@ namespace FinanceApp.Server.Models.TickerDetails
     public class Branding
     {
         [JsonPropertyName("logo_url")]
-        public string LogoUrl { get; set; }
+        public string LogoUrl { get; set; } = null!;
 
         [JsonPropertyName("icon_url")]
-        public string IconUrl { get; set; }
+        public string IconUrl { get; set; } = null!;
 
         public Branding()
         {
