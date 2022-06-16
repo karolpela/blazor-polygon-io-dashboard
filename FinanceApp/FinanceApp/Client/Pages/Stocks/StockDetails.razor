@@ -3,10 +3,12 @@
 @inject HttpClient Http
 
 <MudItem Class="mt-4">
-    @if (tickerDetails != null)
+    @if (SelectedTicker != null)
     {
-        @*<p>CEO: @tickerDetails.ResultsDto. </p>*@
-        <StockOpenClose SelectedTicker="@SelectedTicker"> </StockOpenClose>
+        <MudPaper Class="d-flex align-center mt-4 pa-4" Elevation="2">
+            <MudImage Class="pa-8" Width="200" Height="null" Src="@logoString"/>
+            <StockOpenClose SelectedTicker="@SelectedTicker"> </StockOpenClose>
+        </MudPaper>
     }
 </MudItem>
 
@@ -14,7 +16,8 @@
     [Parameter]
     public Result? SelectedTicker { get; set; }
 
-    private TickerDetailsDto? tickerDetails;
+    private TickerDto? ticker;
+    private string? logoString;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -22,7 +25,11 @@
         {
             try
             {
-                tickerDetails = await Http.GetFromJsonAsync<TickerDetailsDto>($"api/tickers/{SelectedTicker.Ticker}");
+                ticker = await Http.GetFromJsonAsync<TickerDto>($"api/tickers/{SelectedTicker.Ticker}");
+                if (ticker != null)
+                {
+                    logoString = $"data:image/svg+xml;base64,{Convert.ToBase64String(ticker.Logo)}";
+                }
             }
             catch (HttpRequestException ex)
             {
