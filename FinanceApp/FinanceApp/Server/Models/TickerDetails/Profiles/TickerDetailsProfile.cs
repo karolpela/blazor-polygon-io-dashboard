@@ -8,6 +8,16 @@ namespace FinanceApp.Server.Models.TickerDetails.Profiles
         public TickerDetailsProfile()
         {
             CreateMap<TickerDetails, TickerDetailsDto>();
+            CreateMap<TickerDetailsDto, TickerDetails>();
+
+            CreateMap<Branding, BrandingDto>();
+            CreateMap<BrandingDto, Branding>();
+
+            CreateMap<Address, AddressDto>();
+            CreateMap<AddressDto, Address>();
+
+            CreateMap<TickerResultsDto, TickerResults>();
+            CreateMap<TickerResults, TickerResultsDto>();
         }
     }
 }

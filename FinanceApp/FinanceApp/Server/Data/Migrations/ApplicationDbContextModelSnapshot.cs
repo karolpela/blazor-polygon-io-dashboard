@@ -17,24 +17,24 @@ namespace FinanceApp.Server.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("ApplicationUserTickerDetails", b =>
+            modelBuilder.Entity("ApplicationUserTickerResults", b =>
                 {
                     b.Property<string>("ApplicationUsersId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("TickerWatchlistTickerId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("TickerWatchlistTicker")
+                        .HasColumnType("nvarchar(4)");
 
-                    b.HasKey("ApplicationUsersId", "TickerWatchlistTickerId");
+                    b.HasKey("ApplicationUsersId", "TickerWatchlistTicker");
 
-                    b.HasIndex("TickerWatchlistTickerId");
+                    b.HasIndex("TickerWatchlistTicker");
 
-                    b.ToTable("TickerDetailsApplicationUser", (string)null);
+                    b.ToTable("ApplicationUserTickerResults", (string)null);
                 });
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.DeviceFlowCodes", b =>
@@ -249,15 +249,12 @@ namespace FinanceApp.Server.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostalCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Address1");
@@ -271,7 +268,6 @@ namespace FinanceApp.Server.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("IconUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("LogoUrl");
@@ -279,28 +275,25 @@ namespace FinanceApp.Server.Data.Migrations
                     b.ToTable("Branding");
                 });
 
-            modelBuilder.Entity("FinanceApp.Server.Models.TickerDetails.Results", b =>
+            modelBuilder.Entity("FinanceApp.Server.Models.TickerDetails.TickerResults", b =>
                 {
                     b.Property<string>("Ticker")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
                     b.Property<string>("Address1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("BrandingLogoUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Cik")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompositeFigi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CurrencyName")
@@ -308,11 +301,9 @@ namespace FinanceApp.Server.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HomepageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ListDate")
@@ -335,7 +326,6 @@ namespace FinanceApp.Server.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PrimaryExchange")
@@ -343,32 +333,28 @@ namespace FinanceApp.Server.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShareClassFigi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("ShareClassSharesOutstanding")
+                    b.Property<long?>("ShareClassSharesOutstanding")
                         .HasColumnType("bigint");
 
                     b.Property<string>("SicCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SicDescription")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TickerRoot")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TotalEmployees")
+                    b.Property<int?>("TotalEmployees")
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("WeightedSharesOutstanding")
+                    b.Property<long?>("WeightedSharesOutstanding")
                         .HasColumnType("bigint");
 
                     b.HasKey("Ticker");
@@ -377,31 +363,7 @@ namespace FinanceApp.Server.Data.Migrations
 
                     b.HasIndex("BrandingLogoUrl");
 
-                    b.ToTable("Results");
-                });
-
-            modelBuilder.Entity("FinanceApp.Server.Models.TickerDetails.TickerDetails", b =>
-                {
-                    b.Property<string>("TickerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RequestId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ResultsTicker")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TickerId");
-
-                    b.HasIndex("ResultsTicker");
-
-                    b.ToTable("TickerDetails", (string)null);
+                    b.ToTable("TickerResults", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -541,7 +503,7 @@ namespace FinanceApp.Server.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ApplicationUserTickerDetails", b =>
+            modelBuilder.Entity("ApplicationUserTickerResults", b =>
                 {
                     b.HasOne("FinanceApp.Server.Models.ApplicationUser", null)
                         .WithMany()
@@ -549,41 +511,26 @@ namespace FinanceApp.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FinanceApp.Server.Models.TickerDetails.TickerDetails", null)
+                    b.HasOne("FinanceApp.Server.Models.TickerDetails.TickerResults", null)
                         .WithMany()
-                        .HasForeignKey("TickerWatchlistTickerId")
+                        .HasForeignKey("TickerWatchlistTicker")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FinanceApp.Server.Models.TickerDetails.Results", b =>
+            modelBuilder.Entity("FinanceApp.Server.Models.TickerDetails.TickerResults", b =>
                 {
                     b.HasOne("FinanceApp.Server.Models.TickerDetails.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("Address1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Address1");
 
                     b.HasOne("FinanceApp.Server.Models.TickerDetails.Branding", "Branding")
                         .WithMany()
-                        .HasForeignKey("BrandingLogoUrl")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BrandingLogoUrl");
 
                     b.Navigation("Address");
 
                     b.Navigation("Branding");
-                });
-
-            modelBuilder.Entity("FinanceApp.Server.Models.TickerDetails.TickerDetails", b =>
-                {
-                    b.HasOne("FinanceApp.Server.Models.TickerDetails.Results", "Results")
-                        .WithMany()
-                        .HasForeignKey("ResultsTicker")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Results");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

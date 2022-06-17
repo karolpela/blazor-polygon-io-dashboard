@@ -8,14 +8,21 @@ namespace FinanceApp.Shared.Models.TickerDetails
 {
     public class TickerDto
     {
-        public TickerDetailsDto TickerDetailsDto{ get; set; }
-        public byte[] Logo { get; set; }
+        public TickerResultsDto TickerResultsDto { get; set; }
+        public byte[]? Logo { get; set; }
 
-        public TickerDto(TickerDetailsDto tickerDetailsDto, byte[] logo)
+        public string? LogoFormat
         {
-            TickerDetailsDto = tickerDetailsDto;
-            Logo = logo;
+            get => _logoFormat == "svg" ? "svg+xml" : _logoFormat;
+            set => _logoFormat = value;
+        }
 
+        private string? _logoFormat;
+        public TickerDto(TickerResultsDto tickerResultsDto, byte[] logo, string logoFormat)
+        {
+            TickerResultsDto = tickerResultsDto;
+            Logo = logo;
+            LogoFormat = logoFormat;
         }
     }
 }

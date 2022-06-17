@@ -7,23 +7,17 @@ using System.Threading.Tasks;
 
 namespace FinanceApp.Shared.Models.Tickers
 {
-
     public class Tickers
     {
-        [JsonPropertyName("results")]
-        public List<Result> Results { get; set; }
+        [JsonPropertyName("results")] public List<Result> Results { get; set; }
 
-        [JsonPropertyName("status")]
-        public string Status { get; set; }
+        [JsonPropertyName("status")] public string Status { get; set; }
 
-        [JsonPropertyName("request_id")]
-        public string RequestId { get; set; }
+        [JsonPropertyName("request_id")] public string RequestId { get; set; }
 
-        [JsonPropertyName("count")]
-        public int Count { get; set; }
+        [JsonPropertyName("count")] public int Count { get; set; }
 
-        [JsonPropertyName("next_url")]
-        public string NextUrl { get; set; }
+        [JsonPropertyName("next_url")] public string NextUrl { get; set; }
 
         public Tickers(List<Result> results, string status, string requestId, int count, string nextUrl)
         {

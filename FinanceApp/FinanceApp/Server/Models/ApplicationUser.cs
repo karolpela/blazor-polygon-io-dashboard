@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FinanceApp.Server.Models.TickerDetails;
+using Microsoft.AspNetCore.Identity;
 
 namespace FinanceApp.Server.Models
 {
-    public class ApplicationUser : IdentityUser
+    public sealed class ApplicationUser : IdentityUser
     {
-        public virtual ICollection<TickerDetails.TickerDetails> TickerWatchlist { get; set; }
+        public ICollection<TickerResults> TickerWatchlist { get; set; }
 
         public ApplicationUser()
         {
-            TickerWatchlist = new HashSet<TickerDetails.TickerDetails>();
+            TickerWatchlist = new HashSet<TickerResults>();
         }
     }
 }
