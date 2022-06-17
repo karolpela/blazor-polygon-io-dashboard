@@ -1,18 +1,21 @@
 ﻿@using FinanceApp.Shared.Models.TickerDetails
 @using FinanceApp.Shared.Models.Tickers
+@using System.Net
 @inject HttpClient Http
+
 
 <MudItem Class="mt-4">
     @if (SelectedTicker != null)
     {
         <MudPaper Class="d-flex align-center mt-4 pa-4" Elevation="2">
-            <MudImage Class="pa-8" Width="200" Height="null" Src="@logoString"/>
+            <MudImage Class="pa-8" Width="200" Height="200" ObjectFit="ObjectFit.Contain" Src="@logoString"/>
             <StockOpenClose SelectedTicker="@SelectedTicker"> </StockOpenClose>
         </MudPaper>
     }
 </MudItem>
 
 @code {
+
     [Parameter]
     public Result? SelectedTicker { get; set; }
 
@@ -26,15 +29,19 @@
             try
             {
                 ticker = await Http.GetFromJsonAsync<TickerDto>($"api/tickers/{SelectedTicker.Ticker}");
-                if (ticker != null)
+                if (ticker is {Logo: { } })
                 {
-                    logoString = $"data:image/svg+xml;base64,{Convert.ToBase64String(ticker.Logo)}";
+                    logoString = $"data:image/{ticker.LogoFormat};base64,{Convert.ToBase64String(ticker.Logo)}";
                 }
             }
             catch (HttpRequestException ex)
             {
-                Console.WriteLine(ex.Message);
+                if (ex.StatusCode == HttpStatusCode.TooManyRequests)
+                {
+                    throw;
+                }
             }
         }
     }
+
 }

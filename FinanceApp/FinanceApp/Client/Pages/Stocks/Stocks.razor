@@ -10,12 +10,18 @@
 
 @if (tickers != null)
 {
-    <MudAutocomplete T="Result" Label="NASDAQ common stocks" @bind-Value="selectedTicker"
-                 AutoFocus=true
-                 SearchFunc="@SearchStock" ResetValueOnEmptyText=true
-                 ToStringFunc="@(r => r == null ? null : $"{r.Ticker} - {r.Name}")" />
-
-    <StockDetails SelectedTicker="@selectedTicker" />
+    <MudAutocomplete T="Result" Label="NASDAQ common stocks" @bind-Value="SelectedTicker"
+                     AutoFocus=true
+                     SearchFunc="@SearchStock" ResetValueOnEmptyText=true
+                     ToStringFunc="@(r => r == null ? null : $"{r.Ticker} - {r.Name}")"/>
+    <ErrorBoundary @ref="errorBoundary">
+        <ChildContent>
+            <StockDetails SelectedTicker="@SelectedTicker"/>
+        </ChildContent>
+        <ErrorContent>
+            <h2 class="pt-4">Too many requests!</h2>
+        </ErrorContent>
+    </ErrorBoundary>
 }
 else
 {
@@ -24,7 +30,19 @@ else
 
 @code {
     private Tickers? tickers;
-    private Result? selectedTicker;
+
+    private Result? _selectedTicker;
+
+    public Result? SelectedTicker
+    {
+        get => _selectedTicker;
+        set
+        {
+            _selectedTicker = value;
+            errorBoundary?.Recover();
+        }
+    }
+    private ErrorBoundary? errorBoundary;
 
     protected override async Task OnInitializedAsync()
     {
@@ -47,8 +65,9 @@ else
             else
             {
                 return tickers.Results.Where(r => r.Ticker.Contains(value, StringComparison.InvariantCultureIgnoreCase) ||
-                r.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+                                                  r.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase));
             }
         });
     }
+
 }
