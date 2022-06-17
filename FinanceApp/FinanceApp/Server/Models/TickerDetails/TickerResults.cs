@@ -28,7 +28,7 @@ namespace FinanceApp.Server.Models.TickerDetails
 
         [JsonPropertyName("share_class_figi")] public string? ShareClassFigi { get; set; } = null!;
 
-        [JsonPropertyName("market_cap")] public double MarketCap { get; set; }
+        [JsonPropertyName("market_cap")] public double? MarketCap { get; set; }
 
         [JsonPropertyName("phone_number")] public string? PhoneNumber { get; set; } = null!;
 
@@ -46,7 +46,7 @@ namespace FinanceApp.Server.Models.TickerDetails
 
         [JsonPropertyName("total_employees")] public int? TotalEmployees { get; set; }
 
-        [JsonPropertyName("list_date")] public string ListDate { get; set; } = null!;
+        [JsonPropertyName("list_date")] public string? ListDate { get; set; } = null!;
 
         [JsonPropertyName("branding")] public Branding? Branding { get; set; }
 
