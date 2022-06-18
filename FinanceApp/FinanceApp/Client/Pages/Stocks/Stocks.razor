@@ -16,7 +16,7 @@
                      ToStringFunc="@(r => r == null ? null : $"{r.Ticker} - {r.Name}")"/>
     <ErrorBoundary @ref="errorBoundary">
         <ChildContent>
-            <StockDetails SelectedTicker="@SelectedTicker"/>
+            <StockDetails SelectedTickerResult="@SelectedTicker"/>
         </ChildContent>
         <ErrorContent>
             <h2 class="pt-4">Too many requests!</h2>

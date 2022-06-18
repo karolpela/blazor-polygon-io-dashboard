@@ -1,15 +1,21 @@
-﻿@using FinanceApp.Shared.Models.TickerDetails
-@using FinanceApp.Shared.Models.Tickers
+﻿@using FinanceApp.Shared.Models.Tickers
+@using FinanceApp.Shared.Models.TickerDetails
 @using System.Net
+@using System.Security.Claims
+@using System.Text
+@using System.Text.Json
 @inject HttpClient Http
-
+@inject AuthenticationStateProvider AuthStateProvider
 
 <MudItem Class="mt-4">
-    @if (SelectedTicker != null)
+    @if (SelectedTickerResult != null)
     {
         <MudPaper Class="d-flex align-center mt-4 pa-4" Elevation="2">
-            <MudImage Class="pa-8" Width="200" Height="200" ObjectFit="ObjectFit.Contain" Src="@logoString"/>
-            <StockOpenClose SelectedTicker="@SelectedTicker"> </StockOpenClose>
+            <MudToggleIconButton Toggled="@SubscribedTo" ToggledChanged="@ToggleWatchlistAsync"
+                                 Icon="@Icons.Material.Filled.FavoriteBorder" Title="Add to watchlist"
+                                 ToggledIcon="@Icons.Material.Filled.Favorite" ToggledTitle="Remove from watchlist"/>
+            <MudImage Class="pa-8" Alt="Logo" Width="200" Height="200" ObjectFit="ObjectFit.ScaleDown" Src="@logoString"/>
+            <StockOpenClose SelectedTicker="@SelectedTickerResult"> </StockOpenClose>
         </MudPaper>
     }
 </MudItem>
@@ -17,19 +23,62 @@
 @code {
 
     [Parameter]
-    public Result? SelectedTicker { get; set; }
+    public Result? SelectedTickerResult { get; set; }
+
+    public bool SubscribedTo { get; set; }
 
     private TickerDto? ticker;
     private string? logoString;
 
+    private async Task ToggleWatchlistAsync()
+    {
+        var username = await GetUsernameAsync();
+        var usernameJson = JsonSerializer.Serialize(username);
+        var content = new StringContent(usernameJson, Encoding.UTF8, "application/json");
+
+        try
+        {
+            if (SubscribedTo)
+            {
+                await Http.DeleteAsync($"api/tickers/{SelectedTickerResult!.Ticker}/users/{username!.Normalize()}/");
+                //TODO check if actually unsubscribed
+                SubscribedTo = false;
+            }
+            else
+            {
+                await Http.PostAsync($"api/tickers/{SelectedTickerResult!.Ticker}/users/", content);
+                //TODO check if actually subscribed
+                SubscribedTo = true;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    private async Task<string?> GetUsernameAsync()
+    {
+        var state = await AuthStateProvider.GetAuthenticationStateAsync();
+        var username = state.User.Identity?.Name!.Replace("\'", "");
+        return username;
+    }
+
     protected override async Task OnParametersSetAsync()
     {
-        if (SelectedTicker != null)
+        if (SelectedTickerResult != null)
         {
             try
             {
-                ticker = await Http.GetFromJsonAsync<TickerDto>($"api/tickers/{SelectedTicker.Ticker}");
-                if (ticker is {Logo: { } })
+                var username = await GetUsernameAsync();
+
+                var response = await Http.GetAsync($"api/tickers/{SelectedTickerResult.Ticker}/on-watchlist/{username}");
+                SubscribedTo = response.IsSuccessStatusCode;
+
+                ticker = await Http.GetFromJsonAsync<TickerDto>($"api/tickers/{SelectedTickerResult.Ticker}");
+
+                if (ticker is { Logo: { } })
                 {
                     logoString = $"data:image/{ticker.LogoFormat};base64,{Convert.ToBase64String(ticker.Logo)}";
                 }
