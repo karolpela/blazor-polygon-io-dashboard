@@ -243,6 +243,67 @@ namespace FinanceApp.Server.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("FinanceApp.Server.Models.DailyOpenClose.DailyOpenClose", b =>
+                {
+                    b.Property<string>("Ticker")
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
+
+                    b.Property<string>("From")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double?>("AfterHours")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Close")
+                        .HasColumnType("float");
+
+                    b.Property<double>("High")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Low")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Open")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("PreMarket")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Symbol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("Volume")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Ticker", "From");
+
+                    b.ToTable("DailyOpenClose", (string)null);
+                });
+
+            modelBuilder.Entity("FinanceApp.Server.Models.Logo.Logo", b =>
+                {
+                    b.Property<string>("Ticker")
+                        .HasColumnType("nvarchar(4)");
+
+                    b.Property<byte[]>("Data")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Format")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Ticker");
+
+                    b.ToTable("Logo", (string)null);
+                });
+
             modelBuilder.Entity("FinanceApp.Server.Models.TickerDetails.Address", b =>
                 {
                     b.Property<string>("Address1")
@@ -363,6 +424,49 @@ namespace FinanceApp.Server.Data.Migrations
                     b.HasIndex("BrandingLogoUrl");
 
                     b.ToTable("TickerResults", (string)null);
+                });
+
+            modelBuilder.Entity("FinanceApp.Server.Models.Tickers.TickerListItem", b =>
+                {
+                    b.Property<string>("Ticker")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool?>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Cik")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompositeFigi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CurrencyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastUpdatedUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Locale")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Market")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrimaryExchange")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShareClassFigi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Ticker");
+
+                    b.ToTable("TickerListItem", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -517,6 +621,28 @@ namespace FinanceApp.Server.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("FinanceApp.Server.Models.DailyOpenClose.DailyOpenClose", b =>
+                {
+                    b.HasOne("FinanceApp.Server.Models.TickerDetails.TickerResults", "TickerResults")
+                        .WithMany("DailyOpenCloses")
+                        .HasForeignKey("Ticker")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TickerResults");
+                });
+
+            modelBuilder.Entity("FinanceApp.Server.Models.Logo.Logo", b =>
+                {
+                    b.HasOne("FinanceApp.Server.Models.TickerDetails.TickerResults", "TickerResults")
+                        .WithOne("Logo")
+                        .HasForeignKey("FinanceApp.Server.Models.Logo.Logo", "Ticker")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TickerResults");
+                });
+
             modelBuilder.Entity("FinanceApp.Server.Models.TickerDetails.TickerResults", b =>
                 {
                     b.HasOne("FinanceApp.Server.Models.TickerDetails.Address", "Address")
@@ -581,6 +707,13 @@ namespace FinanceApp.Server.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FinanceApp.Server.Models.TickerDetails.TickerResults", b =>
+                {
+                    b.Navigation("DailyOpenCloses");
+
+                    b.Navigation("Logo");
                 });
 #pragma warning restore 612, 618
         }

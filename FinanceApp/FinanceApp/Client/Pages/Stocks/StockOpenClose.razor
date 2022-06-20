@@ -1,53 +1,76 @@
-﻿@using FinanceApp.Shared.Models
-@using FinanceApp.Shared.Models.Tickers
-@using static System.Net.Mime.MediaTypeNames
+﻿@using FinanceApp.Shared.Models.TickerList
+@using FinanceApp.Shared.Models
 @inject HttpClient Http
 
-@if (dailyOpenClose != null)
-{
-       @*<MudPaper Class="d-flex align-center mt-4 pa-4" Elevation="2">
-       <MudImage Class="pa-8" Width="200" Height="null" Src="@logoString"/>*@
-    <MudGrid Spacing="2">
-        @foreach (var property in dailyOpenClose.GetType().GetProperties())
-        {
-            @if (property.Name == "Status") continue;
+<MudStack Class="align-start">
+    <MudButtonGroup Color="Color.Primary">
+        <MudButton @onclick="@(() => SetFromAsync("Last day"))">Last day</MudButton>
+        <MudButton @onclick="@(() => SetFromAsync("1 week ago"))">1 week ago</MudButton>
+        <MudButton @onclick="@(() => SetFromAsync("1 month ago"))">1 month ago</MudButton>
+        <MudButton @onclick="@(() => SetFromAsync("3 months ago"))">3 months ago</MudButton>
+    </MudButtonGroup>
 
-            <MudItem xs="4">
-                <MudPaper Elevation="1" Class="d-flex justify-space-between px-3 py-1">
-                    <MudText Style="@($"color:{Colors.Grey.Darken2};")">@property.Name</MudText>
-                    <MudText>
-                        <b>@property.GetValue(dailyOpenClose)</b>
-                    </MudText>
-                </MudPaper>
-            </MudItem>
-        }
-    </MudGrid>
-@*    </MudPaper>
-*@
-}
+    @if (dailyOpenClose != null)
+    {
+        <MudGrid Spacing="2">
+            @foreach (var property in dailyOpenClose.GetType().GetProperties())
+            {
+                @if (property.Name == "Status") continue;
+
+                <MudItem xs="4">
+                    <MudPaper Elevation="1" Class="d-flex justify-space-between px-2 py-1">
+                        <MudText Style="@($"color:{Colors.Grey.Darken2};")">@property.Name</MudText>
+                        <MudText>
+                            <b>@property.GetValue(dailyOpenClose)</b>
+                        </MudText>
+                    </MudPaper>
+                </MudItem>
+            }
+        </MudGrid>
+    }
+    else
+    {
+        <p class="pa-2">No data available for selected date</p>
+    }
+</MudStack>
 
 
 @code {
 
     [Parameter]
-    public Result? SelectedTicker { get; set; }
+    public TickerListItemDto? SelectedTicker { get; set; }
 
-    private DailyOpenClose? dailyOpenClose;
+    public string From { get; set; } = $"{DateTime.Now.AddDays(-1):yyyy-MM-dd}";
 
-    //private string? logoString;
+    private DailyOpenCloseDto? dailyOpenClose;
+
+    private async Task SetFromAsync(string offset)
+    {
+        var date = offset switch
+        {
+            "Last day" => DateTime.Now.AddDays(-1),
+            "1 week ago" => DateTime.Now.AddDays(-7),
+            "1 month ago" => DateTime.Now.AddMonths(-1),
+            "3 months ago" => DateTime.Now.AddMonths(-3),
+            _ => DateTime.Now.AddDays(-1)
+            };
+        From = $"{date:yyyy-MM-dd}";
+        try
+        {
+            dailyOpenClose = await Http.GetFromJsonAsync<DailyOpenCloseDto>($"api/tickers/{SelectedTicker!.Ticker}/open-close/{From}");
+        }
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine(e);
+            dailyOpenClose = null;
+        }
+    }
 
     protected override async Task OnParametersSetAsync()
     {
         if (SelectedTicker != null)
         {
-            try
-            {
-                dailyOpenClose = await Http.GetFromJsonAsync<DailyOpenClose>($"api/tickers/{SelectedTicker.Ticker}/open-close/");
-            }
-            catch (HttpRequestException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            await SetFromAsync("Last day");
         }
     }
 

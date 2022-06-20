@@ -1,14 +1,13 @@
-﻿using System.Net;
-using FinanceApp.Server.Services;
+﻿using FinanceApp.Server.Services;
 using FinanceApp.Shared.Models;
 using FinanceApp.Shared.Models.TickerDetails;
-using FinanceApp.Shared.Models.Tickers;
+using FinanceApp.Shared.Models.TickerList;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApp.Server.Controllers;
 
-[Authorize]
+//[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class TickersController : ControllerBase
@@ -29,11 +28,26 @@ public class TickersController : ControllerBase
     public async Task<IActionResult> GetTickersAsync()
     {
         var client = _clientFactory.CreateClient();
-        var tickers = await client.GetFromJsonAsync<Tickers>(
-            "https://api.polygon.io/v3/reference/tickers?type=CS" +
-            "&market=stocks&exchange=XNAS&active=true&sort=ticker&order=asc&limit=1000" +
-            $"&apiKey={_configuration["Polygon:ApiKey"]}");
-        return Ok(tickers);
+        List<TickerListItemDto> itemList = new();
+
+        // Try to get new data from Polygon
+        try
+        {
+            var tickerListDto = await client.GetFromJsonAsync<TickerListDto>(
+                "https://api.polygon.io/v3/reference/tickers?type=CS" +
+                "&market=stocks&exchange=XNAS&active=true&sort=ticker&order=asc&limit=1000" +
+                $"&apiKey={_configuration["Polygon:ApiKey"]}");
+            itemList = tickerListDto!.Results;
+            // Save updated list to db
+            await _tickerDbService.SaveListItemsToDbAsync(itemList);
+        }
+        catch (HttpRequestException)
+        {
+            // In case Polygon is not available, get Ticker list from db
+            itemList.AddRange(await _tickerDbService.GetTickerListItemsAsync());
+        }
+
+        return Ok(itemList);
     }
 
     [HttpGet("{ticker}")]
@@ -41,81 +55,67 @@ public class TickersController : ControllerBase
     {
         var client = _clientFactory.CreateClient();
 
-        TickerDetailsDto? tickerDetailsDto;
+        TickerResultsDto? tickerResultsDto;
 
-        //TODO organize and send from db if Polygon is unavailable
         try
         {
-            tickerDetailsDto = await client.GetFromJsonAsync<TickerDetailsDto>(
+            var tickerDetailsDto = await client.GetFromJsonAsync<TickerDetailsDto>(
                 $"https://api.polygon.io/v3/reference/tickers/{ticker}?apiKey={_configuration["Polygon:ApiKey"]}");
+            tickerResultsDto = tickerDetailsDto!.TickerResults;
+            await _tickerDbService.SaveResultsToDbAsync(tickerResultsDto);
         }
-        catch (HttpRequestException e)
+        catch (HttpRequestException)
         {
-            return HandleHttpRequestException(e);
+            tickerResultsDto = await _tickerDbService.GetTickerResultsAsync(ticker);
         }
 
-        if (tickerDetailsDto == null) return NotFound();
+        if (tickerResultsDto == null) return NotFound();
 
-        var logo = Array.Empty<byte>();
-        var logoFormat = string.Empty;
-        if (tickerDetailsDto.TickerResults.Branding != null)
-            if (tickerDetailsDto.TickerResults.Branding.IconUrl != null)
+        LogoDto? logoDto = null;
+
+        if (tickerResultsDto.Branding != null)
+            try
             {
-                try
-                {
-                    logo = await client.GetByteArrayAsync(
-                        $"{tickerDetailsDto.TickerResults.Branding.LogoUrl}?apiKey={_configuration["Polygon:ApiKey"]}");
-                    logoFormat = Path.GetExtension(tickerDetailsDto.TickerResults.Branding.LogoUrl)[1..];
-                }
-                catch (HttpRequestException e)
-                {
-                    return HandleHttpRequestException(e);
-                }
+                var logoArray = await client.GetByteArrayAsync(
+                    $"{tickerResultsDto.Branding.LogoUrl}?apiKey={_configuration["Polygon:ApiKey"]}");
+                var logoFormat = Path.GetExtension(tickerResultsDto.Branding.LogoUrl)[1..];
+
+                logoDto = new LogoDto(ticker, logoArray, logoFormat);
+                await _tickerDbService.UpdateLogoAsync(logoDto);
             }
-        var tickerResultsDto = tickerDetailsDto.TickerResults;
+            catch (HttpRequestException)
+            {
+                logoDto = await _tickerDbService.GetLogoAsync(ticker);
+            }
 
-        // Save to db
-        await _tickerDbService.SaveToDbAsync(tickerResultsDto);
-
-
-        //var dailyOpenClose = await client.GetFromJsonAsync<DailyOpenClose>(
-        //$"https://api.polygon.io/v1/open-close/{ticker}/{DateTime.Now.AddDays(-4):yyyy-MM-dd}?apiKey={_configuration["Polygon:ApiKey"]}");
-
-        var tickerDto = new TickerDto(tickerResultsDto, logo, logoFormat);
-        return Ok(tickerDto);
+        var tickerResultsBrandingDto = new TickerResultsLogoDto(tickerResultsDto, logoDto);
+        return Ok(tickerResultsBrandingDto);
     }
 
-    private static IActionResult HandleHttpRequestException(HttpRequestException e)
-    {
-        if (e.StatusCode == HttpStatusCode.TooManyRequests)
-            return new StatusCodeResult((int)HttpStatusCode.TooManyRequests);
-        return new StatusCodeResult((int)HttpStatusCode.BadRequest);
-    }
-
-    [HttpGet("{ticker}/open-close")]
-    public async Task<IActionResult> GetTickerOpenCloseAsync(string ticker)
+    [HttpGet("{ticker}/open-close/{from}")]
+    public async Task<IActionResult> GetTickerOpenCloseAsync(string ticker, string from)
     {
         var client = _clientFactory.CreateClient();
 
-        DailyOpenClose? dailyOpenClose = null;
+        DailyOpenCloseDto? dailyOpenCloseDto;
         try
         {
-            dailyOpenClose = await client.GetFromJsonAsync<DailyOpenClose>(
-                $"https://api.polygon.io/v1/open-close/{ticker}/2022-06-02?apiKey={_configuration["Polygon:ApiKey"]}");
+            dailyOpenCloseDto = await client.GetFromJsonAsync<DailyOpenCloseDto>(
+                $"https://api.polygon.io/v1/open-close/{ticker}/{from}?apiKey={_configuration["Polygon:ApiKey"]}");
+            if (dailyOpenCloseDto != null)
+                await _tickerDbService.SaveDailyOpenCloseToDbAsync(ticker, dailyOpenCloseDto);
         }
-        catch (HttpRequestException e)
+        catch (HttpRequestException)
         {
-            return HandleHttpRequestException(e);
+            dailyOpenCloseDto = await _tickerDbService.GetDailyOpenCloseAsync(ticker, from);
         }
 
-        //var dailyOpenClose = await client.GetFromJsonAsync<DailyOpenClose>(
-        //$"https://api.polygon.io/v1/open-close/{ticker}/{DateTime.Now.AddDays(-4):yyyy-MM-dd}?apiKey={_configuration["Polygon:ApiKey"]}");
-        return dailyOpenClose != null ? Ok(dailyOpenClose) : NotFound();
+        return dailyOpenCloseDto != null ? Ok(dailyOpenCloseDto) : NotFound();
     }
 
     [AllowAnonymous]
     [HttpPost("{ticker}/users")]
-    public async Task<IActionResult> SubscribeToTicker(string ticker, [FromBody]string username)
+    public async Task<IActionResult> SubscribeToTicker(string ticker, [FromBody] string username)
     {
         var result = await _tickerDbService.SubscribeToTickerAsync(ticker, username);
 
@@ -143,4 +143,9 @@ public class TickersController : ControllerBase
         return isOnWatchlist ? Ok() : NotFound();
     }
 
+    [HttpGet("{ticker}/aggregates")]
+    public async Task<IActionResult> GetAggregatesAsync(string from, string to)
+    {
+        return null;
+    }
 }

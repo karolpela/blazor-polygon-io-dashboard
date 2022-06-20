@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
-namespace FinanceApp.Server.Models.TickerDetails
+namespace FinanceApp.Server.Models.TickerDetails;
+
+public class Branding
 {
-    public class Branding
+    public Branding()
     {
-        [JsonPropertyName("logo_url")] public string LogoUrl { get; set; } = null!;
-
-        [JsonPropertyName("icon_url")] public string? IconUrl { get; set; }
-
-        public Branding()
-        {
-        }
-
-        public Branding(string logoUrl, string iconUrl)
-        {
-            LogoUrl = logoUrl;
-            IconUrl = iconUrl;
-        }
     }
+
+    public Branding(string logoUrl, string iconUrl)
+    {
+        LogoUrl = logoUrl;
+        IconUrl = iconUrl;
+    }
+
+    [JsonPropertyName("logo_url")] public string LogoUrl { get; set; } = null!;
+
+    [JsonPropertyName("icon_url")] public string? IconUrl { get; set; }
 }
