@@ -1,4 +1,5 @@
-﻿using FinanceApp.Server.Services;
+﻿using FinanceApp.Server.Models.Bars;
+using FinanceApp.Server.Services;
 using FinanceApp.Shared.Models;
 using FinanceApp.Shared.Models.TickerDetails;
 using FinanceApp.Shared.Models.TickerList;
@@ -33,9 +34,13 @@ public class TickersController : ControllerBase
         // Try to get new data from Polygon
         try
         {
+            throw new HttpRequestException();
             var tickerListDto = await client.GetFromJsonAsync<TickerListDto>(
                 "https://api.polygon.io/v3/reference/tickers?type=CS" +
-                "&market=stocks&exchange=XNAS&active=true&sort=ticker&order=asc&limit=1000" +
+                "&market=stocks&exchange=XNAS" +
+                "&active=true&sort=ticker" +
+                "&order=asc" +
+                "&limit=1000" +
                 $"&apiKey={_configuration["Polygon:ApiKey"]}");
             itemList = tickerListDto!.Results;
             // Save updated list to db
@@ -59,8 +64,10 @@ public class TickersController : ControllerBase
 
         try
         {
+            throw new HttpRequestException();
             var tickerDetailsDto = await client.GetFromJsonAsync<TickerDetailsDto>(
-                $"https://api.polygon.io/v3/reference/tickers/{ticker}?apiKey={_configuration["Polygon:ApiKey"]}");
+                $"https://api.polygon.io/v3/reference/tickers/{ticker}" +
+                $"?apiKey={_configuration["Polygon:ApiKey"]}");
             tickerResultsDto = tickerDetailsDto!.TickerResults;
             await _tickerDbService.SaveResultsToDbAsync(tickerResultsDto);
         }
@@ -69,15 +76,19 @@ public class TickersController : ControllerBase
             tickerResultsDto = await _tickerDbService.GetTickerResultsAsync(ticker);
         }
 
-        if (tickerResultsDto == null) return NotFound();
-
         LogoDto? logoDto = null;
 
-        if (tickerResultsDto.Branding != null)
+        if (tickerResultsDto == null)
+        {
+            logoDto = await _tickerDbService.GetLogoAsync(ticker);
+        }
+        else if (tickerResultsDto.Branding != null)
+        {
             try
             {
                 var logoArray = await client.GetByteArrayAsync(
-                    $"{tickerResultsDto.Branding.LogoUrl}?apiKey={_configuration["Polygon:ApiKey"]}");
+                    $"{tickerResultsDto.Branding.LogoUrl}" +
+                    $"?apiKey={_configuration["Polygon:ApiKey"]}");
                 var logoFormat = Path.GetExtension(tickerResultsDto.Branding.LogoUrl)[1..];
 
                 logoDto = new LogoDto(ticker, logoArray, logoFormat);
@@ -87,9 +98,16 @@ public class TickersController : ControllerBase
             {
                 logoDto = await _tickerDbService.GetLogoAsync(ticker);
             }
+        }
+        else
+        {
+            logoDto = await _tickerDbService.GetLogoAsync(ticker);
+        }
 
-        var tickerResultsBrandingDto = new TickerResultsLogoDto(tickerResultsDto, logoDto);
-        return Ok(tickerResultsBrandingDto);
+        if (tickerResultsDto == null && logoDto == null) return NotFound();
+
+        var tickerResultsLogoDto = new TickerResultsLogoDto(tickerResultsDto, logoDto);
+        return Ok(tickerResultsLogoDto);
     }
 
     [HttpGet("{ticker}/open-close/{from}")]
@@ -100,8 +118,11 @@ public class TickersController : ControllerBase
         DailyOpenCloseDto? dailyOpenCloseDto;
         try
         {
+            throw new HttpRequestException();
+
             dailyOpenCloseDto = await client.GetFromJsonAsync<DailyOpenCloseDto>(
-                $"https://api.polygon.io/v1/open-close/{ticker}/{from}?apiKey={_configuration["Polygon:ApiKey"]}");
+                $"https://api.polygon.io/v1/open-close/{ticker}/{from}" +
+                $"?apiKey={_configuration["Polygon:ApiKey"]}");
             if (dailyOpenCloseDto != null)
                 await _tickerDbService.SaveDailyOpenCloseToDbAsync(ticker, dailyOpenCloseDto);
         }
@@ -143,9 +164,54 @@ public class TickersController : ControllerBase
         return isOnWatchlist ? Ok() : NotFound();
     }
 
-    [HttpGet("{ticker}/aggregates")]
-    public async Task<IActionResult> GetAggregatesAsync(string from, string to)
+    [HttpGet("{ticker}/bars")]
+    public async Task<IActionResult> GetBarsAsync(string ticker, string timespan, int multiplier, long from, long to)
     {
-        return null;
+        var client = _clientFactory.CreateClient();
+
+        Bars? bars;
+        try
+        {
+            bars = await client.GetFromJsonAsync<Bars>(
+                $"https://api.polygon.io/v2/aggs/ticker/{ticker}/range/{multiplier}/{timespan}/{from}/{to}" +
+                "?adjusted=true" +
+                "&sort=asc" +
+                $"&apiKey={_configuration["Polygon:ApiKey"]}");
+        }
+        catch (HttpRequestException e)
+        {
+            //TODO get from db
+            return NotFound();
+            Console.WriteLine(e);
+            throw;
+        }
+
+        if (bars.Results == null) return NotFound();
+
+        var chartDataList = new List<StockChartData>();
+
+        var date = DateTimeOffset.FromUnixTimeMilliseconds(from);
+        foreach (var result in bars.Results)
+        {
+            chartDataList.Add(new StockChartData()
+            {
+                Date = date.DateTime,
+                Open = result.O,
+                Low = result.L,
+                Close = result.C,
+                High = result.H,
+                Volume = result.V
+            });
+
+            date = timespan switch
+            {
+                "minute" => date.AddMinutes(multiplier),
+                "hour" => date.AddHours(multiplier),
+                "day" => date.AddDays(1),
+                "week" => date.AddDays(7),
+                _ => date,
+            };
+        }
+        return Ok(chartDataList);
     }
 }

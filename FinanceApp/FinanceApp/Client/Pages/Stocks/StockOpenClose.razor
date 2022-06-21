@@ -1,13 +1,14 @@
 ﻿@using FinanceApp.Shared.Models.TickerList
 @using FinanceApp.Shared.Models
+@using Syncfusion.Blazor.Charts
 @inject HttpClient Http
 
 <MudStack Class="align-start">
     <MudButtonGroup Color="Color.Primary">
-        <MudButton @onclick="@(() => SetFromAsync("Last day"))">Last day</MudButton>
-        <MudButton @onclick="@(() => SetFromAsync("1 week ago"))">1 week ago</MudButton>
-        <MudButton @onclick="@(() => SetFromAsync("1 month ago"))">1 month ago</MudButton>
-        <MudButton @onclick="@(() => SetFromAsync("3 months ago"))">3 months ago</MudButton>
+        <MudButton @onclick="@((args) => DateSelected(args, DateTimeOffset.Now.AddDays(-1),"minute", 30))">Last day</MudButton>
+        <MudButton @onclick="@((args) => DateSelected(args, DateTimeOffset.Now.AddDays(-7),"hour", 4))">1 week ago</MudButton>
+        <MudButton @onclick="@((args) => DateSelected(args, DateTimeOffset.Now.AddMonths(-1),"day", 1))">1 month ago</MudButton>
+        <MudButton @onclick="@((args) => DateSelected(args, DateTimeOffset.Now.AddMonths(-3),"week", 1))">3 months ago</MudButton>
     </MudButtonGroup>
 
     @if (dailyOpenClose != null)
@@ -40,24 +41,24 @@
     [Parameter]
     public TickerListItemDto? SelectedTicker { get; set; }
 
-    public string From { get; set; } = $"{DateTime.Now.AddDays(-1):yyyy-MM-dd}";
+    [Parameter]
+    public EventCallback<(DateTimeOffset,string,int)> OnDateSelected { get; set; }
+
+    public DateTimeOffset SelectedDate { get; set; } = DateTimeOffset.Now;
 
     private DailyOpenCloseDto? dailyOpenClose;
 
-    private async Task SetFromAsync(string offset)
+    private async Task DateSelected(MouseEventArgs e, DateTimeOffset date, string timespan, int multiplier)
     {
-        var date = offset switch
-        {
-            "Last day" => DateTime.Now.AddDays(-1),
-            "1 week ago" => DateTime.Now.AddDays(-7),
-            "1 month ago" => DateTime.Now.AddMonths(-1),
-            "3 months ago" => DateTime.Now.AddMonths(-3),
-            _ => DateTime.Now.AddDays(-1)
-            };
-        From = $"{date:yyyy-MM-dd}";
+        await OnDateSelected.InvokeAsync((date, timespan, multiplier));
+        await UpdateOpenCloseAsync(date);
+    }
+
+    private async Task UpdateOpenCloseAsync(DateTimeOffset date)
+    {
         try
         {
-            dailyOpenClose = await Http.GetFromJsonAsync<DailyOpenCloseDto>($"api/tickers/{SelectedTicker!.Ticker}/open-close/{From}");
+            dailyOpenClose = await Http.GetFromJsonAsync<DailyOpenCloseDto>($"api/tickers/{SelectedTicker!.Ticker}/open-close/{SelectedDate:yyyy-MM-dd}");
         }
         catch (HttpRequestException e)
         {
@@ -66,12 +67,18 @@
         }
     }
 
-    protected override async Task OnParametersSetAsync()
+    // protected override async Task OnParametersSetAsync()
+    // {
+    //     if (SelectedTicker != null)
+    //     {
+    //         await SetDateAsync("Last day");
+    //     }
+    // }
+    protected override async Task OnInitializedAsync()
     {
         if (SelectedTicker != null)
         {
-            await SetFromAsync("Last day");
+            await UpdateOpenCloseAsync(DateTimeOffset.Now.AddDays(-1));
         }
     }
-
 }

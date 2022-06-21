@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FinanceApp.Server.Models.Aggregates;
+namespace FinanceApp.Server.Models.Bars;
 
-public class Aggregates
+public class Bars
 {
     [JsonPropertyName("ticker")] public string Ticker { get; set; }
 
@@ -12,11 +12,23 @@ public class Aggregates
 
     [JsonPropertyName("adjusted")] public bool Adjusted { get; set; }
 
-    [JsonPropertyName("results")] public List<AggregateResult> Results { get; set; }
+    [JsonPropertyName("results")] public List<BarsResult> Results { get; set; }
 
     [JsonPropertyName("status")] public string Status { get; set; }
 
     [JsonPropertyName("request_id")] public string RequestId { get; set; }
 
     [JsonPropertyName("count")] public int Count { get; set; }
+
+    public Bars(string ticker, int queryCount, int resultsCount, bool adjusted, List<BarsResult> results, string status, string requestId, int count)
+    {
+        Ticker = ticker;
+        QueryCount = queryCount;
+        ResultsCount = resultsCount;
+        Adjusted = adjusted;
+        Results = results;
+        Status = status;
+        RequestId = requestId;
+        Count = count;
+    }
 }
