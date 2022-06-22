@@ -2,6 +2,7 @@
 using FinanceApp.Server.Models;
 using FinanceApp.Server.Models.DailyOpenClose;
 using FinanceApp.Server.Models.Logo;
+using FinanceApp.Server.Models.StockChartData;
 using FinanceApp.Server.Models.TickerDetails;
 using FinanceApp.Server.Models.Tickers;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
@@ -22,6 +23,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     public DbSet<TickerListItem> TickerListItems => Set<TickerListItem>();
     public DbSet<Logo> Logos => Set<Logo>();
     public DbSet<DailyOpenClose> DailyOpenCloses => Set<DailyOpenClose>();
+    public DbSet<StockChartData> StockChartData => Set<StockChartData>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -48,6 +50,10 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
             e.HasMany(tr => tr.DailyOpenCloses)
                 .WithOne(doc => doc.TickerResults)
                 .HasForeignKey(doc => doc.Ticker);
+
+            e.HasMany(tr => tr.StockChartData)
+                .WithOne(scd => scd.TickerResults)
+                .HasForeignKey(scd => scd.Ticker);
         });
 
         builder.Entity<TickerListItem>(e =>
@@ -67,6 +73,14 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
             e.HasKey(doc => new { doc.Ticker, doc.From });
             e.Property(doc => doc.Ticker).HasMaxLength(4);
             e.ToTable("DailyOpenClose");
+        });
+
+        builder.Entity<StockChartData>(e =>
+        {
+            e.HasKey(scd => new { scd.Ticker, scd.Timespan, scd.Multiplier, scd.Date });
+            e.Property(scd => scd.Timespan).HasMaxLength(15);
+            e.Property(scd => scd.Volume).HasPrecision(20, 0);
+            e.ToTable("StockChartData");
         });
     }
 }

@@ -1,4 +1,6 @@
-﻿using FinanceApp.Server.Models.Bars;
+﻿using Duende.IdentityServer.Extensions;
+using FinanceApp.Server.Models.Bars;
+using FinanceApp.Server.Models.StockChartData;
 using FinanceApp.Server.Services;
 using FinanceApp.Shared.Models;
 using FinanceApp.Shared.Models.TickerDetails;
@@ -180,6 +182,7 @@ public class TickersController : ControllerBase
         var fromOffsetAdjustedUnix = fromOffsetAdjusted.ToUnixTimeMilliseconds();
         var toOffsetAdjustedUnix = toOffsetAdjusted.ToUnixTimeMilliseconds();
 
+        List<StockChartDataDto>? chartDataDtoList;
         Bars? bars;
         try
         {
@@ -190,18 +193,18 @@ public class TickersController : ControllerBase
                 "&limit=5000" +
                 $"&apiKey={_configuration["Polygon:ApiKey"]}");
         }
-        catch (HttpRequestException e)
+        catch (HttpRequestException)
         {
-            //TODO get from db
-            return NotFound();
-            Console.WriteLine(e);
-            throw;
+            // get from db
+            chartDataDtoList = (await _tickerDbService.GetStockChartDataAsync(ticker, timespan, multiplier,
+                fromOffsetAdjusted.DateTime, toOffsetAdjusted.DateTime)).ToList();
+            if (chartDataDtoList.IsNullOrEmpty()) return NotFound();
+            return Ok(chartDataDtoList);
         }
 
-        if (bars.Results == null) return NotFound();
+        if (bars == null) return NotFound();
 
-        var chartDataList = new List<StockChartData>();
-
+        chartDataDtoList = new List<StockChartDataDto>();
         var date = fromOffsetAdjusted;
         foreach (var result in bars.Results)
         {
@@ -213,7 +216,7 @@ public class TickersController : ControllerBase
                 _ => date
             };
 
-            chartDataList.Add(new StockChartData
+            chartDataDtoList.Add(new StockChartDataDto
             {
                 Date = date.DateTime,
                 Open = result.O,
@@ -221,7 +224,7 @@ public class TickersController : ControllerBase
                 Close = result.C,
                 High = result.H,
                 Volume = result.V
-            });
+            }); 
 
             date = timespan switch
             {
@@ -232,6 +235,8 @@ public class TickersController : ControllerBase
                 _ => date,
             };
         }
-        return Ok(chartDataList);
+        // save to db
+        await _tickerDbService.SaveStockChartDataAsync(chartDataDtoList, ticker, timespan, multiplier);
+        return Ok(chartDataDtoList);
     }
 }

@@ -8,6 +8,7 @@ public class TickerResults
     {
         ApplicationUsers = new HashSet<ApplicationUser>();
         DailyOpenCloses = new HashSet<DailyOpenClose.DailyOpenClose>();
+        StockChartData = new HashSet<StockChartData.StockChartData>();
     }
 
     public TickerResults(string ticker, string name, string market, string locale, string primaryExchange, string type,
@@ -18,6 +19,7 @@ public class TickerResults
     {
         ApplicationUsers = new HashSet<ApplicationUser>();
         DailyOpenCloses = new HashSet<DailyOpenClose.DailyOpenClose>();
+        StockChartData = new HashSet<StockChartData.StockChartData>();
         Ticker = ticker;
         Name = name;
         Market = market;
@@ -47,6 +49,8 @@ public class TickerResults
     [JsonIgnore] public ICollection<ApplicationUser> ApplicationUsers { get; set; }
 
     [JsonIgnore] public ICollection<DailyOpenClose.DailyOpenClose> DailyOpenCloses { get; set; }
+
+    [JsonIgnore] public ICollection<StockChartData.StockChartData> StockChartData { get; set; }
 
     [JsonIgnore] public virtual Logo.Logo? Logo { get; set; } = null!;
 

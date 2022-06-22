@@ -1,6 +1,6 @@
 ﻿namespace FinanceApp.Shared.Models;
 
-public class StockChartData
+public class StockChartDataDto
 {
     public DateTime Date { get; set; }
     public double Open { get; set; }
@@ -9,12 +9,12 @@ public class StockChartData
     public double High { get; set; }
     public decimal Volume { get; set; }
 
-    public StockChartData()
+    public StockChartDataDto()
     {
             
     }
 
-    public StockChartData(DateTime date, double open, double low, double close, double high, decimal volume)
+    public StockChartDataDto(DateTime date, double open, double low, double close, double high, decimal volume)
     {
         Date = date;
         Open = open;

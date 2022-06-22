@@ -2,6 +2,7 @@
 using FinanceApp.Server.Data;
 using FinanceApp.Server.Models.DailyOpenClose;
 using FinanceApp.Server.Models.Logo;
+using FinanceApp.Server.Models.StockChartData;
 using FinanceApp.Server.Models.TickerDetails;
 using FinanceApp.Server.Models.Tickers;
 using FinanceApp.Shared.Models;
@@ -162,6 +163,47 @@ public class TickerDbService : ITickerDbService
         dailyOpenClose.Ticker = ticker;
 
         await _context.DailyOpenCloses.AddAsync(dailyOpenClose);
+        return await _context.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<StockChartDataDto>> GetStockChartDataAsync(string ticker, string timespan, int multiplier, DateTime from, DateTime to)
+    {
+        var chartDataFromDb = await _context.StockChartData
+            .Where(cd => cd.Ticker == ticker && cd.Timespan == timespan && cd.Multiplier == multiplier
+                         && cd.Date >= from && cd.Date <= to)
+            .ToListAsync();
+        return _mapper.Map<IEnumerable<StockChartDataDto>>(chartDataFromDb);
+    }
+
+    public async Task<int> SaveStockChartDataAsync(IEnumerable<StockChartDataDto> stockChartDataDtoList, string ticker, string timespan, int multiplier)
+    {
+
+        var stockChartDataList = stockChartDataDtoList.Select(d => new StockChartData
+        {
+            Ticker = ticker,
+            Timespan = timespan,
+            Multiplier = multiplier,
+            Date = d.Date,
+            Open = d.Open,
+            Low = d.Low,
+            Close = d.Close,
+            High = d.High,
+            Volume = d.Volume
+        }).ToList();
+
+        var chartDataFromDb = await _context.StockChartData.AsNoTracking().ToListAsync();
+
+        var notInDb = stockChartDataList
+            .ExceptBy(chartDataFromDb.Select(cd => new { cd.Ticker, cd.Timespan, cd.Multiplier, cd.Date }),
+                cd => new { cd.Ticker, cd.Timespan, cd.Multiplier, cd.Date })
+            .ToList();
+
+        if (notInDb.Any()) await _context.StockChartData.AddRangeAsync(notInDb);
+
+        var toUpdate = stockChartDataList.Except(notInDb).ToList();
+
+        if (toUpdate.Any()) _context.UpdateRange(toUpdate);
+
         return await _context.SaveChangesAsync();
     }
 }

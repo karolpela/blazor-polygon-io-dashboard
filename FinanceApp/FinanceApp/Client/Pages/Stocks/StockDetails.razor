@@ -49,7 +49,7 @@
     [Parameter]
     public TickerListItemDto? SelectedTickerResult { get; set; }
 
-    public List<StockChartData>? StockChartDetails { get; set; }
+    public List<StockChartDataDto>? StockChartDetails { get; set; }
 
     public bool SubscribedTo { get; set; }
 
@@ -106,7 +106,7 @@
             var fromUnix = ((DateTimeOffset)selection.utcFrom).ToUnixTimeMilliseconds();
             var toUnix = DateTimeOffset.UtcNow.AddDays(-1).ToUnixTimeMilliseconds(); // today's data is hardly available
 
-            StockChartDetails = await Http.GetFromJsonAsync<List<StockChartData>>(
+            StockChartDetails = await Http.GetFromJsonAsync<List<StockChartDataDto>>(
                     $"api/Tickers/{SelectedTickerResult!.Ticker}/bars" +
                     $"?fromUnix={fromUnix}&toUnix={toUnix}" +
                     $"&timespan={selection.timespan}" +
