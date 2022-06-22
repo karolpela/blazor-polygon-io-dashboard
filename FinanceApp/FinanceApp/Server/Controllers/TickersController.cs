@@ -165,17 +165,29 @@ public class TickersController : ControllerBase
     }
 
     [HttpGet("{ticker}/bars")]
-    public async Task<IActionResult> GetBarsAsync(string ticker, string timespan, int multiplier, long from, long to)
+    public async Task<IActionResult> GetBarsAsync(string ticker, string timespan, int multiplier, long fromUnix, long toUnix)
     {
         var client = _clientFactory.CreateClient();
+
+
+        var fromOffset = DateTimeOffset.FromUnixTimeMilliseconds(fromUnix);
+        var toOffset = DateTimeOffset.FromUnixTimeMilliseconds(toUnix);
+
+        // exchange opens at 1:30 PM UTC and closes at 9:30 PM UTC
+        var fromOffsetAdjusted = new DateTimeOffset(fromOffset.Year, fromOffset.Month, fromOffset.Day, 13, 30, 0, TimeSpan.Zero);
+        var toOffsetAdjusted = new DateTimeOffset(toOffset.Year, toOffset.Month, toOffset.Day, 19, 30, 0, TimeSpan.Zero);
+
+        var fromOffsetAdjustedUnix = fromOffsetAdjusted.ToUnixTimeMilliseconds();
+        var toOffsetAdjustedUnix = toOffsetAdjusted.ToUnixTimeMilliseconds();
 
         Bars? bars;
         try
         {
             bars = await client.GetFromJsonAsync<Bars>(
-                $"https://api.polygon.io/v2/aggs/ticker/{ticker}/range/{multiplier}/{timespan}/{from}/{to}" +
+                $"https://api.polygon.io/v2/aggs/ticker/{ticker}/range/{multiplier}/{timespan}/{fromOffsetAdjustedUnix}/{toOffsetAdjustedUnix}" +
                 "?adjusted=true" +
                 "&sort=asc" +
+                "&limit=5000" +
                 $"&apiKey={_configuration["Polygon:ApiKey"]}");
         }
         catch (HttpRequestException e)
@@ -190,10 +202,18 @@ public class TickersController : ControllerBase
 
         var chartDataList = new List<StockChartData>();
 
-        var date = DateTimeOffset.FromUnixTimeMilliseconds(from);
+        var date = fromOffsetAdjusted;
         foreach (var result in bars.Results)
         {
-            chartDataList.Add(new StockChartData()
+            // skip weekends
+            date = date.DayOfWeek switch
+            {
+                DayOfWeek.Saturday => date.AddDays(2),
+                DayOfWeek.Sunday => date.AddDays(1),
+                _ => date
+            };
+
+            chartDataList.Add(new StockChartData
             {
                 Date = date.DateTime,
                 Open = result.O,
@@ -207,8 +227,8 @@ public class TickersController : ControllerBase
             {
                 "minute" => date.AddMinutes(multiplier),
                 "hour" => date.AddHours(multiplier),
-                "day" => date.AddDays(1),
-                "week" => date.AddDays(7),
+                "day" => date.AddDays(multiplier),
+                "week" => date.AddDays(7 * multiplier),
                 _ => date,
             };
         }
