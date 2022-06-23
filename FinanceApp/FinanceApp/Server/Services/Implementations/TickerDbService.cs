@@ -5,12 +5,13 @@ using FinanceApp.Server.Models.Logo;
 using FinanceApp.Server.Models.StockChartData;
 using FinanceApp.Server.Models.TickerDetails;
 using FinanceApp.Server.Models.Tickers;
+using FinanceApp.Server.Services.Interfaces;
 using FinanceApp.Shared.Models;
 using FinanceApp.Shared.Models.TickerDetails;
 using FinanceApp.Shared.Models.TickerList;
 using Microsoft.EntityFrameworkCore;
 
-namespace FinanceApp.Server.Services;
+namespace FinanceApp.Server.Services.Implementations;
 
 public class TickerDbService : ITickerDbService
 {
@@ -134,14 +135,14 @@ public class TickerDbService : ITickerDbService
         return await _context.SaveChangesAsync();
     }
 
-    public async Task<bool> IsOnWatchlistAsync(string ticker, string username)
-    {
-        return await _context.Results
-            .Include(r => r.ApplicationUsers)
-            .Where(r => r.Ticker == ticker &&
-                        r.ApplicationUsers.Select(au => au.UserName).Contains(username))
-            .AnyAsync();
-    }
+    // public async Task<bool> IsOnWatchlistAsync(string ticker, string username)
+    // {
+    //     return await _context.Results
+    //         .Include(r => r.ApplicationUsers)
+    //         .Where(r => r.Ticker == ticker &&
+    //                     r.ApplicationUsers.Select(au => au.UserName).Contains(username))
+    //         .AnyAsync();
+    // }
 
     public async Task<DailyOpenCloseDto?> GetDailyOpenCloseAsync(string ticker, string from)
     {
@@ -166,23 +167,26 @@ public class TickerDbService : ITickerDbService
         return await _context.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<StockChartDataDto>> GetStockChartDataAsync(string ticker, string timespan, int multiplier, DateTime from, DateTime to)
+    public async Task<IEnumerable<StockChartDataDto>> GetStockChartDataAsync(string ticker, string timespan,
+        int multiplier, DateTime queryDate, DateTime from, DateTime to)
     {
         var chartDataFromDb = await _context.StockChartData
-            .Where(cd => cd.Ticker == ticker && cd.Timespan == timespan && cd.Multiplier == multiplier
+            .Where(cd => cd.Ticker == ticker && cd.Timespan == timespan 
+                         && cd.Multiplier == multiplier && cd.QueryDate == queryDate
                          && cd.Date >= from && cd.Date <= to)
             .ToListAsync();
         return _mapper.Map<IEnumerable<StockChartDataDto>>(chartDataFromDb);
     }
 
-    public async Task<int> SaveStockChartDataAsync(IEnumerable<StockChartDataDto> stockChartDataDtoList, string ticker, string timespan, int multiplier)
+    public async Task<int> SaveStockChartDataAsync(IEnumerable<StockChartDataDto> stockChartDataDtoList, string ticker,
+        string timespan, int multiplier, DateTime queryDate)
     {
-
         var stockChartDataList = stockChartDataDtoList.Select(d => new StockChartData
         {
             Ticker = ticker,
             Timespan = timespan,
             Multiplier = multiplier,
+            QueryDate = queryDate,
             Date = d.Date,
             Open = d.Open,
             Low = d.Low,
