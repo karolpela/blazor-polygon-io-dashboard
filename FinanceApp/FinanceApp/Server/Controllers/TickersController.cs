@@ -1,7 +1,6 @@
 ﻿using Duende.IdentityServer.Extensions;
 using FinanceApp.Server.Models.Bars;
-using FinanceApp.Server.Models.StockChartData;
-using FinanceApp.Server.Services;
+using FinanceApp.Server.Services.Interfaces;
 using FinanceApp.Shared.Models;
 using FinanceApp.Shared.Models.TickerDetails;
 using FinanceApp.Shared.Models.TickerList;
@@ -36,7 +35,7 @@ public class TickersController : ControllerBase
         // Try to get new data from Polygon
         try
         {
-            throw new HttpRequestException();
+            //throw new HttpRequestException();
             var tickerListDto = await client.GetFromJsonAsync<TickerListDto>(
                 "https://api.polygon.io/v3/reference/tickers?type=CS" +
                 "&market=stocks&exchange=XNAS" +
@@ -66,7 +65,7 @@ public class TickersController : ControllerBase
 
         try
         {
-            throw new HttpRequestException();
+            //throw new HttpRequestException();
             var tickerDetailsDto = await client.GetFromJsonAsync<TickerDetailsDto>(
                 $"https://api.polygon.io/v3/reference/tickers/{ticker}" +
                 $"?apiKey={_configuration["Polygon:ApiKey"]}");
@@ -81,11 +80,8 @@ public class TickersController : ControllerBase
         LogoDto? logoDto = null;
 
         if (tickerResultsDto == null)
-        {
             logoDto = await _tickerDbService.GetLogoAsync(ticker);
-        }
         else if (tickerResultsDto.Branding != null)
-        {
             try
             {
                 var logoArray = await client.GetByteArrayAsync(
@@ -100,11 +96,8 @@ public class TickersController : ControllerBase
             {
                 logoDto = await _tickerDbService.GetLogoAsync(ticker);
             }
-        }
         else
-        {
             logoDto = await _tickerDbService.GetLogoAsync(ticker);
-        }
 
         if (tickerResultsDto == null && logoDto == null) return NotFound();
 
@@ -120,7 +113,7 @@ public class TickersController : ControllerBase
         DailyOpenCloseDto? dailyOpenCloseDto;
         try
         {
-            throw new HttpRequestException();
+            //throw new HttpRequestException();
 
             dailyOpenCloseDto = await client.GetFromJsonAsync<DailyOpenCloseDto>(
                 $"https://api.polygon.io/v1/open-close/{ticker}/{from}" +
@@ -158,16 +151,17 @@ public class TickersController : ControllerBase
         return Ok(result);
     }
 
-    [AllowAnonymous]
-    [HttpGet("{ticker}/on-watchlist/{username}")]
-    public async Task<IActionResult> IsOnWatchlistAsync(string ticker, string username)
-    {
-        var isOnWatchlist = await _tickerDbService.IsOnWatchlistAsync(ticker, username);
-        return isOnWatchlist ? Ok() : NotFound();
-    }
+    // [AllowAnonymous]
+    // [HttpGet("{ticker}/on-watchlist/{username}")]
+    // public async Task<IActionResult> IsOnWatchlistAsync(string ticker, string username)
+    // {
+    //     var isOnWatchlist = await _tickerDbService.IsOnWatchlistAsync(ticker, username);
+    //     return isOnWatchlist ? Ok() : NotFound();
+    // }
 
     [HttpGet("{ticker}/bars")]
-    public async Task<IActionResult> GetBarsAsync(string ticker, string timespan, int multiplier, long fromUnix, long toUnix)
+    public async Task<IActionResult> GetBarsAsync(string ticker, string timespan, int multiplier, long fromUnix,
+        long toUnix)
     {
         var client = _clientFactory.CreateClient();
 
@@ -176,8 +170,10 @@ public class TickersController : ControllerBase
         var toOffset = DateTimeOffset.FromUnixTimeMilliseconds(toUnix);
 
         // exchange opens at 1:30 PM UTC and closes at 9:30 PM UTC
-        var fromOffsetAdjusted = new DateTimeOffset(fromOffset.Year, fromOffset.Month, fromOffset.Day, 13, 30, 0, TimeSpan.Zero);
-        var toOffsetAdjusted = new DateTimeOffset(toOffset.Year, toOffset.Month, toOffset.Day, 19, 30, 0, TimeSpan.Zero);
+        var fromOffsetAdjusted =
+            new DateTimeOffset(fromOffset.Year, fromOffset.Month, fromOffset.Day, 13, 30, 0, TimeSpan.Zero);
+        var toOffsetAdjusted =
+            new DateTimeOffset(toOffset.Year, toOffset.Month, toOffset.Day, 19, 30, 0, TimeSpan.Zero);
 
         var fromOffsetAdjustedUnix = fromOffsetAdjusted.ToUnixTimeMilliseconds();
         var toOffsetAdjustedUnix = toOffsetAdjusted.ToUnixTimeMilliseconds();
@@ -197,7 +193,7 @@ public class TickersController : ControllerBase
         {
             // get from db
             chartDataDtoList = (await _tickerDbService.GetStockChartDataAsync(ticker, timespan, multiplier,
-                fromOffsetAdjusted.DateTime, toOffsetAdjusted.DateTime)).ToList();
+                DateTime.Now.Date, fromOffsetAdjusted.DateTime, toOffsetAdjusted.DateTime)).ToList();
             if (chartDataDtoList.IsNullOrEmpty()) return NotFound();
             return Ok(chartDataDtoList);
         }
@@ -224,7 +220,7 @@ public class TickersController : ControllerBase
                 Close = result.C,
                 High = result.H,
                 Volume = result.V
-            }); 
+            });
 
             date = timespan switch
             {
@@ -232,11 +228,12 @@ public class TickersController : ControllerBase
                 "hour" => date.AddHours(multiplier),
                 "day" => date.AddDays(multiplier),
                 "week" => date.AddDays(7 * multiplier),
-                _ => date,
+                _ => date
             };
         }
+
         // save to db
-        await _tickerDbService.SaveStockChartDataAsync(chartDataDtoList, ticker, timespan, multiplier);
+        await _tickerDbService.SaveStockChartDataAsync(chartDataDtoList, ticker, timespan, multiplier, DateTime.Now.Date);
         return Ok(chartDataDtoList);
     }
 }
