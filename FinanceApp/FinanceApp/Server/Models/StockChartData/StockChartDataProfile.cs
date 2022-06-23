@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
 using FinanceApp.Shared.Models;
 
-namespace FinanceApp.Server.Models.StockChartData
+namespace FinanceApp.Server.Models.StockChartData;
+
+public class StockChartDataProfile : Profile
 {
-    public class StockChartDataProfile : Profile
+    public StockChartDataProfile()
     {
-        public StockChartDataProfile()
-        {
-            CreateMap<StockChartData, StockChartDataDto>();
-            CreateMap<StockChartDataDto, StockChartData>();
-        }
+        CreateMap<StockChartData, StockChartDataDto>();
+        CreateMap<StockChartDataDto, StockChartData>();
     }
 }

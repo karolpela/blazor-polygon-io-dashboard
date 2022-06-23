@@ -77,7 +77,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 
         builder.Entity<StockChartData>(e =>
         {
-            e.HasKey(scd => new { scd.Ticker, scd.Timespan, scd.Multiplier, scd.Date });
+            e.HasKey(scd => new { scd.Ticker, scd.Timespan, scd.Multiplier, scd.QueryDate, scd.Date });
             e.Property(scd => scd.Timespan).HasMaxLength(15);
             e.Property(scd => scd.Volume).HasPrecision(20, 0);
             e.ToTable("StockChartData");
