@@ -24,6 +24,7 @@ public class StockChartData
         Volume = volume;
     }
 
+    public virtual TickerResults TickerResults { get; set; } = null!;
     public string Ticker { get; set; } = null!;
     public string Timespan { get; set; } = null!;
     public int Multiplier { get; set; }
@@ -34,5 +35,4 @@ public class StockChartData
     public double Close { get; set; }
     public double High { get; set; }
     public decimal Volume { get; set; }
-    public virtual TickerResults TickerResults { get; set; } = null!;
 }

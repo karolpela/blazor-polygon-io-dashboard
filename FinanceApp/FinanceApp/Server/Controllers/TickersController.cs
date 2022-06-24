@@ -2,6 +2,7 @@
 using FinanceApp.Server.Models.Bars;
 using FinanceApp.Server.Services.Interfaces;
 using FinanceApp.Shared.Models;
+using FinanceApp.Shared.Models.News;
 using FinanceApp.Shared.Models.TickerDetails;
 using FinanceApp.Shared.Models.TickerList;
 using Microsoft.AspNetCore.Authorization;
@@ -226,5 +227,50 @@ public class TickersController : ControllerBase
         await _tickerDbService.SaveStockChartDataAsync(chartDataDtoList, ticker, timespan, multiplier,
             DateTime.Now.Date);
         return Ok(chartDataDtoList);
+    }
+
+    [AllowAnonymous]
+    [HttpGet("{ticker}/news")]
+    public async Task<IActionResult> GetNewsAsync(string ticker)
+    {
+        var client = _clientFactory.CreateClient();
+
+        var resultsImagesDtoList = new List<NewsResultImageDto>();
+        try
+        {
+            var newsDto = await client.GetFromJsonAsync<NewsDto>("https://api.polygon.io/v2/reference/news" +
+                                                                 $"?ticker={ticker}" +
+                                                                 $"&apiKey={_configuration["Polygon:ApiKey"]}");
+            if (newsDto?.Results != null)
+            {
+                foreach (var resultDto in newsDto.Results)
+                {
+                    byte[]? image = null;
+                    if (resultDto.ImageUrl != null)
+                        try
+                        {
+                            image = await client.GetByteArrayAsync(resultDto.ImageUrl);
+                        }
+                        catch (HttpRequestException)
+                        {
+                            Console.WriteLine("Unable to get news image");
+                        }
+
+                    resultsImagesDtoList.Add(new NewsResultImageDto(resultDto, image));
+                }
+
+                ;
+                await _tickerDbService.SaveNewsImagesAsync(resultsImagesDtoList);
+            }
+        }
+        catch (HttpRequestException e)
+        {
+            //TODO get from db
+            resultsImagesDtoList = null;
+
+            Console.WriteLine(e);
+        }
+
+        return Ok(resultsImagesDtoList);
     }
 }

@@ -2,11 +2,13 @@
 using FinanceApp.Server.Data;
 using FinanceApp.Server.Models.DailyOpenClose;
 using FinanceApp.Server.Models.Logo;
+using FinanceApp.Server.Models.News;
 using FinanceApp.Server.Models.StockChartData;
 using FinanceApp.Server.Models.TickerDetails;
 using FinanceApp.Server.Models.Tickers;
 using FinanceApp.Server.Services.Interfaces;
 using FinanceApp.Shared.Models;
+using FinanceApp.Shared.Models.News;
 using FinanceApp.Shared.Models.TickerDetails;
 using FinanceApp.Shared.Models.TickerList;
 using Microsoft.EntityFrameworkCore;
@@ -46,9 +48,9 @@ public class TickerDbService : ITickerDbService
         return await _context.SaveChangesAsync();
     }
 
-    public async Task<int> SaveListItemsToDbAsync(IEnumerable<TickerListItemDto> itemListDto)
+    public async Task<int> SaveListItemsToDbAsync(IEnumerable<TickerListItemDto> tickerListItemDtos)
     {
-        var tickerList = itemListDto
+        var tickerList = tickerListItemDtos
             .Select(i => _mapper.Map<TickerListItem>(i))
             .ToList();
 
@@ -200,5 +202,42 @@ public class TickerDbService : ITickerDbService
         if (toUpdate.Any()) _context.UpdateRange(toUpdate);
 
         return await _context.SaveChangesAsync();
+    }
+
+    public async Task<int> SaveNewsImagesAsync(IEnumerable<NewsResultImageDto> resultImageDtos)
+    {
+        var newsIdsFromDb = await _context.NewsResults.AsNoTracking().Select(nr => nr.IdNews).ToListAsync();
+        foreach (var resultImageDto in resultImageDtos)
+        {
+            // skip if already in db
+            if (newsIdsFromDb.Contains(resultImageDto.NewsResultDto.IdNews)) continue;
+
+            var newsResult = _mapper.Map<NewsResult>(resultImageDto.NewsResultDto);
+
+            // override publisher mapping if publisher is already in db
+
+            var publisherFromDb = await _context.Publishers.FindAsync(resultImageDto.NewsResultDto.Publisher.Name);
+
+            if (publisherFromDb != null) newsResult.Publisher = publisherFromDb;
+
+            // map many-to-many NewsResult-TickerResults
+            var tickersFromDb = await _context.Results
+                .Where(r => resultImageDto.NewsResultDto.Tickers.Contains(r.Ticker))
+                .ToListAsync();
+
+            newsResult.TickerResults = tickersFromDb;
+
+            foreach (var ticker in tickersFromDb) ticker.NewsResults.Add(newsResult);
+
+            // add to db
+            await _context.NewsResults.AddAsync(newsResult);
+        }
+
+        return await _context.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<NewsResultImageDto>> GetRecentNewsAsync(string ticker, int count)
+    {
+        throw new NotImplementedException();
     }
 }

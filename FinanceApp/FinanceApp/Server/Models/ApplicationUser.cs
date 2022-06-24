@@ -10,5 +10,5 @@ public class ApplicationUser : IdentityUser
         TickerWatchlist = new HashSet<TickerResults>();
     }
 
-    public ICollection<TickerResults> TickerWatchlist { get; set; }
+    public virtual ICollection<TickerResults> TickerWatchlist { get; set; }
 }

@@ -2,6 +2,7 @@
 using FinanceApp.Server.Models;
 using FinanceApp.Server.Models.DailyOpenClose;
 using FinanceApp.Server.Models.Logo;
+using FinanceApp.Server.Models.News;
 using FinanceApp.Server.Models.StockChartData;
 using FinanceApp.Server.Models.TickerDetails;
 using FinanceApp.Server.Models.Tickers;
@@ -24,6 +25,8 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     public DbSet<Logo> Logos => Set<Logo>();
     public DbSet<DailyOpenClose> DailyOpenCloses => Set<DailyOpenClose>();
     public DbSet<StockChartData> StockChartData => Set<StockChartData>();
+    public DbSet<NewsResult> NewsResults => Set<NewsResult>();
+    public DbSet<Publisher> Publishers => Set<Publisher>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -54,6 +57,10 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
             e.HasMany(tr => tr.StockChartData)
                 .WithOne(scd => scd.TickerResults)
                 .HasForeignKey(scd => scd.Ticker);
+
+            e.HasMany(tr => tr.NewsResults)
+                .WithMany(nr => nr.TickerResults)
+                .UsingEntity(j => j.ToTable("NewsResultTickerResults"));
         });
 
         builder.Entity<TickerListItem>(e =>
@@ -81,6 +88,21 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
             e.Property(scd => scd.Timespan).HasMaxLength(15);
             e.Property(scd => scd.Volume).HasPrecision(20, 0);
             e.ToTable("StockChartData");
+        });
+
+        builder.Entity<NewsResult>(e =>
+        {
+            e.HasKey(nr => nr.IdNews);
+            e.ToTable("NewsResult");
+        });
+
+        builder.Entity<Publisher>(e =>
+        {
+            e.HasKey(p => p.Name);
+            e.HasMany(p => p.NewsResults)
+                .WithOne(nr => nr.Publisher)
+                .HasForeignKey(nr => nr.PublisherName);
+            e.ToTable("Publisher");
         });
     }
 }
