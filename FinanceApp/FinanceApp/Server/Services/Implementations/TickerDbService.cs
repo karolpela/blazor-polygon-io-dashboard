@@ -135,15 +135,6 @@ public class TickerDbService : ITickerDbService
         return await _context.SaveChangesAsync();
     }
 
-    // public async Task<bool> IsOnWatchlistAsync(string ticker, string username)
-    // {
-    //     return await _context.Results
-    //         .Include(r => r.ApplicationUsers)
-    //         .Where(r => r.Ticker == ticker &&
-    //                     r.ApplicationUsers.Select(au => au.UserName).Contains(username))
-    //         .AnyAsync();
-    // }
-
     public async Task<DailyOpenCloseDto?> GetDailyOpenCloseAsync(string ticker, string from)
     {
         var openCloseFromDb = await _context.DailyOpenCloses
@@ -156,9 +147,8 @@ public class TickerDbService : ITickerDbService
         if (await _context.DailyOpenCloses
                 .AsNoTracking()
                 .Where(doc => doc.Ticker == ticker && doc.From == dailyOpenCloseDto.From).AnyAsync())
-            // no need to update because historical data doesn't (at least shouldn't?) change
             return 0;
-
+        // no need to update because historical data doesn't (at least shouldn't?) change
 
         var dailyOpenClose = _mapper.Map<DailyOpenClose>(dailyOpenCloseDto);
         dailyOpenClose.Ticker = ticker;
@@ -171,9 +161,9 @@ public class TickerDbService : ITickerDbService
         int multiplier, DateTime queryDate, DateTime from, DateTime to)
     {
         var chartDataFromDb = await _context.StockChartData
-            .Where(cd => cd.Ticker == ticker && cd.Timespan == timespan 
-                         && cd.Multiplier == multiplier && cd.QueryDate == queryDate
-                         && cd.Date >= from && cd.Date <= to)
+            .Where(cd => cd.Ticker == ticker && cd.Timespan == timespan
+                                             && cd.Multiplier == multiplier && cd.QueryDate == queryDate
+                                             && cd.Date >= from && cd.Date <= to)
             .ToListAsync();
         return _mapper.Map<IEnumerable<StockChartDataDto>>(chartDataFromDb);
     }
@@ -198,8 +188,9 @@ public class TickerDbService : ITickerDbService
         var chartDataFromDb = await _context.StockChartData.AsNoTracking().ToListAsync();
 
         var notInDb = stockChartDataList
-            .ExceptBy(chartDataFromDb.Select(cd => new { cd.Ticker, cd.Timespan, cd.Multiplier, cd.Date }),
-                cd => new { cd.Ticker, cd.Timespan, cd.Multiplier, cd.Date })
+            .ExceptBy(
+                chartDataFromDb.Select(cd => new { cd.Ticker, cd.Timespan, cd.Multiplier, cd.Date, cd.QueryDate }),
+                cd => new { cd.Ticker, cd.Timespan, cd.Multiplier, cd.Date, cd.QueryDate })
             .ToList();
 
         if (notInDb.Any()) await _context.StockChartData.AddRangeAsync(notInDb);

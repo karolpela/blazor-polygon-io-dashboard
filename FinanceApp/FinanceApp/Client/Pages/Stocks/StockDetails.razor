@@ -1,6 +1,6 @@
 ﻿@using FinanceApp.Shared.Models.TickerList
-@using FinanceApp.Shared.Models.TickerDetails
 @using FinanceApp.Shared.Models
+@using FinanceApp.Shared.Models.TickerDetails
 @using Syncfusion.Blazor.Charts
 @using System.Text.Json
 @using System.Text
@@ -26,20 +26,29 @@
                 </MudPaper>
                 @if (tickerResultsLogoDto.TickerResultsDto != null)
                 {
-                
                     <MudContainer Class="d-inline">
                         <StockOpenClose SelectedTicker="@SelectedTickerResult"
                                         OnDateSelected="UpdateChartAsync"/>
                     </MudContainer>
                 }
             </MudPaper>
-            <MudPaper Elevation="2">
-                <SfStockChart @ref="sfStockChart" EnableSelector="false">
-                    <StockChartSeriesCollection>
-                        <StockChartSeries DataSource="@StockChartDetails" Type="ChartSeriesType.Candle" XName="Date" YName="Close" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume"></StockChartSeries>
-                    </StockChartSeriesCollection>
-                </SfStockChart>
-            </MudPaper>
+            @if (StockChartDetails != null)
+            {
+                <MudPaper Class="pa-2" Elevation="2">
+
+                    <SfStockChart @ref="sfStockChart" EnableSelector="false" EnablePeriodSelector="false">
+                        <StockChartPrimaryXAxis>
+                            <StockChartAxisMajorGridLines Width="0" Color="grey"></StockChartAxisMajorGridLines>
+                            <StockChartAxisMinorGridLines Width="0" Color="grey"></StockChartAxisMinorGridLines>
+                        </StockChartPrimaryXAxis>
+
+                        <StockChartSeriesCollection>
+                            <StockChartSeries DataSource="@StockChartDetails" Type="ChartSeriesType.HiloOpenClose" XName="Date" YName="Close" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume"></StockChartSeries>
+                        </StockChartSeriesCollection>
+                    </SfStockChart>
+
+                </MudPaper>
+            }
         </MudStack>
     }
 </MudContainer>
@@ -102,20 +111,19 @@
     {
         try
         {
-            // utcFrom is already set back a selected amount
+    // utcFrom is already set back a selected amount
             var fromUnix = ((DateTimeOffset)selection.utcFrom).ToUnixTimeMilliseconds();
             var toUnix = DateTimeOffset.UtcNow.AddDays(-1).ToUnixTimeMilliseconds(); // today's data is hardly available
 
             StockChartDetails = await Http.GetFromJsonAsync<List<StockChartDataDto>>(
-                    $"api/Tickers/{SelectedTickerResult!.Ticker}/bars" +
-                    $"?fromUnix={fromUnix}&toUnix={toUnix}" +
-                    $"&timespan={selection.timespan}" +
-                    $"&multiplier={selection.multiplier}");
+                $"api/Tickers/{SelectedTickerResult!.Ticker}/bars" +
+                $"?fromUnix={fromUnix}&toUnix={toUnix}" +
+                $"&timespan={selection.timespan}" +
+                $"&multiplier={selection.multiplier}");
         }
-        catch (Exception e)
+        catch (HttpRequestException)
         {
-            Console.WriteLine(e);
-            throw;
+            StockChartDetails = null;
         }
 
         sfStockChart?.UpdateStockChart();
@@ -130,7 +138,7 @@
             {
                 var username = await GetUsernameAsync();
 
-                var response = await Http.GetAsync($"api/tickers/{SelectedTickerResult.Ticker}/on-watchlist/{username}");
+                var response = await Http.GetAsync($"api/users/{username}/watching/{SelectedTickerResult.Ticker}");
                 SubscribedTo = response.IsSuccessStatusCode;
 
                 tickerResultsLogoDto = await Http.GetFromJsonAsync<TickerResultsLogoDto>($"api/tickers/{SelectedTickerResult.Ticker}");
@@ -141,7 +149,7 @@
             {
                 Console.WriteLine(ex.Message);
 
-                //throw;
+    //throw;
             }
         }
     }

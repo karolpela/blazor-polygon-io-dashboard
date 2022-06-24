@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApp.Server.Controllers;
 
-//[Authorize]
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class TickersController : ControllerBase
@@ -77,7 +77,7 @@ public class TickersController : ControllerBase
             tickerResultsDto = await _tickerDbService.GetTickerResultsAsync(ticker);
         }
 
-        LogoDto? logoDto = null;
+        LogoDto? logoDto;
 
         if (tickerResultsDto == null)
             logoDto = await _tickerDbService.GetLogoAsync(ticker);
@@ -129,7 +129,6 @@ public class TickersController : ControllerBase
         return dailyOpenCloseDto != null ? Ok(dailyOpenCloseDto) : NotFound();
     }
 
-    [AllowAnonymous]
     [HttpPost("{ticker}/users")]
     public async Task<IActionResult> SubscribeToTicker(string ticker, [FromBody] string username)
     {
@@ -140,7 +139,6 @@ public class TickersController : ControllerBase
         return Ok(result);
     }
 
-    [AllowAnonymous]
     [HttpDelete("{ticker}/users/{username}")]
     public async Task<IActionResult> UnsubscribeFromTicker(string ticker, string username)
     {
@@ -150,14 +148,6 @@ public class TickersController : ControllerBase
 
         return Ok(result);
     }
-
-    // [AllowAnonymous]
-    // [HttpGet("{ticker}/on-watchlist/{username}")]
-    // public async Task<IActionResult> IsOnWatchlistAsync(string ticker, string username)
-    // {
-    //     var isOnWatchlist = await _tickerDbService.IsOnWatchlistAsync(ticker, username);
-    //     return isOnWatchlist ? Ok() : NotFound();
-    // }
 
     [HttpGet("{ticker}/bars")]
     public async Task<IActionResult> GetBarsAsync(string ticker, string timespan, int multiplier, long fromUnix,
@@ -198,7 +188,7 @@ public class TickersController : ControllerBase
             return Ok(chartDataDtoList);
         }
 
-        if (bars == null) return NotFound();
+        if (bars?.Results == null) return NotFound();
 
         chartDataDtoList = new List<StockChartDataDto>();
         var date = fromOffsetAdjusted;
@@ -233,7 +223,8 @@ public class TickersController : ControllerBase
         }
 
         // save to db
-        await _tickerDbService.SaveStockChartDataAsync(chartDataDtoList, ticker, timespan, multiplier, DateTime.Now.Date);
+        await _tickerDbService.SaveStockChartDataAsync(chartDataDtoList, ticker, timespan, multiplier,
+            DateTime.Now.Date);
         return Ok(chartDataDtoList);
     }
 }

@@ -4,17 +4,13 @@
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 <MudLayout>
-    <MudAppBar>
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@(e => DrawerToggle())"/>
-        <label>Finance App</label>
-        <MudSpacer/>
-        <MudSwitch @bind-Checked="@_isDarkMode" Color="Color.Primary" Class="ma-4" T="bool" Label="Toggle Light/Dark Mode"/>
-    </MudAppBar>
-    <MudDrawer @bind-Open="@_drawerOpen">
-        <NavMenu/>
-    </MudDrawer>
+    <MudToggleIconButton @bind-Toggled="@_isDarkMode" Style="position: absolute; right: 0; top: 0;"
+                         Class="ma-4"
+                         Color="Color.Dark" ToggledColor="Color.Surface"
+                         Icon="@Icons.Material.Filled.DarkMode"
+                         ToggledIcon="@Icons.Material.Filled.LightMode"/>
     <MudMainContent>
-        <MudContainer Class="ma-4" MaxWidth="MaxWidth.Medium">
+        <MudContainer Class="mt-6" MaxWidth="MaxWidth.Medium">
             @Body
         </MudContainer>
     </MudMainContent>
@@ -22,16 +18,8 @@
 
 @code {
 
-    bool _drawerOpen = true;
-
     private bool _isDarkMode;
     private MudThemeProvider _mudThemeProvider = null!;
-
-
-    void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -43,21 +31,3 @@
     }
 
 }
-
-
-@*<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4 auth">
-            <LoginDisplay />
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>*@

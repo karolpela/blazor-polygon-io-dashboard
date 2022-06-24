@@ -1,0 +1,91 @@
+﻿@inject HttpClient Http
+@inject AuthenticationStateProvider AuthStateProvider
+@page "/"
+@using FinanceApp.Shared.Models.TickerList
+
+<div class="d-flex justify-space-between">
+    <MudText Typo="Typo.h3" Class="mb-6">Dashboard</MudText>
+    <LogoutButton/>
+</div>
+<AuthorizeView>
+    <Authorized>
+        @if (tickers != null)
+        {
+            <div class="d-flex align-end">
+                <MudAutocomplete T="TickerListItemDto" Label="NASDAQ common stocks" @bind-Value="SelectedTicker"
+                                 AutoFocus=true
+                                 SearchFunc="@SearchStock" ResetValueOnEmptyText=true
+                                 ToStringFunc="@(r => r == null ? null : $"{r.Ticker} - {r.Name}")"/>
+                <MudButton Href="/watchlist" Class="ml-4"
+                           Variant="Variant.Outlined" Color="Color.Primary"
+                           StartIcon="@Icons.Material.Outlined.Bookmarks">
+                    Watchlist
+                </MudButton>
+            </div>
+            <ErrorBoundary @ref="errorBoundary">
+                <ChildContent>
+                    <StockDetails SelectedTickerResult="@SelectedTicker"/>
+                </ChildContent>
+                <ErrorContent Context="errorContext">
+                    <MudText Typo="Typo.body1">Service unavailable and no cached data present</MudText>
+                </ErrorContent>
+            </ErrorBoundary>
+        }
+        else
+        {
+            <MudText Typo="Typo.subtitle1">Loading stock search..</MudText>
+        }
+    </Authorized>
+    <NotAuthorized>
+        <LoginDisplay/>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+    private List<TickerListItemDto>? tickers;
+
+    private TickerListItemDto? _selectedTicker;
+
+    public TickerListItemDto? SelectedTicker
+    {
+        get => _selectedTicker;
+        set
+        {
+            _selectedTicker = value;
+            errorBoundary?.Recover();
+        }
+    }
+
+    private ErrorBoundary? errorBoundary;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity!.IsAuthenticated)
+        {
+            tickers = await Http.GetFromJsonAsync<List<TickerListItemDto>>("api/tickers/");
+        }
+    }
+
+    private async Task<IEnumerable<TickerListItemDto>> SearchStock(string value)
+    {
+        return await Task.Run(() =>
+        {
+            if (tickers == null)
+            {
+                return Array.Empty<TickerListItemDto>();
+            }
+
+            if (string.IsNullOrEmpty(value))
+            {
+                return tickers;
+            }
+            return tickers.Where(t => t.Ticker.Contains(value, StringComparison.InvariantCultureIgnoreCase) ||
+                                      t.Name!.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+        });
+    }
+
+}

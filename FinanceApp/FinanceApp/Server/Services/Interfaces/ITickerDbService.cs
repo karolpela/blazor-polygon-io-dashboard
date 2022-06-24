@@ -25,6 +25,7 @@ public interface ITickerDbService
 
     public Task<IEnumerable<StockChartDataDto>> GetStockChartDataAsync(string ticker, string timespan, int multiplier,
         DateTime queryDate, DateTime from, DateTime to);
+
     public Task<int> SaveStockChartDataAsync(IEnumerable<StockChartDataDto> stockChartDataDtoList, string ticker,
         string timespan, int multiplier, DateTime queryDate);
 }

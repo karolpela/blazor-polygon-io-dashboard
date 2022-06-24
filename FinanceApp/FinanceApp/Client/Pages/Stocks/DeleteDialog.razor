@@ -1,0 +1,54 @@
+﻿@inject HttpClient Http
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.DeleteForever" Class="mr-3 mb-n1"/>
+            Delete ticker?
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText Typo="Typo.body1">Are you sure that you want to delete ticker <b>@Ticker</b>?</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Error" OnClick="DeleteTicker">Delete</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; } = null!;
+
+    [Parameter]
+    public string Ticker { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Username { get; set; } = string.Empty;
+
+    private void Submit()
+    {
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+    private async Task DeleteTicker()
+    {
+        try
+        {
+            await Http.DeleteAsync($"/api/Tickers/{Ticker}/users/{Username}");
+            Submit();
+        }
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+}

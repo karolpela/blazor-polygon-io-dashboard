@@ -8,7 +8,8 @@ public class StockChartData
     {
     }
 
-    public StockChartData(string ticker, string timespan, int multiplier, DateTime queryDate, DateTime date, double open, double low,
+    public StockChartData(string ticker, string timespan, int multiplier, DateTime queryDate, DateTime date,
+        double open, double low,
         double close, double high, decimal volume)
     {
         Ticker = ticker;

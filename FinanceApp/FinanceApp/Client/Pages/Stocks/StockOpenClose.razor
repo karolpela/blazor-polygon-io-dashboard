@@ -1,14 +1,13 @@
 ﻿@using FinanceApp.Shared.Models.TickerList
 @using FinanceApp.Shared.Models
-@using Syncfusion.Blazor.Charts
 @inject HttpClient Http
 
 <MudStack Class="align-start">
     <MudButtonGroup Color="Color.Primary">
-        <MudButton @onclick="@((args) => DateSelected(args, DateTime.UtcNow.AddDays(-1),"minute", 30))">Last day</MudButton>
-        <MudButton @onclick="@((args) => DateSelected(args, DateTime.UtcNow.AddDays(-7),"hour", 3))">1 week ago</MudButton>
-        <MudButton @onclick="@((args) => DateSelected(args, DateTime.UtcNow.AddMonths(-1),"day", 1))">1 month ago</MudButton>
-        <MudButton @onclick="@((args) => DateSelected(args, DateTime.UtcNow.AddMonths(-3),"week", 1))">3 months ago</MudButton>
+        <MudButton @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddDays(-1), "minute", 30))">Last day</MudButton>
+        <MudButton @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddDays(-7), "hour", 3))">1 week ago</MudButton>
+        <MudButton @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddMonths(-1), "day", 1))">1 month ago</MudButton>
+        <MudButton @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddMonths(-3), "week", 1))">3 months ago</MudButton>
     </MudButtonGroup>
 
     @if (dailyOpenClose != null)
@@ -44,8 +43,6 @@
     [Parameter]
     public EventCallback<(DateTime,string,int)> OnDateSelected { get; set; }
 
-    public DateTime SelectedDate { get; set; } = DateTime.Now;
-
     private DailyOpenCloseDto? dailyOpenClose;
 
     private async Task DateSelected(MouseEventArgs e, DateTime date, string timespan, int multiplier)
@@ -58,7 +55,7 @@
     {
         try
         {
-            dailyOpenClose = await Http.GetFromJsonAsync<DailyOpenCloseDto>($"api/tickers/{SelectedTicker!.Ticker}/open-close/{SelectedDate:yyyy-MM-dd}");
+            dailyOpenClose = await Http.GetFromJsonAsync<DailyOpenCloseDto>($"api/tickers/{SelectedTicker!.Ticker}/open-close/{date:yyyy-MM-dd}");
         }
         catch (HttpRequestException e)
         {
@@ -67,13 +64,6 @@
         }
     }
 
-    // protected override async Task OnParametersSetAsync()
-    // {
-    //     if (SelectedTicker != null)
-    //     {
-    //         await SetDateAsync("Last day");
-    //     }
-    // }
     protected override async Task OnInitializedAsync()
     {
         if (SelectedTicker != null)
@@ -81,4 +71,5 @@
             await UpdateOpenCloseAsync(DateTime.Now.AddDays(-1));
         }
     }
+
 }
