@@ -1,0 +1,45 @@
+﻿@using FinanceApp.Shared.Models.TickerList
+@using FinanceApp.Shared.Models.News
+@inject HttpClient Http
+
+@if (NewsResultImageDtos != null)
+{
+    <MudStack Class="overflow-auto" Style="width: 25%">
+        @foreach (var itemDto in NewsResultImageDtos)
+        {
+            <NewsItem ItemDto="itemDto"></NewsItem>
+        }
+    </MudStack>
+}
+else
+{
+    {
+        <MudText Typo="Typo.body1">Loading news...</MudText>
+    }
+}
+
+@code {
+
+    [Parameter]
+    public TickerListItemDto? SelectedTicker { get; set; }
+
+    private int newsCount = 5;
+
+    public IEnumerable<NewsResultImageDto>? NewsResultImageDtos { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (SelectedTicker == null) return;
+        try
+        {
+            NewsResultImageDtos = await Http.GetFromJsonAsync<IEnumerable<NewsResultImageDto>>(
+                $"api/Tickers/{SelectedTicker.Ticker}/news?count={newsCount}");
+        }
+        catch (HttpRequestException)
+        {
+            NewsResultImageDtos = null;
+            Console.WriteLine("Failed to get news");
+        }
+    }
+
+}

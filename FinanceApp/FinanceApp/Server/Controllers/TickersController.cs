@@ -229,9 +229,8 @@ public class TickersController : ControllerBase
         return Ok(chartDataDtoList);
     }
 
-    [AllowAnonymous]
     [HttpGet("{ticker}/news")]
-    public async Task<IActionResult> GetNewsAsync(string ticker)
+    public async Task<IActionResult> GetNewsAsync(string ticker, int count)
     {
         var client = _clientFactory.CreateClient();
 
@@ -240,35 +239,44 @@ public class TickersController : ControllerBase
         {
             var newsDto = await client.GetFromJsonAsync<NewsDto>("https://api.polygon.io/v2/reference/news" +
                                                                  $"?ticker={ticker}" +
+                                                                 $"&limit={count}" +
                                                                  $"&apiKey={_configuration["Polygon:ApiKey"]}");
             if (newsDto?.Results != null)
             {
                 foreach (var resultDto in newsDto.Results)
                 {
-                    byte[]? image = null;
+                    NewsImageDto? newsImageDto = null;
                     if (resultDto.ImageUrl != null)
                         try
                         {
-                            image = await client.GetByteArrayAsync(resultDto.ImageUrl);
+                            var image = await client.GetByteArrayAsync(resultDto.ImageUrl);
+                            try
+                            {
+                                var format = Path.GetExtension(resultDto.ImageUrl)[1..];
+                                newsImageDto = new NewsImageDto(image, format);
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                Console.WriteLine("No image format specified");
+                            }
                         }
                         catch (HttpRequestException)
                         {
                             Console.WriteLine("Unable to get news image");
                         }
 
-                    resultsImagesDtoList.Add(new NewsResultImageDto(resultDto, image));
+                    resultsImagesDtoList.Add(new NewsResultImageDto(resultDto, newsImageDto));
                 }
 
-                ;
                 await _tickerDbService.SaveNewsImagesAsync(resultsImagesDtoList);
             }
         }
-        catch (HttpRequestException e)
+        catch (HttpRequestException)
         {
-            //TODO get from db
-            resultsImagesDtoList = null;
-
-            Console.WriteLine(e);
+            // get from db
+            Console.WriteLine("Unable to get news from Polygon - getting from database instead");
+            var newsImagesDtos = await _tickerDbService.GetNewsImagesAsync(ticker, count);
+            resultsImagesDtoList.AddRange(newsImagesDtos);
         }
 
         return Ok(resultsImagesDtoList);

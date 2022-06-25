@@ -206,11 +206,23 @@ public class TickerDbService : ITickerDbService
 
     public async Task<int> SaveNewsImagesAsync(IEnumerable<NewsResultImageDto> resultImageDtos)
     {
-        var newsIdsFromDb = await _context.NewsResults.AsNoTracking().Select(nr => nr.IdNews).ToListAsync();
+        var newsFromDb = await _context.NewsResults
+            .Include(nr => nr.NewsImage)
+            .ToListAsync();
         foreach (var resultImageDto in resultImageDtos)
         {
             // skip if already in db
-            if (newsIdsFromDb.Contains(resultImageDto.NewsResultDto.IdNews)) continue;
+            var newsResultFromDb = newsFromDb.Find(nr => nr.IdNews == resultImageDto.NewsResultDto.IdNews);
+            if (newsResultFromDb != null)
+            {
+                // add image if news exists but no image present
+                if (resultImageDto.ImageDto != null && newsResultFromDb.NewsImage == null)
+                    newsResultFromDb.NewsImage = new NewsImage(
+                        resultImageDto.ImageDto.Data,
+                        resultImageDto.ImageDto.Format,
+                        newsResultFromDb.IdNews);
+                continue;
+            }
 
             var newsResult = _mapper.Map<NewsResult>(resultImageDto.NewsResultDto);
 
@@ -236,8 +248,18 @@ public class TickerDbService : ITickerDbService
         return await _context.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<NewsResultImageDto>> GetRecentNewsAsync(string ticker, int count)
+    public async Task<IEnumerable<NewsResultImageDto>> GetNewsImagesAsync(string ticker, int count)
     {
-        throw new NotImplementedException();
+        return await _context.NewsResults
+            .Include(nr => nr.TickerResults)
+            .Where(nr => nr.TickerResults.Select(tr => tr.Ticker).Contains(ticker))
+            .Include(nr => nr.NewsImage)
+            .Include(nr => nr.Publisher)
+            .OrderByDescending(nr => nr.PublishedUtc)
+            .Take(5)
+            .Select(nr => new NewsResultImageDto(
+                _mapper.Map<NewsResultDto>(nr),
+                nr.NewsImage == null ? null : new NewsImageDto(nr.NewsImage.Data, nr.NewsImage.Format)))
+            .ToListAsync();
     }
 }

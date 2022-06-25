@@ -26,6 +26,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     public DbSet<DailyOpenClose> DailyOpenCloses => Set<DailyOpenClose>();
     public DbSet<StockChartData> StockChartData => Set<StockChartData>();
     public DbSet<NewsResult> NewsResults => Set<NewsResult>();
+    public DbSet<NewsImage> NewsImages => Set<NewsImage>();
     public DbSet<Publisher> Publishers => Set<Publisher>();
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -93,7 +94,16 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
         builder.Entity<NewsResult>(e =>
         {
             e.HasKey(nr => nr.IdNews);
+            e.HasOne(nr => nr.NewsImage)
+                .WithOne(ni => ni.NewsResult)
+                .HasForeignKey<NewsImage>(ni => ni.IdNews);
             e.ToTable("NewsResult");
+        });
+
+        builder.Entity<NewsImage>(e =>
+        {
+            e.HasKey(ni => ni.IdNews);
+            e.ToTable("NewsImage");
         });
 
         builder.Entity<Publisher>(e =>

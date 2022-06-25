@@ -4,6 +4,7 @@ using FinanceApp.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinanceApp.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220625083843_StoreNewsImagesInSeparateTable")]
+    partial class StoreNewsImagesInSeparateTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,7 +122,7 @@ namespace FinanceApp.Server.Data.Migrations
 
                     b.HasIndex("Use");
 
-                    b.ToTable("Keys", (string)null);
+                    b.ToTable("Keys");
                 });
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.PersistedGrant", b =>
@@ -314,6 +316,7 @@ namespace FinanceApp.Server.Data.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Format")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdNews");
@@ -431,7 +434,7 @@ namespace FinanceApp.Server.Data.Migrations
 
                     b.HasKey("Address1");
 
-                    b.ToTable("Address", (string)null);
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("FinanceApp.Server.Models.TickerDetails.Branding", b =>
@@ -444,7 +447,7 @@ namespace FinanceApp.Server.Data.Migrations
 
                     b.HasKey("LogoUrl");
 
-                    b.ToTable("Branding", (string)null);
+                    b.ToTable("Branding");
                 });
 
             modelBuilder.Entity("FinanceApp.Server.Models.TickerDetails.TickerResults", b =>

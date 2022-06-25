@@ -5,26 +5,30 @@ namespace FinanceApp.Server.Models.News;
 
 public class NewsResult
 {
-    public NewsResult()
+#pragma warning disable CS8618
+    private NewsResult()
+#pragma warning restore CS8618
     {
     }
 
-    public NewsResult(string idNews, Publisher publisher, string title, string author, DateTime publishedUtc,
-        string articleUrl, byte[] image, string? description, /*List<string>? keywords,*/ string? ampUrl)
+    public NewsResult(string publisherName, NewsImage? newsImage, string idNews, Publisher publisher, string title,
+        string author, DateTime publishedUtc, string articleUrl, string? description)
     {
+        PublisherName = publisherName;
+        NewsImage = newsImage;
         IdNews = idNews;
         Publisher = publisher;
         Title = title;
         Author = author;
         PublishedUtc = publishedUtc;
         ArticleUrl = articleUrl;
-        Image = image;
         Description = description;
     }
 
     public virtual ICollection<TickerResults> TickerResults { get; set; } = new HashSet<TickerResults>();
 
     public string PublisherName { get; set; }
+    public NewsImage? NewsImage { get; set; }
 
     [JsonPropertyName("id")] public string IdNews { get; set; }
 
@@ -37,8 +41,6 @@ public class NewsResult
     [JsonPropertyName("published_utc")] public DateTime PublishedUtc { get; set; }
 
     [JsonPropertyName("article_url")] public string ArticleUrl { get; set; }
-
-    public byte[]? Image { get; set; }
 
     [JsonPropertyName("description")] public string? Description { get; set; }
 }

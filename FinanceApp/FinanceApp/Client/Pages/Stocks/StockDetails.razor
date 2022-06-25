@@ -4,14 +4,15 @@
 @using Syncfusion.Blazor.Charts
 @using System.Text.Json
 @using System.Text
+@using FinanceApp.Client.Pages.Stocks.News
 @inject HttpClient Http
 @inject AuthenticationStateProvider AuthStateProvider
 
-<MudContainer Class="mt-4">
+<MudContainer Class="my-4 d-flex" Style="height: 700px; width: 100%;">
     @if (tickerResultsLogoDto != null)
     {
-        <MudStack Spacing="4">
-            <MudPaper Class="d-flex mt-4 pa-4" Elevation="2">
+        <MudStack Class="mr-6" Style="Width: 80%" Spacing="4">
+            <MudPaper Class="d-flex pa-4" Elevation="2">
                 <MudToggleIconButton Toggled="@SubscribedTo" ToggledChanged="@ToggleWatchlistAsync"
                                      Class="pa-0 ma-2" Style="position: absolute"
                                      Icon="@Icons.Material.Filled.FavoriteBorder" Title="Add to watchlist"
@@ -35,7 +36,6 @@
             @if (StockChartDetails != null)
             {
                 <MudPaper Class="pa-2" Elevation="2">
-
                     <SfStockChart @ref="sfStockChart" EnableSelector="false" EnablePeriodSelector="false">
                         <StockChartPrimaryXAxis>
                             <StockChartAxisMajorGridLines Width="0" Color="grey"></StockChartAxisMajorGridLines>
@@ -46,10 +46,10 @@
                             <StockChartSeries DataSource="@StockChartDetails" Type="ChartSeriesType.HiloOpenClose" XName="Date" YName="Close" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume"></StockChartSeries>
                         </StockChartSeriesCollection>
                     </SfStockChart>
-
                 </MudPaper>
             }
         </MudStack>
+        <NewsList SelectedTicker="@SelectedTickerResult"/>
     }
 </MudContainer>
 
@@ -101,7 +101,7 @@
         return username;
     }
 
-    private string ConvertToBase64(LogoDto logo)
+    public static string ConvertToBase64(LogoDto logo)
     {
         if (logo.Format == "svg") logo.Format = "svg+xml";
         return $"data:image/{logo.Format};base64,{Convert.ToBase64String(logo.Data)}";
@@ -145,11 +145,10 @@
 
                 await UpdateChartAsync((DateTime.Now.AddDays(-1), "minute", 30));
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
-                Console.WriteLine(ex.Message);
-
-    //throw;
+                tickerResultsLogoDto = null;
+                throw;
             }
         }
     }

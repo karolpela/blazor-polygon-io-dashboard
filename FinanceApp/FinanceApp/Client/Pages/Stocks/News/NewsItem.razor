@@ -1,0 +1,54 @@
+﻿@using FinanceApp.Shared.Models.News
+@if (ItemDto != null)
+{
+    <MudCard>
+        <MudCardHeader>
+            <CardHeaderContent>@ItemDto.NewsResultDto.Publisher.Name</CardHeaderContent>
+        </MudCardHeader>
+        @if (ItemDto.ImageDto != null)
+        {
+            <a href="@ItemDto.NewsResultDto.ArticleUrl" target="_blank">
+                <MudCardMedia Image="@ConvertToBase64(ItemDto.ImageDto)" Height="150"/>
+            </a>
+        }
+        <MudCardContent>
+            <a href="@ItemDto.NewsResultDto.ArticleUrl" target="_blank">
+                <MudText Typo="Typo.body1">
+                    <b>@TruncateString(ItemDto.NewsResultDto.Title, 50)</b>
+                </MudText>
+            </a>
+            @if (ItemDto.NewsResultDto.Description != null)
+            {
+                <MudText Typo="Typo.body2">@TruncateString(ItemDto.NewsResultDto.Description, 125)</MudText>
+            }
+        </MudCardContent>
+        @* <MudCardActions> *@
+        @*     <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More  </MudButton> *@
+        @* </MudCardActions> *@
+    </MudCard>
+}
+else
+{
+    <MudText Typo="Typo.body1">No content to display</MudText>
+}
+
+
+@code {
+
+    [Parameter]
+    public NewsResultImageDto? ItemDto { get; set; }
+
+    private string ConvertToBase64(NewsImageDto imageDto)
+    {
+        if (imageDto.Format == null) imageDto.Format = "*";
+        else if (imageDto.Format == "svg") imageDto.Format = "svg+xml";
+        return $"data:image/{imageDto.Format};base64,{Convert.ToBase64String(imageDto.Data)}";
+    }
+
+    private static string TruncateString(string s, int length)
+    {
+        if (Math.Min(s.Length, length) == s.Length) return s;
+        return s.Substring(0, length) + "...";
+    }
+
+}

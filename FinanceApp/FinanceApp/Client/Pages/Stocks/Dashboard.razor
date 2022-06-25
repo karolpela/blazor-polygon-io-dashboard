@@ -14,7 +14,7 @@
             <div class="d-flex align-end">
                 <MudAutocomplete T="TickerListItemDto" Label="NASDAQ common stocks" @bind-Value="SelectedTicker"
                                  AutoFocus=true
-                                 SearchFunc="@SearchStock" ResetValueOnEmptyText=true
+                                 SearchFunc="@SearchStock" ResetValueOnEmptyText=false
                                  ToStringFunc="@(r => r == null ? null : $"{r.Ticker} - {r.Name}")"/>
                 <MudButton Href="/watchlist" Class="ml-4"
                            Variant="Variant.Outlined" Color="Color.Primary"
@@ -27,7 +27,7 @@
                     <StockDetails SelectedTickerResult="@SelectedTicker"/>
                 </ChildContent>
                 <ErrorContent Context="errorContext">
-                    <MudText Typo="Typo.body1">Service unavailable and no cached data present</MudText>
+                    <MudText Class="mt-4" Typo="Typo.body1">Service unavailable and no cached data present</MudText>
                 </ErrorContent>
             </ErrorBoundary>
         }

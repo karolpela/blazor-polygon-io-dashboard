@@ -2,12 +2,12 @@
 
 public class NewsResultImageDto
 {
-    public NewsResultImageDto(NewsResultDto newsResultDto, byte[]? image)
+    public NewsResultImageDto(NewsResultDto newsResultDto, NewsImageDto? imageDto)
     {
         NewsResultDto = newsResultDto;
-        Image = image;
+        ImageDto = imageDto;
     }
 
     public NewsResultDto NewsResultDto { get; set; }
-    public byte[]? Image { get; set; }
+    public NewsImageDto? ImageDto { get; set; }
 }

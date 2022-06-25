@@ -4,6 +4,12 @@ namespace FinanceApp.Shared.Models.News;
 
 public class NewsResultDto
 {
+#pragma warning disable CS8618
+    public NewsResultDto()
+#pragma warning restore CS8618
+    {
+    }
+
     public NewsResultDto(string idNews, PublisherDto publisher, string title, string author, DateTime publishedUtc,
         string articleUrl, List<string> tickers, string? imageUrl, string? description, List<string>? keywords,
         string? ampUrl)

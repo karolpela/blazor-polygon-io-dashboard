@@ -3,7 +3,7 @@
 @inject HttpClient Http
 
 <MudStack Class="align-start">
-    <MudButtonGroup Color="Color.Primary">
+    <MudButtonGroup Class="my-2 align-center" Color="Color.Primary">
         <MudButton @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddDays(-1), "minute", 30))">Last day</MudButton>
         <MudButton @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddDays(-7), "hour", 3))">1 week ago</MudButton>
         <MudButton @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddMonths(-1), "day", 1))">1 month ago</MudButton>

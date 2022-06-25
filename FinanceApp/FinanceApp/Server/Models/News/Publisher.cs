@@ -4,7 +4,7 @@ namespace FinanceApp.Server.Models.News;
 
 public class Publisher
 {
-    public Publisher()
+    private Publisher()
     {
     }
 

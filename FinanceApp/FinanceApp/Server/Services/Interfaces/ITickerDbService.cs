@@ -29,5 +29,5 @@ public interface ITickerDbService
         string timespan, int multiplier, DateTime queryDate);
 
     public Task<int> SaveNewsImagesAsync(IEnumerable<NewsResultImageDto> resultImageDtos);
-    public Task<IEnumerable<NewsResultImageDto>> GetRecentNewsAsync(string ticker, int count);
+    public Task<IEnumerable<NewsResultImageDto>> GetNewsImagesAsync(string ticker, int count);
 }
