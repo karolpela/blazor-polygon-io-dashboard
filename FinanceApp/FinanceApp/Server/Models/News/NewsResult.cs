@@ -6,9 +6,10 @@ namespace FinanceApp.Server.Models.News;
 public class NewsResult
 {
 #pragma warning disable CS8618
-    private NewsResult()
+    public NewsResult()
 #pragma warning restore CS8618
     {
+        
     }
 
     public NewsResult(string publisherName, NewsImage? newsImage, string idNews, Publisher publisher, string title,

@@ -21,7 +21,7 @@ else
 @code {
 
     [Parameter]
-    public TickerListItemDto? SelectedTicker { get; set; }
+    public string? SelectedTicker { get; set; }
 
     private int newsCount = 5;
 
@@ -33,7 +33,7 @@ else
         try
         {
             NewsResultImageDtos = await Http.GetFromJsonAsync<IEnumerable<NewsResultImageDto>>(
-                $"api/Tickers/{SelectedTicker.Ticker}/news?count={newsCount}");
+                $"api/Tickers/{SelectedTicker}/news?count={newsCount}");
         }
         catch (HttpRequestException)
         {

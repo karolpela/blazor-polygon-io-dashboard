@@ -2,12 +2,6 @@
 
 public class NewsImage
 {
-#pragma warning disable CS8618
-    public NewsImage()
-#pragma warning restore CS8618
-    {
-    }
-
     public NewsImage(byte[] data, string? format, string idNews)
     {
         Data = data;

@@ -4,10 +4,10 @@ namespace FinanceApp.Server.Models.News;
 
 public class Publisher
 {
-    private Publisher()
+    public Publisher()
     {
+        
     }
-
     public Publisher(string name, string homepageUrl, string logoUrl, string? faviconUrl)
     {
         Name = name;

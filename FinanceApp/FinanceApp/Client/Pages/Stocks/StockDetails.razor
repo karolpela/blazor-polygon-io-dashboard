@@ -8,7 +8,7 @@
 @inject HttpClient Http
 @inject AuthenticationStateProvider AuthStateProvider
 
-<MudContainer Class="my-4 d-flex" Style="height: 700px; width: 100%;">
+<MudContainer Class="my-4 d-flex" Style="height: 720px">
     @if (tickerResultsLogoDto != null)
     {
         <MudStack Class="mr-6" Style="Width: 80%" Spacing="4">
@@ -16,20 +16,20 @@
                 <MudToggleIconButton Toggled="@SubscribedTo" ToggledChanged="@ToggleWatchlistAsync"
                                      Class="pa-0 ma-2" Style="position: absolute"
                                      Icon="@Icons.Material.Filled.FavoriteBorder" Title="Add to watchlist"
-                                     ToggledIcon="@Icons.Material.Filled.Favorite" ToggledTitle="Remove from watchlist"/>
+                                     ToggledIcon="@Icons.Material.Filled.Favorite" ToggledTitle="Remove from watchlist" />
 
                 <MudPaper Class="d-inline mr-4 pa-2" Height="200px" Width="200px" Elevation="0">
                     @if (tickerResultsLogoDto.LogoDto != null)
                     {
                         <MudImage Alt="Logo" Width="180" Height="180"
-                                  ObjectFit="ObjectFit.ScaleDown" Src="@ConvertToBase64(tickerResultsLogoDto.LogoDto)"/>
+                                  ObjectFit="ObjectFit.ScaleDown" Src="@ConvertToBase64(tickerResultsLogoDto.LogoDto)" />
                     }
                 </MudPaper>
                 @if (tickerResultsLogoDto.TickerResultsDto != null)
                 {
                     <MudContainer Class="d-inline">
-                        <StockOpenClose SelectedTicker="@SelectedTickerResult"
-                                        OnDateSelected="UpdateChartAsync"/>
+                        <StockOpenClose SelectedTicker="@SelectedTicker"
+                                        OnDateSelected="UpdateChartAsync" />
                     </MudContainer>
                 }
             </MudPaper>
@@ -49,14 +49,14 @@
                 </MudPaper>
             }
         </MudStack>
-        <NewsList SelectedTicker="@SelectedTickerResult"/>
+        <NewsList SelectedTicker="@SelectedTicker" />
     }
 </MudContainer>
 
 @code {
 
     [Parameter]
-    public TickerListItemDto? SelectedTickerResult { get; set; }
+    public string? SelectedTicker { get; set; }
 
     public List<StockChartDataDto>? StockChartDetails { get; set; }
 
@@ -76,14 +76,14 @@
         {
             if (SubscribedTo)
             {
-                await Http.DeleteAsync($"api/tickers/{SelectedTickerResult!.Ticker}/users/{username!.Normalize()}/");
-    //TODO check if actually unsubscribed
+                await Http.DeleteAsync($"api/tickers/{SelectedTicker}/users/{username!.Normalize()}/");
+                //TODO check if actually unsubscribed
                 SubscribedTo = false;
             }
             else
             {
-                await Http.PostAsync($"api/tickers/{SelectedTickerResult!.Ticker}/users/", content);
-    //TODO check if actually subscribed
+                await Http.PostAsync($"api/tickers/{SelectedTicker}/users/", content);
+                //TODO check if actually subscribed
                 SubscribedTo = true;
             }
         }
@@ -111,12 +111,12 @@
     {
         try
         {
-    // utcFrom is already set back a selected amount
+            // utcFrom is already set back a selected amount
             var fromUnix = ((DateTimeOffset)selection.utcFrom).ToUnixTimeMilliseconds();
             var toUnix = DateTimeOffset.UtcNow.AddDays(-1).ToUnixTimeMilliseconds(); // today's data is hardly available
 
             StockChartDetails = await Http.GetFromJsonAsync<List<StockChartDataDto>>(
-                $"api/Tickers/{SelectedTickerResult!.Ticker}/bars" +
+                $"api/Tickers/{SelectedTicker}/bars" +
                 $"?fromUnix={fromUnix}&toUnix={toUnix}" +
                 $"&timespan={selection.timespan}" +
                 $"&multiplier={selection.multiplier}");
@@ -132,25 +132,29 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        if (SelectedTickerResult != null)
+        if (string.IsNullOrEmpty(SelectedTicker))
         {
-            try
-            {
-                var username = await GetUsernameAsync();
-
-                var response = await Http.GetAsync($"api/users/{username}/watching/{SelectedTickerResult.Ticker}");
-                SubscribedTo = response.IsSuccessStatusCode;
-
-                tickerResultsLogoDto = await Http.GetFromJsonAsync<TickerResultsLogoDto>($"api/tickers/{SelectedTickerResult.Ticker}");
-
-                await UpdateChartAsync((DateTime.Now.AddDays(-1), "minute", 30));
-            }
-            catch (HttpRequestException)
-            {
-                tickerResultsLogoDto = null;
-                throw;
-            }
+            tickerResultsLogoDto = null;
+            return;
         }
+
+        try
+        {
+            var username = await GetUsernameAsync();
+
+            var response = await Http.GetAsync($"api/users/{username}/watching/{SelectedTicker}");
+            SubscribedTo = response.IsSuccessStatusCode;
+
+            tickerResultsLogoDto = await Http.GetFromJsonAsync<TickerResultsLogoDto>($"api/tickers/{SelectedTicker}");
+
+            await UpdateChartAsync((DateTime.Now.AddDays(-1), "minute", 30));
+        }
+        catch (HttpRequestException)
+        {
+            tickerResultsLogoDto = null;
+            throw;
+        }
+
     }
 
 }

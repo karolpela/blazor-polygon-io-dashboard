@@ -38,7 +38,7 @@
 @code {
 
     [Parameter]
-    public TickerListItemDto? SelectedTicker { get; set; }
+    public string? SelectedTicker { get; set; }
 
     [Parameter]
     public EventCallback<(DateTime,string,int)> OnDateSelected { get; set; }
@@ -55,7 +55,7 @@
     {
         try
         {
-            dailyOpenClose = await Http.GetFromJsonAsync<DailyOpenCloseDto>($"api/tickers/{SelectedTicker!.Ticker}/open-close/{date:yyyy-MM-dd}");
+            dailyOpenClose = await Http.GetFromJsonAsync<DailyOpenCloseDto>($"api/tickers/{SelectedTicker}/open-close/{date:yyyy-MM-dd}");
         }
         catch (HttpRequestException e)
         {

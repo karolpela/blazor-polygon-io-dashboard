@@ -12,7 +12,7 @@
         @if (tickers != null)
         {
             <div class="d-flex align-end">
-                <MudAutocomplete T="TickerListItemDto" Label="NASDAQ common stocks" @bind-Value="SelectedTicker"
+                <MudAutocomplete T="TickerListItemDto" Label="NASDAQ common stocks" @bind-Value="SelectedItem"
                                  AutoFocus=true
                                  SearchFunc="@SearchStock" ResetValueOnEmptyText=false
                                  ToStringFunc="@(r => r == null ? null : $"{r.Ticker} - {r.Name}")"/>
@@ -24,7 +24,10 @@
             </div>
             <ErrorBoundary @ref="errorBoundary">
                 <ChildContent>
-                    <StockDetails SelectedTickerResult="@SelectedTicker"/>
+                    @if (SelectedItem != null)
+                    {
+                        <StockDetails SelectedTicker="@SelectedItem.Ticker"/>
+                    }
                 </ChildContent>
                 <ErrorContent Context="errorContext">
                     <MudText Class="mt-4" Typo="Typo.body1">Service unavailable and no cached data present</MudText>
@@ -45,17 +48,18 @@
 @code {
     private List<TickerListItemDto>? tickers;
 
-    private TickerListItemDto? _selectedTicker;
+    private TickerListItemDto? _selectedItem;
 
-    public TickerListItemDto? SelectedTicker
+    public TickerListItemDto? SelectedItem
     {
-        get => _selectedTicker;
+        get => _selectedItem;
         set
         {
-            _selectedTicker = value;
+            _selectedItem = value;
             errorBoundary?.Recover();
         }
     }
+
 
     private ErrorBoundary? errorBoundary;
 
