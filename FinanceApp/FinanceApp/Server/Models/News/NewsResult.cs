@@ -9,7 +9,6 @@ public class NewsResult
     public NewsResult()
 #pragma warning restore CS8618
     {
-        
     }
 
     public NewsResult(string publisherName, NewsImage? newsImage, string idNews, Publisher publisher, string title,

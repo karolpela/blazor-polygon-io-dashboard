@@ -78,7 +78,11 @@ public class TickerDbService : ITickerDbService
 
     public async Task<TickerResultsDto?> GetTickerResultsAsync(string ticker)
     {
-        var resultsFromDb = await _context.Results.FindAsync(ticker);
+        var resultsFromDb = await _context.Results
+            .Include(tr => tr.Address)
+            .Include(tr => tr.Branding)
+            .Where(tr => tr.Ticker == ticker)
+            .SingleOrDefaultAsync();
         return _mapper.Map<TickerResultsDto>(resultsFromDb);
     }
 
@@ -130,7 +134,8 @@ public class TickerDbService : ITickerDbService
 
         if (tickerFromDb == null) return 0;
 
-        // TODO handle a case where ticker is not on user's watchlist
+        if (!userFromDb.TickerWatchlist.Contains(tickerFromDb)) return 0;
+
         userFromDb.TickerWatchlist.Remove(tickerFromDb);
         tickerFromDb.ApplicationUsers.Remove(userFromDb);
 

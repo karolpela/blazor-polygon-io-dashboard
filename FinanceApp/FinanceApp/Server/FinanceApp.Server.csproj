@@ -39,8 +39,4 @@
 		<_ContentIncludedByDefault Remove="Pages\Shared\_ValidationScriptsPartial.cshtml" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Areas\Identity" />
-	</ItemGroup>
-
 </Project>

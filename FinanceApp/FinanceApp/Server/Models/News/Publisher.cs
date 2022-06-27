@@ -4,10 +4,12 @@ namespace FinanceApp.Server.Models.News;
 
 public class Publisher
 {
+#pragma warning disable CS8618
     public Publisher()
+#pragma warning restore CS8618
     {
-        
     }
+
     public Publisher(string name, string homepageUrl, string logoUrl, string? faviconUrl)
     {
         Name = name;
