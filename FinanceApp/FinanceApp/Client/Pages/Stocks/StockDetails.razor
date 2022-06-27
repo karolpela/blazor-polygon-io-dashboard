@@ -1,5 +1,4 @@
-﻿@using FinanceApp.Shared.Models.TickerList
-@using FinanceApp.Shared.Models
+﻿@using FinanceApp.Shared.Models
 @using FinanceApp.Shared.Models.TickerDetails
 @using Syncfusion.Blazor.Charts
 @using System.Text.Json
@@ -16,24 +15,24 @@
                 <MudToggleIconButton Toggled="@SubscribedTo" ToggledChanged="@ToggleWatchlistAsync"
                                      Class="pa-0 ma-2" Style="position: absolute"
                                      Icon="@Icons.Material.Filled.FavoriteBorder" Title="Add to watchlist"
-                                     ToggledIcon="@Icons.Material.Filled.Favorite" ToggledTitle="Remove from watchlist" />
+                                     ToggledIcon="@Icons.Material.Filled.Favorite" ToggledTitle="Remove from watchlist"/>
 
                 <MudPaper Class="d-inline mr-4 pa-2" Height="200px" Width="200px" Elevation="0">
                     @if (tickerResultsLogoDto.LogoDto != null)
                     {
                         <MudImage Alt="Logo" Width="180" Height="180"
-                                  ObjectFit="ObjectFit.ScaleDown" Src="@ConvertToBase64(tickerResultsLogoDto.LogoDto)" />
+                                  ObjectFit="ObjectFit.ScaleDown" Src="@ConvertToBase64(tickerResultsLogoDto.LogoDto)"/>
                     }
                 </MudPaper>
                 @if (tickerResultsLogoDto.TickerResultsDto != null)
                 {
                     <MudContainer Class="d-inline">
                         <StockOpenClose SelectedTicker="@SelectedTicker"
-                                        OnDateSelected="UpdateChartAsync" />
+                                        OnDateSelected="UpdateChartAsync"/>
                     </MudContainer>
                 }
             </MudPaper>
-            @if (StockChartDetails != null)
+            @if (StockChartDetails != null && StockChartDetails.Count != 0)
             {
                 <MudPaper Class="pa-2" Elevation="2">
                     <SfStockChart @ref="sfStockChart" EnableSelector="false" EnablePeriodSelector="false">
@@ -49,7 +48,7 @@
                 </MudPaper>
             }
         </MudStack>
-        <NewsList SelectedTicker="@SelectedTicker" />
+        <NewsList SelectedTicker="@SelectedTicker"/>
     }
 </MudContainer>
 
@@ -77,20 +76,16 @@
             if (SubscribedTo)
             {
                 await Http.DeleteAsync($"api/tickers/{SelectedTicker}/users/{username!.Normalize()}/");
-                //TODO check if actually unsubscribed
-                SubscribedTo = false;
             }
             else
             {
                 await Http.PostAsync($"api/tickers/{SelectedTicker}/users/", content);
-                //TODO check if actually subscribed
-                SubscribedTo = true;
             }
+            await UpdateWatchlistStatusAsync();
         }
-        catch (Exception e)
+        catch (HttpRequestException)
         {
-            Console.WriteLine(e);
-            throw;
+            Console.WriteLine("Unable to change watchlist status");
         }
     }
 
@@ -111,7 +106,7 @@
     {
         try
         {
-            // utcFrom is already set back a selected amount
+    // utcFrom is already set back a selected amount
             var fromUnix = ((DateTimeOffset)selection.utcFrom).ToUnixTimeMilliseconds();
             var toUnix = DateTimeOffset.UtcNow.AddDays(-1).ToUnixTimeMilliseconds(); // today's data is hardly available
 
@@ -125,7 +120,6 @@
         {
             StockChartDetails = null;
         }
-
         sfStockChart?.UpdateStockChart();
     }
 
@@ -140,10 +134,7 @@
 
         try
         {
-            var username = await GetUsernameAsync();
-
-            var response = await Http.GetAsync($"api/users/{username}/watching/{SelectedTicker}");
-            SubscribedTo = response.IsSuccessStatusCode;
+            await UpdateWatchlistStatusAsync();
 
             tickerResultsLogoDto = await Http.GetFromJsonAsync<TickerResultsLogoDto>($"api/tickers/{SelectedTicker}");
 
@@ -154,7 +145,20 @@
             tickerResultsLogoDto = null;
             throw;
         }
-
     }
 
+    private async Task UpdateWatchlistStatusAsync()
+    {
+        var username = await GetUsernameAsync();
+
+        try
+        {
+            var response = await Http.GetAsync($"api/users/{username}/watching/{SelectedTicker}");
+            SubscribedTo = response.IsSuccessStatusCode;
+        }
+        catch (HttpRequestException)
+        {
+            Console.WriteLine("Unable to refresh watchlist status");
+        }
+    }
 }

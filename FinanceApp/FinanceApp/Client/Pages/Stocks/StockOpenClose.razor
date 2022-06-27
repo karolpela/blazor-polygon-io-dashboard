@@ -1,5 +1,4 @@
-﻿@using FinanceApp.Shared.Models.TickerList
-@using FinanceApp.Shared.Models
+﻿@using FinanceApp.Shared.Models
 @inject HttpClient Http
 
 <MudStack Class="align-start">
@@ -61,6 +60,14 @@
         {
             Console.WriteLine(e);
             dailyOpenClose = null;
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (SelectedTicker != null)
+        {
+            await UpdateOpenCloseAsync(DateTime.Now.AddDays(-1));
         }
     }
 
