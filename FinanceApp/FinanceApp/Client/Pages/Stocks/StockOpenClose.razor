@@ -39,8 +39,12 @@
     [Parameter]
     public string? SelectedTicker { get; set; }
 
+    private string previousTicker;
+
     [Parameter]
     public EventCallback<(DateTime,string,int)> OnDateSelected { get; set; }
+
+    private DateTime previousDateTime;
 
     private DailyOpenCloseDto? dailyOpenClose;
 
@@ -52,30 +56,35 @@
 
     private async Task UpdateOpenCloseAsync(DateTime date)
     {
+        if (date.Date == previousDateTime.Date && dailyOpenClose != null && SelectedTicker == previousTicker)
+        {
+            return;
+        }
         try
         {
             dailyOpenClose = await Http.GetFromJsonAsync<DailyOpenCloseDto>($"api/tickers/{SelectedTicker}/open-close/{date:yyyy-MM-dd}");
+            previousDateTime = date;
         }
-        catch (HttpRequestException e)
+        catch (HttpRequestException)
         {
-            Console.WriteLine(e);
             dailyOpenClose = null;
+            throw;
         }
     }
 
     protected override async Task OnParametersSetAsync()
     {
-        if (SelectedTicker != null)
+        if (SelectedTicker != null && SelectedTicker != previousTicker)
         {
-            await UpdateOpenCloseAsync(DateTime.Now.AddDays(-1));
-        }
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        if (SelectedTicker != null)
-        {
-            await UpdateOpenCloseAsync(DateTime.Now.AddDays(-1));
+            try
+            {
+                await UpdateOpenCloseAsync(DateTime.Now.AddDays(-1));
+                previousTicker = SelectedTicker;
+            }
+            catch (HttpRequestException)
+            {
+                Console.WriteLine("Unable to get new open-close");
+            }
         }
     }
 

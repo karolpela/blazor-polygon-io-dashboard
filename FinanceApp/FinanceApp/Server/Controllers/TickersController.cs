@@ -54,7 +54,6 @@ public class TickersController : ControllerBase
 
         try
         {
-            //throw new HttpRequestException();
             var tickerDetailsDto = await _stockApiService.GetTickerDetails(ticker);
             if (tickerDetailsDto == null) return NotFound();
 
@@ -73,7 +72,6 @@ public class TickersController : ControllerBase
             // unable to get new results but check db for existing logo
             logoDto = await _tickerDbService.GetLogoAsync(ticker);
         }
-
         else
         {
             try

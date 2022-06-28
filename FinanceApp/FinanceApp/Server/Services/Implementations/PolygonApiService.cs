@@ -121,25 +121,28 @@ public class PolygonApiService : IStockApiService
         foreach (var resultDto in newsDto.Results)
         {
             NewsImageDto? newsImageDto = null;
-            if (resultDto.ImageUrl != null)
+            if (resultDto.ImageUrl != null) {
                 try
                 {
                     var image = await client.GetByteArrayAsync(resultDto.ImageUrl);
+                    string? format;
                     try
                     {
-                        var format = Path.GetExtension(resultDto.ImageUrl)[1..];
-                        newsImageDto = new NewsImageDto(image, format);
+                        format = Path.GetExtension(resultDto.ImageUrl)[1..];
+                        
                     }
                     catch (ArgumentOutOfRangeException)
                     {
+                        format = null;
                         Console.WriteLine("No image format specified");
                     }
+                    newsImageDto = new NewsImageDto(image, format);
                 }
                 catch (HttpRequestException)
                 {
                     Console.WriteLine("Unable to get news image");
                 }
-
+            }
             resultsImagesDtoList.Add(new NewsResultImageDto(resultDto, newsImageDto));
         }
 

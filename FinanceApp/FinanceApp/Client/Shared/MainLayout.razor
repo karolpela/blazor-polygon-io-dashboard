@@ -10,9 +10,11 @@
                          Icon="@Icons.Material.Filled.DarkMode"
                          ToggledIcon="@Icons.Material.Filled.LightMode"/>
     <MudMainContent>
-        <MudContainer Class="mt-6" MaxWidth="MaxWidth.Large">
-            @Body
-        </MudContainer>
+        <CascadingValue Value="@_isDarkMode">
+            <MudContainer Class="mt-6" MaxWidth="MaxWidth.Large">
+                @Body
+            </MudContainer>
+        </CascadingValue>
     </MudMainContent>
 </MudLayout>
 
