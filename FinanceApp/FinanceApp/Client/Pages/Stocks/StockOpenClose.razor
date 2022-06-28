@@ -64,6 +64,7 @@
         {
             dailyOpenClose = await Http.GetFromJsonAsync<DailyOpenCloseDto>($"api/tickers/{SelectedTicker}/open-close/{date:yyyy-MM-dd}");
             previousDateTime = date;
+            previousTicker = SelectedTicker;
         }
         catch (HttpRequestException)
         {
@@ -75,16 +76,7 @@
     {
         if (SelectedTicker != null && SelectedTicker != previousTicker)
         {
-            try
-            {
-                await UpdateOpenCloseAsync(DateTime.Now.AddDays(-1));
-                previousTicker = SelectedTicker;
-            }
-            catch (HttpRequestException)
-            {
-                Console.WriteLine("Unable to get new open-close");
-            }
+            await UpdateOpenCloseAsync(DateTime.Now.AddDays(-1));
         }
     }
-
 }
