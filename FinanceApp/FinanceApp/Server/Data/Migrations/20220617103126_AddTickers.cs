@@ -38,7 +38,7 @@ namespace FinanceApp.Server.Data.Migrations
                 name: "TickerResults",
                 columns: table => new
                 {
-                    Ticker = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    Ticker = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Market = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Locale = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -83,7 +83,7 @@ namespace FinanceApp.Server.Data.Migrations
                 columns: table => new
                 {
                     ApplicationUsersId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TickerWatchlistTicker = table.Column<string>(type: "nvarchar(8)", nullable: false)
+                    TickerWatchlistTicker = table.Column<string>(type: "nvarchar(4)", nullable: false)
                 },
                 constraints: table =>
                 {

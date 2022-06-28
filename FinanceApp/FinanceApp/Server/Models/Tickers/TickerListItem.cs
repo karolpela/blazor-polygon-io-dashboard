@@ -23,8 +23,6 @@ public class TickerListItem
         LastUpdatedUtc = lastUpdatedUtc;
     }
 
-    public virtual TickerResults? TickerResults{ get; set; }
-
     [JsonPropertyName("ticker")] public string Ticker { get; set; }
 
     [JsonPropertyName("name")] public string Name { get; set; }

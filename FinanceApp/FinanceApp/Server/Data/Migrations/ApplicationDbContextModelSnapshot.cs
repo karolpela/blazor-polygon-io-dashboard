@@ -28,7 +28,7 @@ namespace FinanceApp.Server.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("TickerWatchlistTicker")
-                        .HasColumnType("nvarchar(8)");
+                        .HasColumnType("nvarchar(4)");
 
                     b.HasKey("ApplicationUsersId", "TickerWatchlistTicker");
 
@@ -120,7 +120,7 @@ namespace FinanceApp.Server.Data.Migrations
 
                     b.HasIndex("Use");
 
-                    b.ToTable("Keys");
+                    b.ToTable("Keys", (string)null);
                 });
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.PersistedGrant", b =>
@@ -246,8 +246,8 @@ namespace FinanceApp.Server.Data.Migrations
             modelBuilder.Entity("FinanceApp.Server.Models.DailyOpenClose.DailyOpenClose", b =>
                 {
                     b.Property<string>("Ticker")
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
 
                     b.Property<string>("From")
                         .HasColumnType("nvarchar(450)");
@@ -287,7 +287,7 @@ namespace FinanceApp.Server.Data.Migrations
             modelBuilder.Entity("FinanceApp.Server.Models.Logo.Logo", b =>
                 {
                     b.Property<string>("Ticker")
-                        .HasColumnType("nvarchar(8)");
+                        .HasColumnType("nvarchar(4)");
 
                     b.Property<byte[]>("Data")
                         .IsRequired()
@@ -377,7 +377,7 @@ namespace FinanceApp.Server.Data.Migrations
             modelBuilder.Entity("FinanceApp.Server.Models.StockChartData.StockChartData", b =>
                 {
                     b.Property<string>("Ticker")
-                        .HasColumnType("nvarchar(8)");
+                        .HasColumnType("nvarchar(4)");
 
                     b.Property<string>("Timespan")
                         .HasMaxLength(15)
@@ -429,7 +429,7 @@ namespace FinanceApp.Server.Data.Migrations
 
                     b.HasKey("Address1");
 
-                    b.ToTable("Address");
+                    b.ToTable("Address", (string)null);
                 });
 
             modelBuilder.Entity("FinanceApp.Server.Models.TickerDetails.Branding", b =>
@@ -442,14 +442,14 @@ namespace FinanceApp.Server.Data.Migrations
 
                     b.HasKey("LogoUrl");
 
-                    b.ToTable("Branding");
+                    b.ToTable("Branding", (string)null);
                 });
 
             modelBuilder.Entity("FinanceApp.Server.Models.TickerDetails.TickerResults", b =>
                 {
                     b.Property<string>("Ticker")
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
@@ -538,8 +538,7 @@ namespace FinanceApp.Server.Data.Migrations
             modelBuilder.Entity("FinanceApp.Server.Models.Tickers.TickerListItem", b =>
                 {
                     b.Property<string>("Ticker")
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool?>("Active")
                         .HasColumnType("bit");
@@ -726,7 +725,7 @@ namespace FinanceApp.Server.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("TickerResultsTicker")
-                        .HasColumnType("nvarchar(8)");
+                        .HasColumnType("nvarchar(4)");
 
                     b.HasKey("NewsResultsIdNews", "TickerResultsTicker");
 
@@ -815,17 +814,9 @@ namespace FinanceApp.Server.Data.Migrations
                         .WithMany()
                         .HasForeignKey("BrandingLogoUrl");
 
-                    b.HasOne("FinanceApp.Server.Models.Tickers.TickerListItem", "TickerListItem")
-                        .WithOne("TickerResults")
-                        .HasForeignKey("FinanceApp.Server.Models.TickerDetails.TickerResults", "Ticker")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Address");
 
                     b.Navigation("Branding");
-
-                    b.Navigation("TickerListItem");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -911,11 +902,6 @@ namespace FinanceApp.Server.Data.Migrations
                     b.Navigation("Logo");
 
                     b.Navigation("StockChartData");
-                });
-
-            modelBuilder.Entity("FinanceApp.Server.Models.Tickers.TickerListItem", b =>
-                {
-                    b.Navigation("TickerResults");
                 });
 #pragma warning restore 612, 618
         }

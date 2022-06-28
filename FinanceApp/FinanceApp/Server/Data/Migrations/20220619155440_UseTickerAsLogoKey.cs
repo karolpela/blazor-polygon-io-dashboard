@@ -31,7 +31,7 @@ namespace FinanceApp.Server.Data.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "Ticker",
                 table: "Logo",
-                type: "nvarchar(8)",
+                type: "nvarchar(4)",
                 nullable: false,
                 defaultValue: "");
 

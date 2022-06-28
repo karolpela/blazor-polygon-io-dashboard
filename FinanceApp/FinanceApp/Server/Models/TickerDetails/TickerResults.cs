@@ -60,8 +60,6 @@ public class TickerResults
 
      public virtual Logo.Logo? Logo { get; set; } = null!;
 
-     public virtual TickerListItem? TickerListItem{ get; set; }
-
     [JsonPropertyName("ticker")] public string Ticker { get; set; } = null!;
 
     [JsonPropertyName("name")] public string Name { get; set; } = null!;

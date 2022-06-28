@@ -13,7 +13,7 @@ namespace FinanceApp.Server.Data.Migrations
                 name: "StockChartData",
                 columns: table => new
                 {
-                    Ticker = table.Column<string>(type: "nvarchar(8)", nullable: false),
+                    Ticker = table.Column<string>(type: "nvarchar(4)", nullable: false),
                     Timespan = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Multiplier = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),

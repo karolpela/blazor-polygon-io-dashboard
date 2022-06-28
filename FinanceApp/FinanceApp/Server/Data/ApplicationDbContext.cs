@@ -40,7 +40,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
         builder.Entity<TickerResults>(e =>
         {
             e.HasKey(tr => tr.Ticker);
-            e.Property(tr => tr.Ticker).HasMaxLength(8);
+            e.Property(tr => tr.Ticker).HasMaxLength(4);
             e.ToTable("TickerResults");
 
             e.HasMany(td => td.ApplicationUsers)
@@ -67,11 +67,6 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
         builder.Entity<TickerListItem>(e =>
         {
             e.HasKey(tli => tli.Ticker);
-            e.HasOne(tli => tli.TickerResults)
-                .WithOne(tr => tr.TickerListItem)
-                .HasForeignKey<TickerResults>(tr => tr.Ticker);
-
-            e.Property(tli => tli.Ticker).HasMaxLength(8);
             e.ToTable("TickerListItem");
         });
 
@@ -84,7 +79,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
         builder.Entity<DailyOpenClose>(e =>
         {
             e.HasKey(doc => new { doc.Ticker, doc.From });
-            e.Property(doc => doc.Ticker).HasMaxLength(8);
+            e.Property(doc => doc.Ticker).HasMaxLength(4);
             e.ToTable("DailyOpenClose");
         });
 

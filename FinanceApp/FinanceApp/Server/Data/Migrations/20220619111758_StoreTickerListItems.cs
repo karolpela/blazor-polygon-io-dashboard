@@ -13,7 +13,7 @@ namespace FinanceApp.Server.Data.Migrations
                 name: "TickerListItem",
                 columns: table => new
                 {
-                    Ticker = table.Column<string>(type: "nvarchar(8)", nullable: false),
+                    Ticker = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Market = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Locale = table.Column<string>(type: "nvarchar(max)", nullable: true),
