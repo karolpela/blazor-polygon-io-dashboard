@@ -26,16 +26,16 @@
         <HeaderContent>
             <MudTh>Logo</MudTh>
             <MudTh>
-                <MudTableSortLabel SortBy="new Func<TickerResultsLogoDto, object>(t => t.TickerResultsDto!.Ticker)">Ticker</MudTableSortLabel>
+                <MudTableSortLabel SortBy="new Func<TickerResultsLogoDto, object>(t => t.TickerResultsDto?.Ticker!)">Ticker</MudTableSortLabel>
             </MudTh>
             <MudTh>
-                <MudTableSortLabel SortBy="new Func<TickerResultsLogoDto, object>(t => t.TickerResultsDto!.Name)">Name</MudTableSortLabel>
+                <MudTableSortLabel SortBy="new Func<TickerResultsLogoDto, object>(t => t.TickerResultsDto?.Name!)">Name</MudTableSortLabel>
             </MudTh>
             <MudTh>
-                <MudTableSortLabel SortBy="new Func<TickerResultsLogoDto, object>(t => t.TickerResultsDto!.PrimaryExchange)">Primary exchange</MudTableSortLabel>
+                <MudTableSortLabel SortBy="new Func<TickerResultsLogoDto, object>(t => t.TickerResultsDto?.PrimaryExchange!)">Primary exchange</MudTableSortLabel>
             </MudTh>
             <MudTh>
-                <MudTableSortLabel SortBy="new Func<TickerResultsLogoDto, object>(t => t.TickerResultsDto!.MarketCap)">Market cap</MudTableSortLabel>
+                <MudTableSortLabel SortBy="new Func<TickerResultsLogoDto, object>(t => t.TickerResultsDto?.MarketCap!)">Market cap</MudTableSortLabel>
             </MudTh>
             <MudTh>Options</MudTh>
         </HeaderContent>
@@ -49,8 +49,8 @@
             </MudTd>
             <MudTd DataLabel="Ticker"> @(context.TickerResultsDto != null ? context.TickerResultsDto.Ticker : "")</MudTd>
             <MudTd DataLabel="Name">@(context.TickerResultsDto != null ? context.TickerResultsDto.Name : "")</MudTd>
-            <MudTd DataLabel="Primary exchange">@(context.TickerResultsDto != null ? context.TickerResultsDto.PrimaryExchange : "")</MudTd>
-            <MudTd DataLabel="Market cap"> @(context.TickerResultsDto != null ? context.TickerResultsDto.MarketCap : "")</MudTd>
+            <MudTd DataLabel="Primary exchange">@(context.TickerResultsDto?.PrimaryExchange != null ? context.TickerResultsDto.PrimaryExchange : "")</MudTd>
+            <MudTd DataLabel="Market cap"> @(context.TickerResultsDto?.MarketCap != null ? Math.Round(context.TickerResultsDto.MarketCap.Value, 2) : "")</MudTd>
             <MudTd>
                 <MudButton OnClick="@(() => OpenDeleteDialogAsync(context.TickerResultsDto?.Ticker))"
                            Variant="Variant.Outlined" Color="Color.Error">
@@ -117,7 +117,7 @@ else
             return true;
         if (t.TickerResultsDto!.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
             return true;
-        if (t.TickerResultsDto.PrimaryExchange.Contains(searchString))
+        if (t.TickerResultsDto.PrimaryExchange != null && t.TickerResultsDto.PrimaryExchange.Contains(searchString))
             return true;
         return false;
     }
