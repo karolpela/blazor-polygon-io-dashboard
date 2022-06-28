@@ -4,7 +4,7 @@ namespace FinanceApp.Shared.Models.TickerDetails;
 
 public class AddressDto
 {
-    public AddressDto(string address1, string city, string state, string postalCode)
+    public AddressDto(string? address1, string? city, string? state, string? postalCode)
     {
         Address1 = address1;
         City = city;
@@ -12,7 +12,7 @@ public class AddressDto
         PostalCode = postalCode;
     }
 
-    [JsonPropertyName("address1")] public string Address1 { get; set; }
+    [JsonPropertyName("address1")] public string? Address1 { get; set; }
 
     [JsonPropertyName("city")] public string? City { get; set; }
 

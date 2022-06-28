@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using FinanceApp.Server.Models.News;
+using FinanceApp.Server.Models.Tickers;
 
 namespace FinanceApp.Server.Models.TickerDetails;
 
@@ -49,15 +50,17 @@ public class TickerResults
         WeightedSharesOutstanding = weightedSharesOutstanding;
     }
 
-    [JsonIgnore] public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
+     public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
 
-    [JsonIgnore] public virtual ICollection<DailyOpenClose.DailyOpenClose> DailyOpenCloses { get; set; }
+     public virtual ICollection<DailyOpenClose.DailyOpenClose> DailyOpenCloses { get; set; }
 
-    [JsonIgnore] public virtual ICollection<StockChartData.StockChartData> StockChartData { get; set; }
+     public virtual ICollection<StockChartData.StockChartData> StockChartData { get; set; }
 
-    [JsonIgnore] public virtual ICollection<NewsResult> NewsResults { get; set; }
+     public virtual ICollection<NewsResult> NewsResults { get; set; }
 
-    [JsonIgnore] public virtual Logo.Logo? Logo { get; set; } = null!;
+     public virtual Logo.Logo? Logo { get; set; } = null!;
+
+     public virtual TickerListItem? TickerListItem{ get; set; }
 
     [JsonPropertyName("ticker")] public string Ticker { get; set; } = null!;
 

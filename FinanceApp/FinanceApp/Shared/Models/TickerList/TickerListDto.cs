@@ -4,7 +4,7 @@ namespace FinanceApp.Shared.Models.TickerList;
 
 public class TickerListDto
 {
-    public TickerListDto(List<TickerListItemDto> results, string? status, string? requestId, int? count,
+    public TickerListDto(List<TickerListItemDto>? results, string? status, string? requestId, int? count,
         string? nextUrl)
     {
         Results = results;
@@ -14,7 +14,7 @@ public class TickerListDto
         NextUrl = nextUrl;
     }
 
-    [JsonPropertyName("results")] public List<TickerListItemDto> Results { get; set; }
+    [JsonPropertyName("results")] public List<TickerListItemDto>? Results { get; set; }
 
     [JsonPropertyName("status")] public string? Status { get; set; }
 

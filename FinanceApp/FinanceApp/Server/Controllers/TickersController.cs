@@ -32,7 +32,7 @@ public class TickersController : ControllerBase
         try
         {
             var tickerListDto = await _stockApiService.GetTickerList();
-            if (tickerListDto == null) return NotFound();
+            if (tickerListDto?.Results == null) return NotFound();
 
             itemList = tickerListDto.Results;
             // Save updated list to db
@@ -55,7 +55,7 @@ public class TickersController : ControllerBase
         try
         {
             var tickerDetailsDto = await _stockApiService.GetTickerDetails(ticker);
-            if (tickerDetailsDto == null) return NotFound();
+            if (tickerDetailsDto?.TickerResults == null) return NotFound();
 
             tickerResultsDto = tickerDetailsDto.TickerResults;
             await _tickerDbService.SaveResultsToDbAsync(tickerResultsDto);

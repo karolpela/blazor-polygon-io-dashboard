@@ -53,7 +53,7 @@ namespace FinanceApp.Server.Data.Migrations
                 columns: table => new
                 {
                     NewsResultsIdNews = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TickerResultsTicker = table.Column<string>(type: "nvarchar(4)", nullable: false)
+                    TickerResultsTicker = table.Column<string>(type: "nvarchar(8)", nullable: false)
                 },
                 constraints: table =>
                 {

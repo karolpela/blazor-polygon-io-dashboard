@@ -12,7 +12,7 @@ namespace FinanceApp.Server.Data.Migrations
                 name: "DailyOpenClose",
                 columns: table => new
                 {
-                    Ticker = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
+                    Ticker = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     From = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Symbol = table.Column<string>(type: "nvarchar(max)", nullable: false),

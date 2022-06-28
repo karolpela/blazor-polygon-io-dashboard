@@ -1,11 +1,12 @@
 ﻿using System.Text.Json.Serialization;
+using FinanceApp.Server.Models.TickerDetails;
 
 namespace FinanceApp.Server.Models.Tickers;
 
 public class TickerListItem
 {
-    public TickerListItem(string ticker, string? name, string? market, string? locale, string? primaryExchange,
-        string? type, bool? active, string? currencyName, string? cik, string? compositeFigi, string? shareClassFigi,
+    public TickerListItem(string ticker, string name, string market, string locale, string? primaryExchange,
+        string? type, bool? active, string currencyName, string? cik, string? compositeFigi, string? shareClassFigi,
         DateTime? lastUpdatedUtc)
     {
         Ticker = ticker;
@@ -22,13 +23,15 @@ public class TickerListItem
         LastUpdatedUtc = lastUpdatedUtc;
     }
 
+    public virtual TickerResults? TickerResults{ get; set; }
+
     [JsonPropertyName("ticker")] public string Ticker { get; set; }
 
-    [JsonPropertyName("name")] public string? Name { get; set; }
+    [JsonPropertyName("name")] public string Name { get; set; }
 
-    [JsonPropertyName("market")] public string? Market { get; set; }
+    [JsonPropertyName("market")] public string Market { get; set; }
 
-    [JsonPropertyName("locale")] public string? Locale { get; set; }
+    [JsonPropertyName("locale")] public string Locale { get; set; }
 
     [JsonPropertyName("primary_exchange")] public string? PrimaryExchange { get; set; }
 
@@ -36,7 +39,7 @@ public class TickerListItem
 
     [JsonPropertyName("active")] public bool? Active { get; set; }
 
-    [JsonPropertyName("currency_name")] public string? CurrencyName { get; set; }
+    [JsonPropertyName("currency_name")] public string CurrencyName { get; set; }
 
     [JsonPropertyName("cik")] public string? Cik { get; set; }
 

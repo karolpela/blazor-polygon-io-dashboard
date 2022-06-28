@@ -44,10 +44,9 @@
             await Http.DeleteAsync($"/api/Tickers/{Ticker}/users/{Username}");
             Submit();
         }
-        catch (HttpRequestException e)
+        catch (HttpRequestException)
         {
-            Console.WriteLine(e);
-            throw;
+            Console.WriteLine("Unable to delete ticker");
         }
     }
 

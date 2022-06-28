@@ -4,7 +4,7 @@ namespace FinanceApp.Shared.Models.TickerList;
 
 public class TickerListItemDto
 {
-    public TickerListItemDto(string ticker, string? name, string? market, string? locale, string? primaryExchange,
+    public TickerListItemDto(string ticker, string name, string market, string locale, string? primaryExchange,
         string? type, bool? active, string? currencyName, string? cik, string? compositeFigi, string? shareClassFigi,
         DateTime? lastUpdatedUtc)
     {
@@ -24,11 +24,11 @@ public class TickerListItemDto
 
     [JsonPropertyName("ticker")] public string Ticker { get; set; }
 
-    [JsonPropertyName("name")] public string? Name { get; set; }
+    [JsonPropertyName("name")] public string Name { get; set; }
 
-    [JsonPropertyName("market")] public string? Market { get; set; }
+    [JsonPropertyName("market")] public string Market { get; set; }
 
-    [JsonPropertyName("locale")] public string? Locale { get; set; }
+    [JsonPropertyName("locale")] public string Locale { get; set; }
 
     [JsonPropertyName("primary_exchange")] public string? PrimaryExchange { get; set; }
 

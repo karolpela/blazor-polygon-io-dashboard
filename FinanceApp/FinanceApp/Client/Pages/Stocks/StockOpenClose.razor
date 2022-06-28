@@ -39,7 +39,7 @@
     [Parameter]
     public string? SelectedTicker { get; set; }
 
-    private string previousTicker;
+    private string? previousTicker;
 
     [Parameter]
     public EventCallback<(DateTime,string,int)> OnDateSelected { get; set; }
@@ -68,7 +68,6 @@
         catch (HttpRequestException)
         {
             dailyOpenClose = null;
-            throw;
         }
     }
 

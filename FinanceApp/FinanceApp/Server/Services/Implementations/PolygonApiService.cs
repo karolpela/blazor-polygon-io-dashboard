@@ -40,7 +40,7 @@ public class PolygonApiService : IStockApiService
 
     public async Task<LogoDto?> GetLogoAsync(TickerResultsDto tickerResultsDto)
     {
-        if (tickerResultsDto.Branding == null) return null;
+        if (tickerResultsDto.Branding?.LogoUrl == null) return null;
         var logoArray = await _clientFactory.CreateClient()
             .GetByteArrayAsync(
                 $"{tickerResultsDto.Branding.LogoUrl}" +
