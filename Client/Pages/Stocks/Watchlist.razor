@@ -50,7 +50,7 @@
             <MudTd DataLabel="Ticker"> @(context.TickerResultsDto != null ? context.TickerResultsDto.Ticker : "")</MudTd>
             <MudTd DataLabel="Name">@(context.TickerResultsDto != null ? context.TickerResultsDto.Name : "")</MudTd>
             <MudTd DataLabel="Primary exchange">@(context.TickerResultsDto?.PrimaryExchange != null ? context.TickerResultsDto.PrimaryExchange : "")</MudTd>
-            <MudTd DataLabel="Market cap"> @(context.TickerResultsDto?.MarketCap != null ? Math.Round(context.TickerResultsDto.MarketCap.Value, 2) : "")</MudTd>
+                <MudTd DataLabel="Market cap"> @(context.TickerResultsDto?.MarketCap != null ? context.TickerResultsDto?.MarketCap?.ToString("C2") : "")</MudTd>
             <MudTd>
                 <MudButton OnClick="@(() => OpenDeleteDialogAsync(context.TickerResultsDto?.Ticker))"
                            Variant="Variant.Outlined" Color="Color.Error">
