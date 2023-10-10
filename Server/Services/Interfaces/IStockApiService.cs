@@ -7,7 +7,7 @@ namespace FinanceApp.Server.Services.Interfaces;
 
 public interface IStockApiService
 {
-    public Task<TickerListDto?> GetTickerList();
+    public Task<List<TickerListItemDto>?> GetTickerList();
     public Task<TickerDetailsDto?> GetTickerDetails(string ticker);
     public Task<LogoDto?> GetLogoAsync(TickerResultsDto tickerResultsDto);
     public Task<DailyOpenCloseDto?> GetDailyOpenCloseAsync(string ticker, string from);

@@ -26,25 +26,25 @@ public class TickersController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetTickersAsync()
     {
-        List<TickerListItemDto> itemList = new();
+        List<TickerListItemDto> tickerList = new();
 
         // Try to get new data from Polygon
         try
         {
-            var tickerListDto = await _stockApiService.GetTickerList();
-            if (tickerListDto?.Results == null) return NotFound();
-
-            itemList = tickerListDto.Results;
+            var tickerItemDtoList = await _stockApiService.GetTickerList();
+            if (tickerItemDtoList == null) return NotFound();
+            
+            tickerList.AddRange(tickerItemDtoList);
             // Save updated list to db
-            await _tickerDbService.SaveListItemsToDbAsync(itemList);
+            await _tickerDbService.SaveListItemsToDbAsync(tickerList);
         }
         catch (HttpRequestException)
         {
             // In case Polygon is not available, get Ticker list from db
-            itemList.AddRange(await _tickerDbService.GetTickerListItemsAsync());
+            tickerList.AddRange(await _tickerDbService.GetTickerListItemsAsync());
         }
 
-        return Ok(itemList);
+        return Ok(tickerList);
     }
 
     [HttpGet("{ticker}")]

@@ -135,12 +135,26 @@
         {
             StockChartDetails = null;
         }
-        sfStockChart?.UpdateStockChart();
+        try
+        {
+            sfStockChart?.UpdateStockChart(); // light mode / dark mode toggle redraw
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
 
     protected override async Task OnParametersSetAsync()
     {
-        sfStockChart?.UpdateStockChart(); // light mode / dark mode toggle redraw
+        try
+        {
+            sfStockChart?.UpdateStockChart(); // light mode / dark mode toggle redraw
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
 
         if (string.IsNullOrEmpty(SelectedTicker))
         {

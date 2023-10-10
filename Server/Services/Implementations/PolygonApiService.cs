@@ -18,9 +18,11 @@ public class PolygonApiService : IStockApiService
         _configuration = configuration;
     }
 
-    public async Task<TickerListDto?> GetTickerList()
+    public async Task<List<TickerListItemDto>?> GetTickerList()
     {
-        return await _clientFactory.CreateClient()
+        var allTickers = new List<TickerListItemDto>();
+
+        var tickerListDto = await _clientFactory.CreateClient()
             .GetFromJsonAsync<TickerListDto>(
                 "https://api.polygon.io/v3/reference/tickers?type=CS" +
                 "&market=stocks&exchange=XNAS" +
@@ -28,6 +30,24 @@ public class PolygonApiService : IStockApiService
                 "&order=asc" +
                 "&limit=1000" +
                 $"&apiKey={_configuration["Polygon:ApiKey"]}");
+
+        var nextUrl = tickerListDto?.NextUrl;
+
+        if (tickerListDto?.Results == null) return allTickers;
+        
+        allTickers.AddRange(tickerListDto.Results!);
+
+        while(!string.IsNullOrEmpty(nextUrl))
+        {
+            tickerListDto = await _clientFactory.CreateClient()
+                .GetFromJsonAsync<TickerListDto>(
+                    $"{nextUrl}" +
+                    $"&apiKey={_configuration["Polygon:ApiKey"]}");
+            allTickers.AddRange(tickerListDto!.Results!);
+            nextUrl = tickerListDto.NextUrl;
+        }
+
+        return allTickers;
     }
 
     public async Task<TickerDetailsDto?> GetTickerDetails(string ticker)
@@ -121,7 +141,8 @@ public class PolygonApiService : IStockApiService
         foreach (var resultDto in newsDto.Results)
         {
             NewsImageDto? newsImageDto = null;
-            if (resultDto.ImageUrl != null) {
+            if (resultDto.ImageUrl != null)
+            {
                 try
                 {
                     var image = await client.GetByteArrayAsync(resultDto.ImageUrl);
@@ -129,13 +150,13 @@ public class PolygonApiService : IStockApiService
                     try
                     {
                         format = Path.GetExtension(resultDto.ImageUrl)[1..];
-                        
                     }
                     catch (ArgumentOutOfRangeException)
                     {
                         format = null;
                         Console.WriteLine("No image format specified");
                     }
+
                     newsImageDto = new NewsImageDto(image, format);
                 }
                 catch (HttpRequestException)
@@ -143,6 +164,7 @@ public class PolygonApiService : IStockApiService
                     Console.WriteLine("Unable to get news image");
                 }
             }
+
             resultsImagesDtoList.Add(new NewsResultImageDto(resultDto, newsImageDto));
         }
 

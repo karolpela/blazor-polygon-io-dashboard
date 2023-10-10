@@ -4,7 +4,7 @@ namespace FinanceApp.Shared.Models;
 
 public class DailyOpenCloseDto
 {
-    public DailyOpenCloseDto(string? status, string? from, string? symbol, double? open, double? high, double? low, double? close, long? volume, double? afterHours, double? preMarket)
+    public DailyOpenCloseDto(string? status, string? from, string? symbol, double? open, double? high, double? low, double? close, decimal? volume, double? afterHours, double? preMarket)
     {
         Status = status;
         From = from;
@@ -32,7 +32,7 @@ public class DailyOpenCloseDto
 
     [JsonPropertyName("close")] public double? Close { get; set; }
 
-    [JsonPropertyName("volume")] public long? Volume { get; set; }
+    [JsonPropertyName("volume")] public decimal? Volume { get; set; }
 
     [JsonPropertyName("afterHours")] public double? AfterHours { get; set; }
 
