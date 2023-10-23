@@ -2,26 +2,26 @@
 @inject AuthenticationStateProvider AuthStateProvider
 @page "/"
 @using FinanceApp.Shared.Models.TickerList
+@using MudBlazor.Extensions
 
-<div class="d-flex justify-space-between">
-    <MudText Typo="Typo.h3" Class="mb-6">Dashboard</MudText>
+<div class="page-heading">
+    <MudText Typo="Typo.h3">Dashboard</MudText>
     <LogoutButton/>
 </div>
 <AuthorizeView>
     <Authorized>
         @if (tickers != null)
         {
-            <div class="d-flex align-end">
+            <div class="d-flex gap-4 align-end">
                 <MudAutocomplete T="TickerListItemDto" Label="NASDAQ common stocks" @bind-Value="SelectedItem"
-                                 AutoFocus=true
-                                 SearchFunc="@SearchStock" ResetValueOnEmptyText=false
+                                 AutoFocus=true SearchFunc="@SearchStock" ResetValueOnEmptyText=false
                                  ToStringFunc="@(r => r == null ? null : $"{r.Ticker} - {r.Name}")"/>
-                <MudButton Href="/watchlist" Class="ml-4"
-                           Variant="Variant.Outlined" Color="Color.Primary"
+                <MudButton Href="/watchlist" Variant="Variant.Outlined" Color="Color.Primary"
                            StartIcon="@Icons.Material.Outlined.Bookmarks">
                     Watchlist
                 </MudButton>
             </div>
+
             <ErrorBoundary @ref="errorBoundary">
                 <ChildContent>
                     @if (SelectedItem != null)
@@ -30,13 +30,14 @@
                     }
                 </ChildContent>
                 <ErrorContent Context="errorContext">
-                    <MudText Class="mt-4" Typo="Typo.body1">Service unavailable and no cached data present</MudText>
+                    @* <MudText Class="mt-4" Typo="Typo.body1">Service unavailable and no cached data present</MudText> *@
+                    <MudText Class="mt-4" Typo="Typo.body1">@errorContext</MudText>
                 </ErrorContent>
             </ErrorBoundary>
         }
         else
         {
-            <MudText Typo="Typo.subtitle1">Loading stock search..</MudText>
+            <MudText Typo="Typo.subtitle1">Loading stock search...</MudText>
         }
     </Authorized>
     <NotAuthorized>

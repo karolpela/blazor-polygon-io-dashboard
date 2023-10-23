@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceApp.Server.Controllers;
 
+[Area("Identity")]
 public class OidcConfigurationController : Controller
 {
     private readonly ILogger<OidcConfigurationController> _logger;

@@ -3,7 +3,7 @@
 
 @if (NewsResultImageDtos != null)
 {
-    <MudStack Class="overflow-auto" Style="width: 25%">
+    <MudStack>
         @foreach (var itemDto in NewsResultImageDtos)
         {
             <NewsItem ItemDto="itemDto"></NewsItem>
@@ -13,7 +13,7 @@
 else
 {
     {
-        <MudText Typo="Typo.body1">Loading news...</MudText>
+        <MudText Class="pa-4" Typo="Typo.body1">Loading news...</MudText>
     }
 }
 

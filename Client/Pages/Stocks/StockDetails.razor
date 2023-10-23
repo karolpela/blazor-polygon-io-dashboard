@@ -7,17 +7,17 @@
 @inject HttpClient Http
 @inject AuthenticationStateProvider AuthStateProvider
 
-<MudContainer Class="my-4 d-flex" Style="height: 720px">
+<MudContainer  Class="details-container pa-0 my-4 d-flex flex-wrap flex-md-nowrap gap-4 ">
     @if (tickerResultsLogoDto != null)
     {
-        <MudStack Class="mr-6" Style="Width: 80%" Spacing="4">
-            <MudPaper Class="d-flex pa-4" Elevation="2">
+        <MudStack Class="d-flex w-100" Spacing="4">
+            <MudPaper Class="d-flex flex-wrap flex-md-nowrap justify-center pa-4 position-relative" Elevation="2">
                 <MudToggleIconButton Toggled="@SubscribedTo" ToggledChanged="@ToggleWatchlistAsync"
-                                     Class="pa-0 ma-2" Style="position: absolute"
+                                     Class="ma-2 position-absolute top-0 start-0"
                                      Icon="@Icons.Material.Filled.FavoriteBorder" Title="Add to watchlist"
                                      ToggledIcon="@Icons.Material.Filled.Favorite" ToggledTitle="Remove from watchlist"/>
 
-                <MudPaper Class="d-inline mr-4 pa-2" Height="200px" Width="200px" Elevation="0">
+                <MudPaper Class="d-flex mr-4 pa-2" Height="200px" Width="200px" Elevation="0">
                     @if (tickerResultsLogoDto.LogoDto != null)
                     {
                         <MudImage Alt="Logo" Width="180" Height="180"
@@ -26,30 +26,36 @@
                 </MudPaper>
                 @if (tickerResultsLogoDto.TickerResultsDto != null)
                 {
-                    <MudContainer Class="d-inline">
+                    <MudContainer Class="d-flex">
                         <StockOpenClose SelectedTicker="@SelectedTicker"
-                                        OnDateSelected="UpdateChartAsync"/>
+                                        OnDateSelected="LoadChartDataAsync"/>
                     </MudContainer>
                 }
             </MudPaper>
             @if (StockChartDetails != null && StockChartDetails.Count != 0)
             {
-                <MudPaper Elevation="0">
-                    <SfStockChart @ref="sfStockChart" EnableSelector="false" EnablePeriodSelector="false"
+                <MudPaper Elevation="2">
+                    <SfStockChart @ref="sfStockChart"
+                                  EnableSelector="false" EnablePeriodSelector="false"
                                   Theme="@(IsDarkMode ? Theme.FluentDark : Theme.Fluent)">
+                        <StockChartChartBorder Color="transparent"></StockChartChartBorder>
                         <StockChartPrimaryXAxis>
-                            <StockChartAxisMajorGridLines Width="0" Color="grey"></StockChartAxisMajorGridLines>
-                            <StockChartAxisMinorGridLines Width="0" Color="grey"></StockChartAxisMinorGridLines>
+                            <StockChartAxisMajorGridLines Width="0"></StockChartAxisMajorGridLines>
+                            <StockChartAxisMinorGridLines Width="0"></StockChartAxisMinorGridLines>
                         </StockChartPrimaryXAxis>
-
                         <StockChartSeriesCollection>
-                            <StockChartSeries DataSource="@StockChartDetails" Type="ChartSeriesType.Candle" XName="Date" YName="Close" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume"></StockChartSeries>
+                            <StockChartSeries DataSource="@StockChartDetails" Type="ChartSeriesType.HiloOpenClose"
+                                              Name="Series"
+                                              XName="Date" YName="Close" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume">
+                            </StockChartSeries>
                         </StockChartSeriesCollection>
                     </SfStockChart>
                 </MudPaper>
             }
         </MudStack>
-        <NewsList SelectedTicker="@SelectedTicker"/>
+        <MudPaper class="news-list overflow-scroll" Elevation="2">
+            <NewsList SelectedTicker="@SelectedTicker"/>
+        </MudPaper>
     }
 </MudContainer>
 
@@ -59,7 +65,15 @@
     public string? SelectedTicker { get; set; }
 
     [CascadingParameter]
-    public bool IsDarkMode { get; set; }
+    public bool IsDarkMode
+    {
+        get => _isDarkMode;
+        set
+        {
+            _isDarkMode = value;
+            sfStockChart?.Refresh();
+        }
+    }
 
     public List<StockChartDataDto>? StockChartDetails { get; set; }
 
@@ -72,6 +86,8 @@
     private string? previousTicker;
 
     private SfStockChart? sfStockChart;
+
+    private bool _isDarkMode;
 
     private async Task ToggleWatchlistAsync()
     {
@@ -110,9 +126,9 @@
         return $"data:image/{logo.Format};base64,{Convert.ToBase64String(logo.Data)}";
     }
 
-    protected async Task UpdateChartAsync((DateTime utcFrom, string timespan, int multiplier) selection)
+    protected async Task LoadChartDataAsync((DateTime utcFrom, string timespan, int multiplier) selection)
     {
-        // avoid unnecessary calls
+    // avoid unnecessary calls
         if (selection.utcFrom.Date == previousDateTime.GetValueOrDefault().Date && StockChartDetails != null && StockChartDetails.Count != 0)
         {
             return;
@@ -120,7 +136,7 @@
 
         try
         {
-            // utcFrom is already set back a selected amount
+    // utcFrom is already set back a selected amount
             var fromUnix = ((DateTimeOffset)selection.utcFrom).ToUnixTimeMilliseconds();
             var toUnix = DateTimeOffset.UtcNow.AddDays(-1).ToUnixTimeMilliseconds(); // today's data is not available so default is yesterday's
 
@@ -135,51 +151,38 @@
         {
             StockChartDetails = null;
         }
-        try
-        {
-            sfStockChart?.UpdateStockChart(); // light mode / dark mode toggle redraw
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
+        sfStockChart?.Refresh();
+    }
+
+    protected override void OnInitialized()
+    {
+        _isDarkMode = IsDarkMode;
     }
 
     protected override async Task OnParametersSetAsync()
     {
-        try
-        {
-            sfStockChart?.UpdateStockChart(); // light mode / dark mode toggle redraw
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
-
         if (string.IsNullOrEmpty(SelectedTicker))
         {
             tickerResultsLogoDto = null;
             return;
         }
 
-        try
+        if (SelectedTicker != previousTicker)
         {
-            if (SelectedTicker != previousTicker)
+            try
             {
                 await UpdateWatchlistStatusAsync();
 
                 tickerResultsLogoDto = await Http.GetFromJsonAsync<TickerResultsLogoDto>($"api/tickers/{SelectedTicker}");
                 previousTicker = SelectedTicker;
             }
+            catch (HttpRequestException)
+            {
+                tickerResultsLogoDto = null;
+                throw new Exception("Unable to get present or cached data");
+            }
+            await LoadChartDataAsync((DateTime.Now.AddDays(-1), "minute", 30));
         }
-        catch (HttpRequestException)
-        {
-            tickerResultsLogoDto = null;
-            throw new Exception("Unable to get present or cached data");
-        }
-
-        await UpdateChartAsync((DateTime.Now.AddDays(-1), "minute", 30));
-
     }
 
     private async Task UpdateWatchlistStatusAsync()
@@ -196,4 +199,5 @@
             Console.WriteLine("Unable to refresh watchlist status");
         }
     }
+
 }

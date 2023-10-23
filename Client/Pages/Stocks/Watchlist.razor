@@ -6,9 +6,9 @@
 @using FinanceApp.Shared.Models.TickerDetails
 @using FinanceApp.Shared.Models
 
-<div class="d-flex align-end justify-space-between mb-6">
+<div class="d-flex align-start justify-space-between mb-6">
     <MudText Typo="Typo.h3">Watchlist</MudText>
-    <MudButton Href="/" Variant="Variant.Filled"Color="Color.Primary"
+    <MudButton Href="/" Variant="Variant.Filled" Color="Color.Primary"
                StartIcon="@Icons.Material.Filled.Close">
         Close
     </MudButton>
@@ -21,7 +21,7 @@
         <ToolBarContent>
             <MudTextField T="string" @bind-value="tickerSearchString" Placeholder="Filter"
                           Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
-                          IconSize="Size.Medium" Class="mt-0"/>
+                          IconSize="Size.Medium"/>
         </ToolBarContent>
         <HeaderContent>
             <MudTh>Logo</MudTh>
