@@ -14,25 +14,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd917f78-56bc-431f-988b-d60323dd2b20" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Client/FinanceApp.Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Client/FinanceApp.Client.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/Pages/Utilities/ImageDecoder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/Dashboard.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/Dashboard.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/News/NewsList.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/News/NewsList.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/StockDetails.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/StockDetails.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/StockOpenClose.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/StockOpenClose.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/Watchlist.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/Watchlist.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Shared/LogoutButton.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Shared/LogoutButton.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/Shared/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Shared/MainLayout.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/_Imports.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/_Imports.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/wwwroot/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/Client/wwwroot/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Client/wwwroot/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/wwwroot/temp/MudBlazor.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/Client/wwwroot/temp/MudBlazor.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/wwwroot/temp/MudBlazor.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/wwwroot/temp/MudBlazor.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Controllers/OidcConfigurationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Controllers/OidcConfigurationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/FinanceApp.Server.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Server/FinanceApp.Server.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +47,10 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bebd253e21dcf766929bfdfd74615bfe46e6e1693b289273dbdb82152893/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bf9021a960b74107a7e141aa06bc9d8a0a53c929178c2fb95b1597be8af8dc/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cff4d35895d3db30db86a0ec21297ac77589b961f6e219dede5a24aff0bb3b8d/ComponentBase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/karol/Repositories/blazor-polygon-io-dashboard/Client/_Imports.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/karol/Repositories/blazor-polygon-io-dashboard/Client/Pages/Stocks/Dashboard.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/karol/Repositories/blazor-polygon-io-dashboard/Client/Pages/Stocks/StockDetails.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/karol/Repositories/blazor-polygon-io-dashboard/Client/Pages/Stocks/StockOpenClose.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/karol/Repositories/blazor-polygon-io-dashboard/Client/Shared/MainLayout.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -171,7 +164,10 @@
       <workItem from="1697638622490" duration="10816000" />
       <workItem from="1697798617363" duration="5726000" />
       <workItem from="1697820259904" duration="23923000" />
-      <workItem from="1698069313183" duration="483000" />
+      <workItem from="1698069313183" duration="613000" />
+      <workItem from="1698227278029" duration="2147000" />
+      <workItem from="1698494571531" duration="3439000" />
+      <workItem from="1698498027444" duration="9116000" />
     </task>
     <task id="LOCAL-00001" summary="Prepare to update .NET">
       <option name="closed" value="true" />
@@ -181,7 +177,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696953780004</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Responsive layout and other CSS tweaks">
+      <option name="closed" value="true" />
+      <created>1698069919761</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698069919761</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,7 +206,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Prepare to update .NET" />
-    <option name="LAST_COMMIT_MESSAGE" value="Prepare to update .NET" />
+    <MESSAGE value="Responsive layout and other CSS tweaks" />
+    <option name="LAST_COMMIT_MESSAGE" value="Responsive layout and other CSS tweaks" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

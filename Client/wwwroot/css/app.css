@@ -12,6 +12,7 @@ html, body, #app, .mud-main-content, .body-container, .details-container {
     justify-content: space-between;
     align-items: start;
     margin-bottom: 24px;
+    width: 100%;
 }
 
 .news-list {

@@ -1,12 +1,13 @@
 ﻿@using FinanceApp.Shared.Models
 @inject HttpClient Http
+@inject ISnackbar Snackbar
 
 <MudStack Class="align-start">
-    <MudButtonGroup Class="my-2 align-center" Color="Color.Primary">
-        <MudButton @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddDays(-1), "minute", 30))">Last day</MudButton>
-        <MudButton @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddDays(-7), "hour", 3))">1 week ago</MudButton>
-        <MudButton @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddMonths(-1), "day", 1))">1 month ago</MudButton>
-        <MudButton @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddMonths(-3), "week", 1))">3 months ago</MudButton>
+    <MudButtonGroup Class="my-2 align-center" Variant="Variant.Filled" OverrideStyles="false">
+        <MudButton @ref="buttonDay" Color="@ColorButton(buttonDay)" @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddDays(-1), "minute", 30, buttonDay))">Last day</MudButton>
+        <MudButton @ref="buttonWeek" Color="@ColorButton(buttonWeek)" @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddDays(-7), "hour", 3, buttonWeek))">1 week ago</MudButton>
+        <MudButton @ref="buttonMonth" Color="@ColorButton(buttonMonth)" @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddMonths(-1), "day", 1, buttonMonth))">1 month ago</MudButton>
+        <MudButton @ref="buttonThreeMonths" Color="@ColorButton(buttonThreeMonths)" @onclick="@(args => DateSelected(args, DateTime.UtcNow.AddMonths(-3), "week", 1, buttonThreeMonths))">3 months ago</MudButton>
     </MudButtonGroup>
 
     @if (dailyOpenClose != null)
@@ -29,7 +30,7 @@
     }
     else
     {
-        <p class="pa-2">No data available for selected date</p>
+        <MudText Typo="Typo.body1">No data available for selected date</MudText>
     }
 </MudStack>
 
@@ -41,6 +42,10 @@
 
     private string? previousTicker;
 
+    MudButton? buttonDay, buttonWeek, buttonMonth, buttonThreeMonths;
+
+    MudButton? highlightedButton;
+
     [Parameter]
     public EventCallback<(DateTime,string,int)> OnDateSelected { get; set; }
 
@@ -48,10 +53,28 @@
 
     private DailyOpenCloseDto? dailyOpenClose;
 
-    private async Task DateSelected(MouseEventArgs e, DateTime date, string timespan, int multiplier)
+    private async Task DateSelected(MouseEventArgs e, DateTime date, string timespan, int multiplier, MudButton? button)
     {
+        date = SkipIfWeekend(date);
+        highlightedButton = button;
         await OnDateSelected.InvokeAsync((date, timespan, multiplier));
         await UpdateOpenCloseAsync(date);
+    }
+
+    private DateTime SkipIfWeekend(DateTime date)
+    {
+        if (date.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday)
+        {
+            Snackbar.Add("Weekend date selected, skipping to previous available data", Severity.Info);
+            date = date.DayOfWeek switch
+            {
+                DayOfWeek.Saturday => date.AddDays(-1),
+                DayOfWeek.Sunday => date.AddDays(-2),
+                _ => date
+                };
+        }
+
+        return date;
     }
 
     private async Task UpdateOpenCloseAsync(DateTime date)
@@ -69,14 +92,27 @@
         catch (HttpRequestException)
         {
             dailyOpenClose = null;
+            Snackbar.Add("Failed to get details. Try again later if requests exceeded.", Severity.Warning);
         }
+    }
+
+    private Color ColorButton(MudButton? button)
+    {
+        return button == highlightedButton ? Color.Secondary : Color.Default;
+    }
+
+    protected override void OnInitialized()
+    {
+        highlightedButton = buttonDay;
     }
 
     protected override async Task OnParametersSetAsync()
     {
         if (SelectedTicker != null && SelectedTicker != previousTicker)
         {
-            await UpdateOpenCloseAsync(DateTime.Now.AddDays(-1));
+            var yesterday = DateTime.Now.AddDays(-1);
+            await UpdateOpenCloseAsync(SkipIfWeekend(yesterday));
+            highlightedButton = buttonDay;
         }
     }
 }

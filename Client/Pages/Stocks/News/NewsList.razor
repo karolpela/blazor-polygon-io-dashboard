@@ -1,5 +1,6 @@
 ﻿@using FinanceApp.Shared.Models.News
 @inject HttpClient Http
+@inject ISnackbar Snackbar
 
 @if (NewsResultImageDtos != null)
 {
@@ -24,7 +25,7 @@ else
 
     private int newsCount = 5;
 
-    public IEnumerable<NewsResultImageDto>? NewsResultImageDtos { get; set; }
+    private IEnumerable<NewsResultImageDto>? NewsResultImageDtos { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
@@ -37,7 +38,7 @@ else
         catch (HttpRequestException)
         {
             NewsResultImageDtos = null;
-            Console.WriteLine("Failed to get news");
+            Snackbar.Add("Unable to get news. Try again later if requests exceeded.");
         }
     }
 

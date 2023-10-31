@@ -6,8 +6,10 @@
 @using FinanceApp.Client.Pages.Stocks.News
 @inject HttpClient Http
 @inject AuthenticationStateProvider AuthStateProvider
+@inject ISnackbar Snackbar
+@inherits FinanceApp.Client.Pages.Utilities.ImageDecoder
 
-<MudContainer  Class="details-container pa-0 my-4 d-flex flex-wrap flex-md-nowrap gap-4 ">
+<MudContainer Class="details-container pa-0 my-4 d-flex flex-wrap flex-md-nowrap gap-4 ">
     @if (tickerResultsLogoDto != null)
     {
         <MudStack Class="d-flex w-100" Spacing="4">
@@ -52,9 +54,20 @@
                     </SfStockChart>
                 </MudPaper>
             }
+            else
+            {
+                <MudText Typo="Typo.body1">Unable to get present or cached ticker chart</MudText>
+            }
         </MudStack>
         <MudPaper class="news-list overflow-scroll" Elevation="2">
-            <NewsList SelectedTicker="@SelectedTicker"/>
+            <ErrorBoundary>
+                <ChildContent>
+                    <NewsList SelectedTicker="@SelectedTicker"/>
+                </ChildContent>
+                <ErrorContent>
+                    <MudText Typo="Typo.body1">Unable to load present or cached news</MudText>
+                </ErrorContent>
+            </ErrorBoundary>
         </MudPaper>
     }
 </MudContainer>
@@ -109,7 +122,7 @@
         }
         catch (HttpRequestException)
         {
-            Console.WriteLine("Unable to change watchlist status");
+            Snackbar.Add("Unable to change watchlist status", Severity.Error);
         }
     }
 
@@ -118,12 +131,6 @@
         var state = await AuthStateProvider.GetAuthenticationStateAsync();
         var username = state.User.Identity?.Name!.Replace("\'", "");
         return username;
-    }
-
-    public static string ConvertToBase64(LogoDto logo)
-    {
-        if (logo.Format == "svg") logo.Format = "svg+xml";
-        return $"data:image/{logo.Format};base64,{Convert.ToBase64String(logo.Data)}";
     }
 
     protected async Task LoadChartDataAsync((DateTime utcFrom, string timespan, int multiplier) selection)
@@ -154,11 +161,6 @@
         sfStockChart?.Refresh();
     }
 
-    protected override void OnInitialized()
-    {
-        _isDarkMode = IsDarkMode;
-    }
-
     protected override async Task OnParametersSetAsync()
     {
         if (string.IsNullOrEmpty(SelectedTicker))
@@ -179,7 +181,7 @@
             catch (HttpRequestException)
             {
                 tickerResultsLogoDto = null;
-                throw new Exception("Unable to get present or cached data");
+                throw new Exception("Unable to get present or cached ticker details");
             }
             await LoadChartDataAsync((DateTime.Now.AddDays(-1), "minute", 30));
         }
@@ -196,7 +198,7 @@
         }
         catch (HttpRequestException)
         {
-            Console.WriteLine("Unable to refresh watchlist status");
+            Snackbar.Add("Unable to refresh watchlist status", Severity.Error);
         }
     }
 
