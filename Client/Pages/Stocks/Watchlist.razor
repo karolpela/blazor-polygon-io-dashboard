@@ -4,7 +4,7 @@
 
 @page "/watchlist"
 @using FinanceApp.Shared.Models.TickerDetails
-@using FinanceApp.Shared.Models
+@using System.Globalization
 @inherits FinanceApp.Client.Pages.Utilities.ImageDecoder
 <div class="d-flex align-start justify-space-between mb-6">
     <MudText Typo="Typo.h3">Watchlist</MudText>
@@ -49,8 +49,8 @@
             </MudTd>
             <MudTd DataLabel="Ticker"> @(context.TickerResultsDto != null ? context.TickerResultsDto.Ticker : "")</MudTd>
             <MudTd DataLabel="Name">@(context.TickerResultsDto != null ? context.TickerResultsDto.Name : "")</MudTd>
-            <MudTd DataLabel="Primary exchange">@(context.TickerResultsDto?.PrimaryExchange != null ? context.TickerResultsDto.PrimaryExchange : "")</MudTd>
-                <MudTd DataLabel="Market cap"> @(context.TickerResultsDto?.MarketCap != null ? context.TickerResultsDto?.MarketCap?.ToString("C2") : "")</MudTd>
+            <MudTd DataLabel="Primary exchange">@(context.TickerResultsDto?.PrimaryExchange ?? "")</MudTd>
+                <MudTd DataLabel="Market cap"> @(context.TickerResultsDto?.MarketCap != null ? context.TickerResultsDto?.MarketCap?.ToString("C2", new CultureInfo("en-US")) : "")</MudTd>
             <MudTd>
                 <MudButton OnClick="@(() => OpenDeleteDialogAsync(context.TickerResultsDto?.Ticker))"
                            Variant="Variant.Outlined" Color="Color.Error">
@@ -119,7 +119,7 @@ else
     {
         var username = await GetUsernameAsync();
         var parameters = new DialogParameters { ["Ticker"] = ticker, ["Username"] = username };
-        var dialog = await DialogService.ShowAsync<DeleteDialog>("Delete ticker", parameters);
+        var dialog = await DialogService.ShowAsync<RemoveDialog>("Delete ticker", parameters);
         var result = await dialog.Result;
 
         if (!result.Canceled)

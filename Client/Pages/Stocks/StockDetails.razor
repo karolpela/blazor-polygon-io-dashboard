@@ -1,76 +1,80 @@
-﻿@using FinanceApp.Shared.Models
+﻿@inject HttpClient Http
+@inject AuthenticationStateProvider AuthStateProvider
+@inject ISnackbar Snackbar
+@using FinanceApp.Shared.Models
 @using FinanceApp.Shared.Models.TickerDetails
-@using Syncfusion.Blazor.Charts
 @using System.Text.Json
 @using System.Text
 @using FinanceApp.Client.Pages.Stocks.News
-@inject HttpClient Http
-@inject AuthenticationStateProvider AuthStateProvider
-@inject ISnackbar Snackbar
 @inherits FinanceApp.Client.Pages.Utilities.ImageDecoder
 
-<MudContainer Class="details-container pa-0 my-4 d-flex flex-wrap flex-md-nowrap gap-4 ">
-    @if (tickerResultsLogoDto != null)
-    {
-        <MudStack Class="d-flex w-100" Spacing="4">
-            <MudPaper Class="d-flex flex-wrap flex-md-nowrap justify-center pa-4 position-relative" Elevation="2">
-                <MudToggleIconButton Toggled="@SubscribedTo" ToggledChanged="@ToggleWatchlistAsync"
-                                     Class="ma-2 position-absolute top-0 start-0"
-                                     Icon="@Icons.Material.Filled.FavoriteBorder" Title="Add to watchlist"
-                                     ToggledIcon="@Icons.Material.Filled.Favorite" ToggledTitle="Remove from watchlist"/>
+<CascadingValue Value="previousTicker" Name="PreviousTicker">
+    <CascadingValue Value="SelectedTicker" Name="SelectedTicker">
+        <MudContainer Class="details-container pa-0 my-4 d-flex flex-wrap flex-md-nowrap gap-4 ">
+            @if (tickerResultsLogoDto != null)
+            {
+                <MudStack Class="d-flex w-100" Spacing="4">
+                    <MudPaper Class="d-flex flex-wrap flex-md-nowrap justify-center pa-4 position-relative" Elevation="2">
+                        <MudToggleIconButton Toggled="@SubscribedTo" ToggledChanged="@ToggleWatchlistAsync"
+                                             Class="ma-2 position-absolute top-0 start-0"
+                                             Icon="@Icons.Material.Filled.FavoriteBorder" Title="Add to watchlist"
+                                             ToggledIcon="@Icons.Material.Filled.Favorite" ToggledTitle="Remove from watchlist"/>
 
-                <MudPaper Class="d-flex mr-4 pa-2" Height="200px" Width="200px" Elevation="0">
-                    @if (tickerResultsLogoDto.LogoDto != null)
+                        <MudPaper Class="d-flex mr-4 pa-2" Height="200px" Width="200px" Elevation="0">
+                            @if (tickerResultsLogoDto.LogoDto != null)
+                            {
+                                <MudImage Alt="Logo" Width="180" Height="180"
+                                          ObjectFit="ObjectFit.ScaleDown" Src="@ConvertToBase64(tickerResultsLogoDto.LogoDto)"/>
+                            }
+                        </MudPaper>
+                        @if (tickerResultsLogoDto.TickerResultsDto != null)
+                        {
+                            <MudContainer Class="d-flex">
+
+                                <StockOpenClose OnDateSelected="LoadChartDataAsync"/>
+
+                            </MudContainer>
+                        }
+                    </MudPaper>
+                    @if (StockChartDetails != null && StockChartDetails.Count != 0)
                     {
-                        <MudImage Alt="Logo" Width="180" Height="180"
-                                  ObjectFit="ObjectFit.ScaleDown" Src="@ConvertToBase64(tickerResultsLogoDto.LogoDto)"/>
+                        <MudPaper Elevation="2">
+                            <SfStockChart @ref="sfStockChart"
+                                          EnableSelector="false" EnablePeriodSelector="false"
+                                          Theme="@(IsDarkMode ? Theme.FluentDark : Theme.Fluent)">
+                                <StockChartChartBorder Color="transparent"></StockChartChartBorder>
+                                <StockChartPrimaryXAxis>
+                                    <StockChartAxisMajorGridLines Width="0"></StockChartAxisMajorGridLines>
+                                    <StockChartAxisMinorGridLines Width="0"></StockChartAxisMinorGridLines>
+                                </StockChartPrimaryXAxis>
+                                <StockChartSeriesCollection>
+                                    <StockChartSeries DataSource="@StockChartDetails" Type="ChartSeriesType.HiloOpenClose"
+                                                      Name="Series"
+                                                      XName="Date" YName="Close" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume">
+                                    </StockChartSeries>
+                                </StockChartSeriesCollection>
+                            </SfStockChart>
+                        </MudPaper>
                     }
-                </MudPaper>
-                @if (tickerResultsLogoDto.TickerResultsDto != null)
-                {
-                    <MudContainer Class="d-flex">
-                        <StockOpenClose SelectedTicker="@SelectedTicker"
-                                        OnDateSelected="LoadChartDataAsync"/>
-                    </MudContainer>
-                }
-            </MudPaper>
-            @if (StockChartDetails != null && StockChartDetails.Count != 0)
-            {
-                <MudPaper Elevation="2">
-                    <SfStockChart @ref="sfStockChart"
-                                  EnableSelector="false" EnablePeriodSelector="false"
-                                  Theme="@(IsDarkMode ? Theme.FluentDark : Theme.Fluent)">
-                        <StockChartChartBorder Color="transparent"></StockChartChartBorder>
-                        <StockChartPrimaryXAxis>
-                            <StockChartAxisMajorGridLines Width="0"></StockChartAxisMajorGridLines>
-                            <StockChartAxisMinorGridLines Width="0"></StockChartAxisMinorGridLines>
-                        </StockChartPrimaryXAxis>
-                        <StockChartSeriesCollection>
-                            <StockChartSeries DataSource="@StockChartDetails" Type="ChartSeriesType.HiloOpenClose"
-                                              Name="Series"
-                                              XName="Date" YName="Close" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume">
-                            </StockChartSeries>
-                        </StockChartSeriesCollection>
-                    </SfStockChart>
+                    else
+                    {
+                        <MudText Typo="Typo.body1">Loading chart...</MudText>
+                    }
+                </MudStack>
+                <MudPaper class="news-list overflow-scroll" Elevation="2">
+                    <ErrorBoundary>
+                        <ChildContent>
+                            <NewsList/>
+                        </ChildContent>
+                        <ErrorContent>
+                            <MudText Typo="Typo.body1">Unable to load present or cached news</MudText>
+                        </ErrorContent>
+                    </ErrorBoundary>
                 </MudPaper>
             }
-            else
-            {
-                <MudText Typo="Typo.body1">Unable to get present or cached ticker chart</MudText>
-            }
-        </MudStack>
-        <MudPaper class="news-list overflow-scroll" Elevation="2">
-            <ErrorBoundary>
-                <ChildContent>
-                    <NewsList SelectedTicker="@SelectedTicker"/>
-                </ChildContent>
-                <ErrorContent>
-                    <MudText Typo="Typo.body1">Unable to load present or cached news</MudText>
-                </ErrorContent>
-            </ErrorBoundary>
-        </MudPaper>
-    }
-</MudContainer>
+        </MudContainer>
+    </CascadingValue>
+</CascadingValue>
 
 @code {
 
@@ -135,10 +139,15 @@
 
     protected async Task LoadChartDataAsync((DateTime utcFrom, string timespan, int multiplier) selection)
     {
-    // avoid unnecessary calls
-        if (selection.utcFrom.Date == previousDateTime.GetValueOrDefault().Date && StockChartDetails != null && StockChartDetails.Count != 0)
+    // If date hasn't changed
+        if (selection.utcFrom.Date == previousDateTime.GetValueOrDefault().Date)
         {
-            return;
+    // And the details have been loaded previously
+            if (StockChartDetails != null && StockChartDetails.Count != 0)
+            {
+    // Don't fetch the same data again
+                return;
+            }
         }
 
         try
@@ -166,10 +175,11 @@
         if (string.IsNullOrEmpty(SelectedTicker))
         {
             tickerResultsLogoDto = null;
-            return;
         }
-
+    // Here a check is made to avoid making calls on isDarkMode change
         if (SelectedTicker != previousTicker)
+            // Delete previous ticker's details
+            StockChartDetails = null;
         {
             try
             {

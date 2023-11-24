@@ -20,20 +20,19 @@ else
 
 @code {
 
-    [Parameter]
+    [CascadingParameter(Name = "SelectedTicker")]
     public string? SelectedTicker { get; set; }
 
-    private int newsCount = 5;
+    private const int NewsCount = 5;
 
     private IEnumerable<NewsResultImageDto>? NewsResultImageDtos { get; set; }
-
+    
     protected override async Task OnParametersSetAsync()
     {
-        if (SelectedTicker == null) return;
         try
         {
             NewsResultImageDtos = await Http.GetFromJsonAsync<IEnumerable<NewsResultImageDto>>(
-                $"api/Tickers/{SelectedTicker}/news?count={newsCount}");
+                $"api/Tickers/{SelectedTicker}/news?count={NewsCount}");
         }
         catch (HttpRequestException)
         {
@@ -41,5 +40,4 @@ else
             Snackbar.Add("Unable to get news. Try again later if requests exceeded.");
         }
     }
-
 }

@@ -19,7 +19,7 @@
 
                 <MudItem xs="6" sm="4">
                     <MudPaper Elevation="1" Class="d-flex justify-space-between px-2 py-1">
-                        <MudText Style="@($"color:{Colors.Grey.Darken2};")">@property.Name</MudText>
+                        <MudText Style="opacity: 0.8">@property.Name</MudText>
                         <MudText>
                             <b>@property.GetValue(dailyOpenClose)</b>
                         </MudText>
@@ -37,10 +37,11 @@
 
 @code {
 
-    [Parameter]
+    [CascadingParameter(Name = "SelectedTicker")]
     public string? SelectedTicker { get; set; }
 
-    private string? previousTicker;
+    [CascadingParameter(Name = "PreviousTicker")]
+    public string? PreviousTicker { get; set; }
 
     MudButton? buttonDay, buttonWeek, buttonMonth, buttonThreeMonths;
 
@@ -73,13 +74,12 @@
                 _ => date
                 };
         }
-
         return date;
     }
 
     private async Task UpdateOpenCloseAsync(DateTime date)
     {
-        if (date.Date == previousDateTime.Date && dailyOpenClose != null && SelectedTicker == previousTicker)
+        if (date.Date == previousDateTime.Date && dailyOpenClose != null && SelectedTicker == PreviousTicker)
         {
             return;
         }
@@ -87,7 +87,6 @@
         {
             dailyOpenClose = await Http.GetFromJsonAsync<DailyOpenCloseDto>($"api/tickers/{SelectedTicker}/open-close/{date:yyyy-MM-dd}");
             previousDateTime = date;
-            previousTicker = SelectedTicker;
         }
         catch (HttpRequestException)
         {
@@ -100,19 +99,22 @@
     {
         return button == highlightedButton ? Color.Secondary : Color.Default;
     }
-
-    protected override void OnInitialized()
+    
+    // Here the logic is split into two lifecycle methods because of
+    // OnDateSelected which is a complex parameter and so it triggers OnParametersSetAsync on each update.
+    // To prevent unnecessary calls a manual check is made to see if the ticker has changed.
+    
+    protected override async Task OnInitializedAsync()
     {
+        var yesterday = DateTime.Now.AddDays(-1);
+        await UpdateOpenCloseAsync(SkipIfWeekend(yesterday));
         highlightedButton = buttonDay;
     }
 
     protected override async Task OnParametersSetAsync()
     {
-        if (SelectedTicker != null && SelectedTicker != previousTicker)
-        {
-            var yesterday = DateTime.Now.AddDays(-1);
-            await UpdateOpenCloseAsync(SkipIfWeekend(yesterday));
-            highlightedButton = buttonDay;
-        }
+        if (SelectedTicker == null || SelectedTicker == PreviousTicker) return;
+        await OnInitializedAsync();
     }
+
 }
