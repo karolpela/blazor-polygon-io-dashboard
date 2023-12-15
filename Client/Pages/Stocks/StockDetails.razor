@@ -78,8 +78,7 @@
 
 @code {
 
-    [Parameter]
-    public string? SelectedTicker { get; set; }
+    [Parameter] public string? SelectedTicker { get; set; }
 
     [CascadingParameter]
     public bool IsDarkMode
@@ -122,6 +121,7 @@
             {
                 await Http.PostAsync($"api/tickers/{SelectedTicker}/users/", content);
             }
+
             await UpdateWatchlistStatusAsync();
         }
         catch (HttpRequestException)
@@ -139,20 +139,20 @@
 
     protected async Task LoadChartDataAsync((DateTime utcFrom, string timespan, int multiplier) selection)
     {
-    // If date hasn't changed
+        // If date hasn't changed
         if (selection.utcFrom.Date == previousDateTime.GetValueOrDefault().Date)
         {
-    // And the details have been loaded previously
+            // And the details have been loaded previously
             if (StockChartDetails != null && StockChartDetails.Count != 0)
             {
-    // Don't fetch the same data again
+                // Don't fetch the same data again
                 return;
             }
         }
 
         try
         {
-    // utcFrom is already set back a selected amount
+            // utcFrom is already set back a selected amount
             var fromUnix = ((DateTimeOffset)selection.utcFrom).ToUnixTimeMilliseconds();
             var toUnix = DateTimeOffset.UtcNow.AddDays(-1).ToUnixTimeMilliseconds(); // today's data is not available so default is yesterday's
 
@@ -167,6 +167,7 @@
         {
             StockChartDetails = null;
         }
+
         sfStockChart?.Refresh();
     }
 
@@ -176,24 +177,30 @@
         {
             tickerResultsLogoDto = null;
         }
-    // Here a check is made to avoid making calls on isDarkMode change
-        if (SelectedTicker != previousTicker)
-            // Delete previous ticker's details
-            StockChartDetails = null;
-        {
-            try
-            {
-                await UpdateWatchlistStatusAsync();
+        
+        // Don't perform the initial loading if the ticker parameter hasn't changed
+        if (SelectedTicker == previousTicker) return;
 
-                tickerResultsLogoDto = await Http.GetFromJsonAsync<TickerResultsLogoDto>($"api/tickers/{SelectedTicker}");
-                previousTicker = SelectedTicker;
-            }
-            catch (HttpRequestException)
+        // Delete previous ticker's details to clear the page in case loading fails
+        StockChartDetails = null;
+        
+        // Fetch ticker details
+        try
+        {
+            await UpdateWatchlistStatusAsync();
+            tickerResultsLogoDto = await Http.GetFromJsonAsync<TickerResultsLogoDto>($"api/tickers/{SelectedTicker}");
+            // Load yesterday's data by default on ticker change
+            if (SelectedTicker != previousTicker)
             {
-                tickerResultsLogoDto = null;
-                throw new Exception("Unable to get present or cached ticker details");
+                await LoadChartDataAsync((DateTime.Now.AddDays(-1), "minute", 30));
             }
-            await LoadChartDataAsync((DateTime.Now.AddDays(-1), "minute", 30));
+
+            previousTicker = SelectedTicker;
+        }
+        catch (HttpRequestException)
+        {
+            tickerResultsLogoDto = null;
+            throw new Exception("Unable to get present or cached ticker details");
         }
     }
 
@@ -211,5 +218,4 @@
             Snackbar.Add("Unable to refresh watchlist status", Severity.Error);
         }
     }
-
 }
