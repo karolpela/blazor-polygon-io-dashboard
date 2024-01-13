@@ -13,31 +13,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd917f78-56bc-431f-988b-d60323dd2b20" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Server/Areas/Identity/Pages/Shared/_LoginPartial.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/dataSources/a7004567-5664-458c-b8f6-d75df8793d34.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/dataSources/a7004567-5664-458c-b8f6-d75df8793d34.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/efCoreDialogsState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/efCoreDialogsState.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/Dashboard.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/Dashboard.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/News/NewsItem.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/News/NewsItem.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/News/NewsList.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/News/NewsList.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/StockDetails.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/StockDetails.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/StockOpenClose.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/StockOpenClose.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Pages/Utilities/ImageDecoder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Utilities/ImageDecoder.cs" afterDir="false" />
+    <list default="true" id="cd917f78-56bc-431f-988b-d60323dd2b20" name="Changes" comment="Fix chart candle color on theme change">
       <change beforePath="$PROJECT_DIR$/Client/Shared/LoginDisplay.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Shared/LoginDisplay.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Shared/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Shared/MainLayout.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Client/wwwroot/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Controllers/TickersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Controllers/TickersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/FinanceApp.Server.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Server/FinanceApp.Server.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Pages/Shared/_Layout.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Pages/Shared/_LoginPartial.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Pages/Shared/_ValidationScriptsPartial.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Pages/_ViewImports.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Services/Implementations/PolygonApiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Services/Implementations/PolygonApiService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Services/Implementations/TickerDbService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Services/Implementations/TickerDbService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,12 +27,13 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0a71fbbc1c854310aca92d4deecf7b5d12000/ed/a61aaa8b/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3a5aa07ca530451e88d6fb825c0e46fe47e00/1c/9af4c844/StockChartCommonAxis.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3a5aa07ca530451e88d6fb825c0e46fe47e00/40/fb32b8b4/StockChartPrimaryXAxis.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e9d836087ea74ecdb589ef4c4d2dac478b2e00/29/8e9e464a/Color.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e9d836087ea74ecdb589ef4c4d2dac478b2e00/58/1ae0ee3e/Adornment.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3182ebe051d9b4bed148730ecd591e6f2d28d705821e6fbb3c16b51b51f15c7/Profile.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a13a23687b565d3b3ca279dd8e2bfd1d74d49132851d9dcc489eaad1431ff/ServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/karol/Repositories/blazor-polygon-io-dashboard/Client/Pages/Stocks/StockOpenClose.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Users/karol/Repositories/blazor-polygon-io-dashboard/Shared/Models/DailyOpenCloseDto.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/karol/Repositories/blazor-polygon-io-dashboard/Client/Pages/Stocks/StockDetails.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -201,7 +179,7 @@
       <workItem from="1703078722863" duration="12953000" />
       <workItem from="1704210890810" duration="8508000" />
       <workItem from="1704396873664" duration="2472000" />
-      <workItem from="1705078463822" duration="6735000" />
+      <workItem from="1705078463822" duration="8689000" />
     </task>
     <task id="LOCAL-00001" summary="Prepare to update .NET">
       <option name="closed" value="true" />
@@ -235,7 +213,23 @@
       <option name="project" value="LOCAL" />
       <updated>1700826298930</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Save progress #2">
+      <option name="closed" value="true" />
+      <created>1705159781867</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1705159781867</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Fix chart candle color on theme change">
+      <option name="closed" value="true" />
+      <created>1705164302562</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1705164302562</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -271,7 +265,9 @@
     <MESSAGE value="Responsive layout and other CSS tweaks" />
     <MESSAGE value="Display messages; Highlight selected date" />
     <MESSAGE value="Prepare to update to .NET 8.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Prepare to update to .NET 8.0" />
+    <MESSAGE value="Save progress #2" />
+    <MESSAGE value="Fix chart candle color on theme change" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix chart candle color on theme change" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

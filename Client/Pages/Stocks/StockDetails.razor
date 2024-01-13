@@ -6,6 +6,7 @@
 @using System.Text.Json
 @using System.Text
 @using FinanceApp.Client.Pages.Stocks.News
+@using ValueType = Syncfusion.Blazor.Charts.ValueType
 @inherits FinanceApp.Client.Pages.Utilities.ImageDecoder
 
 <CascadingValue Value="previousTicker" Name="PreviousTicker">
@@ -41,12 +42,12 @@
                                       EnableSelector="false" EnablePeriodSelector="false"
                                       Theme="@(IsDarkMode ? Theme.FluentDark : Theme.Fluent)">
                             <StockChartChartBorder Color="transparent"></StockChartChartBorder>
-                            <StockChartPrimaryXAxis>
+                            <StockChartPrimaryXAxis ValueType="ValueType.DateTimeCategory">
                                 <StockChartAxisMajorGridLines Width="0"></StockChartAxisMajorGridLines>
                                 <StockChartAxisMinorGridLines Width="0"></StockChartAxisMinorGridLines>
                             </StockChartPrimaryXAxis>
                             <StockChartSeriesCollection>
-                                <StockChartSeries DataSource="@StockChartDetails" Type="ChartSeriesType.HiloOpenClose"
+                                <StockChartSeries DataSource="@StockChartDetails" Type="ChartSeriesType.Candle"
                                                   Name="Series"
                                                   XName="Date" YName="Close" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume">
                                 </StockChartSeries>
