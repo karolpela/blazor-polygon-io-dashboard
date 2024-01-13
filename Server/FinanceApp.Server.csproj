@@ -38,4 +38,10 @@
 		<_ContentIncludedByDefault Remove="Pages\Shared\_ValidationScriptsPartial.cshtml" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Pages\Shared\_Layout.cshtml" />
+	  <UpToDateCheckInput Remove="Pages\Shared\_LoginPartial.cshtml" />
+	  <UpToDateCheckInput Remove="Pages\Shared\_ValidationScriptsPartial.cshtml" />
+	</ItemGroup>
+
 </Project>

@@ -28,22 +28,33 @@ public class TickersController : ControllerBase
     {
         List<TickerListItemDto> tickerList = new();
 
-        // Try to get new data from Polygon
+        tickerList.AddRange(await _tickerDbService.GetTickerListItemsAsync());
+
+        // This is to save requests as the list is very long and fetching all tickers
+        // requires making 4 API calls. Normally a timestamp would be checked to deem
+        // if the list should be fetched again - here the logic is simplified.
+        
+        // Return from db if exists
+        if (!tickerList.IsNullOrEmpty())
+        {
+            return Ok(tickerList);
+        }
+        
+        // Else, try to get new data from Polygon
         try
         {
             var tickerItemDtoList = await _stockApiService.GetTickerList();
             if (tickerItemDtoList == null) return NotFound();
-            
+
             tickerList.AddRange(tickerItemDtoList);
             // Save updated list to db
             await _tickerDbService.SaveListItemsToDbAsync(tickerList);
         }
         catch (HttpRequestException)
         {
-            // In case Polygon is not available, get Ticker list from db
-            tickerList.AddRange(await _tickerDbService.GetTickerListItemsAsync());
+            // Unable to get from db or Polygon
+            return NotFound();
         }
-
         return Ok(tickerList);
     }
 
@@ -74,21 +85,28 @@ public class TickersController : ControllerBase
         }
         else
         {
-            try
+            // check for logo in db – no need to update every time
+            logoDto = await _tickerDbService.GetLogoAsync(ticker);
+
+            if (logoDto == null)
             {
-                // try to get updated logo
-                logoDto = await _stockApiService.GetLogoAsync(tickerResultsDto);
-                if (logoDto != null)
-                    // save logo to db
-                    await _tickerDbService.UpdateLogoAsync(logoDto);
-            }
-            catch (HttpRequestException)
-            {
-                // unable to get updated logo
-                logoDto = await _tickerDbService.GetLogoAsync(ticker);
+                try
+                {
+                    // try to get updated logo
+                    logoDto = await _stockApiService.GetLogoAsync(tickerResultsDto);
+                    if (logoDto != null)
+                    {
+                        // save logo to db
+                        await _tickerDbService.UpdateLogoAsync(logoDto);
+                    }
+                }
+                catch (HttpRequestException)
+                {
+                    // unable to get logo
+                }
             }
         }
-            
+
         if (tickerResultsDto == null && logoDto == null) return NotFound();
 
         var tickerResultsLogoDto = new TickerResultsLogoDto(tickerResultsDto, logoDto);

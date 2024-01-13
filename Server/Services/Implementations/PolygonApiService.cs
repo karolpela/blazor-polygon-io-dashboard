@@ -34,10 +34,10 @@ public class PolygonApiService : IStockApiService
         var nextUrl = tickerListDto?.NextUrl;
 
         if (tickerListDto?.Results == null) return allTickers;
-        
+
         allTickers.AddRange(tickerListDto.Results!);
 
-        while(!string.IsNullOrEmpty(nextUrl))
+        while (!string.IsNullOrEmpty(nextUrl))
         {
             tickerListDto = await _clientFactory.CreateClient()
                 .GetFromJsonAsync<TickerListDto>(

@@ -37,7 +37,7 @@ else
         catch (HttpRequestException)
         {
             NewsResultImageDtos = null;
-            Snackbar.Add("Unable to get news. Try again later if requests exceeded.");
+            Snackbar.Add("Unable to get news. Try again later if requests exceeded.", Severity.Warning);
         }
     }
 }

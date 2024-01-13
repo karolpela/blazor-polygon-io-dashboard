@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="Microsoft SQL Server (JetBrains)">
   <database-model serializer="dbm" dbms="MSSQL" family-id="MSSQL" format-version="4.51">
-    <root id="1"/>
+    <root id="1">
+      <ServerVersion>16.0.4075</ServerVersion>
+    </root>
     <collation id="2" parent="1" name="Albanian_BIN">
       <Description>Albanian, binary sort</Description>
     </collation>
@@ -16723,1259 +16725,1346 @@
       <ObjectId>1</ObjectId>
       <Visible>1</Visible>
     </assembly>
-    <role id="5548" parent="5510" name="INFORMATION_SCHEMA">
+    <filegroup id="5548" parent="5510" name="PRIMARY">
+      <DefaultGroup>1</DefaultGroup>
+      <ObjectId>1</ObjectId>
+    </filegroup>
+    <role id="5549" parent="5510" name="INFORMATION_SCHEMA">
       <AuthType>none</AuthType>
       <ObjectId>3</ObjectId>
     </role>
-    <role id="5549" parent="5510" name="db_accessadmin">
+    <role id="5550" parent="5510" name="db_accessadmin">
       <AuthType>none</AuthType>
       <ObjectId>16385</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5550" parent="5510" name="db_backupoperator">
+    <role id="5551" parent="5510" name="db_backupoperator">
       <AuthType>none</AuthType>
       <ObjectId>16389</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5551" parent="5510" name="db_datareader">
+    <role id="5552" parent="5510" name="db_datareader">
       <AuthType>none</AuthType>
       <ObjectId>16390</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5552" parent="5510" name="db_datawriter">
+    <role id="5553" parent="5510" name="db_datawriter">
       <AuthType>none</AuthType>
       <ObjectId>16391</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5553" parent="5510" name="db_ddladmin">
+    <role id="5554" parent="5510" name="db_ddladmin">
       <AuthType>none</AuthType>
       <ObjectId>16387</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5554" parent="5510" name="db_denydatareader">
+    <role id="5555" parent="5510" name="db_denydatareader">
       <AuthType>none</AuthType>
       <ObjectId>16392</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5555" parent="5510" name="db_denydatawriter">
+    <role id="5556" parent="5510" name="db_denydatawriter">
       <AuthType>none</AuthType>
       <ObjectId>16393</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5556" parent="5510" name="db_owner">
+    <role id="5557" parent="5510" name="db_owner">
       <AuthType>none</AuthType>
       <ObjectId>16384</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5557" parent="5510" name="db_securityadmin">
+    <role id="5558" parent="5510" name="db_securityadmin">
       <AuthType>none</AuthType>
       <ObjectId>16386</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5558" parent="5510" name="dbo">
+    <role id="5559" parent="5510" name="dbo">
       <AuthType>instance</AuthType>
       <DefaultSchema>dbo</DefaultSchema>
       <ObjectId>1</ObjectId>
     </role>
-    <role id="5559" parent="5510" name="guest">
+    <role id="5560" parent="5510" name="guest">
       <AuthType>none</AuthType>
       <DefaultSchema>guest</DefaultSchema>
       <ObjectId>2</ObjectId>
     </role>
-    <role id="5560" parent="5510" name="public">
+    <role id="5561" parent="5510" name="public">
       <AuthType>none</AuthType>
       <ObjectId>0</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5561" parent="5510" name="sys">
+    <role id="5562" parent="5510" name="sys">
       <AuthType>none</AuthType>
       <ObjectId>4</ObjectId>
     </role>
-    <schema id="5562" parent="5510" name="INFORMATION_SCHEMA">
+    <schema id="5563" parent="5510" name="INFORMATION_SCHEMA">
       <ObjectId>3</ObjectId>
     </schema>
-    <schema id="5563" parent="5510" name="db_accessadmin">
+    <schema id="5564" parent="5510" name="db_accessadmin">
       <ObjectId>16385</ObjectId>
     </schema>
-    <schema id="5564" parent="5510" name="db_backupoperator">
+    <schema id="5565" parent="5510" name="db_backupoperator">
       <ObjectId>16389</ObjectId>
     </schema>
-    <schema id="5565" parent="5510" name="db_datareader">
+    <schema id="5566" parent="5510" name="db_datareader">
       <ObjectId>16390</ObjectId>
     </schema>
-    <schema id="5566" parent="5510" name="db_datawriter">
+    <schema id="5567" parent="5510" name="db_datawriter">
       <ObjectId>16391</ObjectId>
     </schema>
-    <schema id="5567" parent="5510" name="db_ddladmin">
+    <schema id="5568" parent="5510" name="db_ddladmin">
       <ObjectId>16387</ObjectId>
     </schema>
-    <schema id="5568" parent="5510" name="db_denydatareader">
+    <schema id="5569" parent="5510" name="db_denydatareader">
       <ObjectId>16392</ObjectId>
     </schema>
-    <schema id="5569" parent="5510" name="db_denydatawriter">
+    <schema id="5570" parent="5510" name="db_denydatawriter">
       <ObjectId>16393</ObjectId>
     </schema>
-    <schema id="5570" parent="5510" name="db_owner">
+    <schema id="5571" parent="5510" name="db_owner">
       <ObjectId>16384</ObjectId>
     </schema>
-    <schema id="5571" parent="5510" name="db_securityadmin">
+    <schema id="5572" parent="5510" name="db_securityadmin">
       <ObjectId>16386</ObjectId>
     </schema>
-    <schema id="5572" parent="5510" name="dbo">
+    <schema id="5573" parent="5510" name="dbo">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2023-10-31.20:13:29</LastIntrospectionLocalTimestamp>
+      <IntrospectionTimestamp>2023-12-15.22:21:12.833</IntrospectionTimestamp>
+      <LastIntrospectionLocalTimestamp>2023-12-15.21:21:12</LastIntrospectionLocalTimestamp>
       <ObjectId>1</ObjectId>
     </schema>
-    <schema id="5573" parent="5510" name="guest">
+    <schema id="5574" parent="5510" name="guest">
       <ObjectId>2</ObjectId>
     </schema>
-    <schema id="5574" parent="5510" name="sys">
+    <schema id="5575" parent="5510" name="sys">
       <ObjectId>4</ObjectId>
     </schema>
-    <table id="5575" parent="5572" name="Address">
-      <CreatedTimestamp>2023-10-09.11:27:12.753</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.760</ModifiedTimestamp>
-      <ObjectId>1653580929</ObjectId>
+    <table id="5576" parent="5573" name="Address">
+      <CreatedTimestamp>2023-12-15.18:48:21.070</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.073</ModifiedTimestamp>
+      <ObjectId>786101841</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5576" parent="5572" name="ApplicationUserTickerResults">
-      <CreatedTimestamp>2023-10-09.11:27:12.760</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.763</ModifiedTimestamp>
-      <ObjectId>1781581385</ObjectId>
+    <table id="5577" parent="5573" name="ApplicationUserTickerResults">
+      <CreatedTimestamp>2023-12-15.18:48:21.077</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.080</ModifiedTimestamp>
+      <ObjectId>914102297</ObjectId>
+      <LobDataSpaceId>0</LobDataSpaceId>
     </table>
-    <table id="5577" parent="5572" name="AspNetRoleClaims">
-      <CreatedTimestamp>2023-10-09.11:27:12.693</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.707</ModifiedTimestamp>
-      <ObjectId>1397580017</ObjectId>
+    <table id="5578" parent="5573" name="AspNetRoleClaims">
+      <CreatedTimestamp>2023-12-15.18:48:21.020</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.033</ModifiedTimestamp>
+      <ObjectId>530100929</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5578" parent="5572" name="AspNetRoles">
-      <CreatedTimestamp>2023-10-09.11:27:12.683</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.710</ModifiedTimestamp>
-      <ObjectId>1237579447</ObjectId>
+    <table id="5579" parent="5573" name="AspNetRoles">
+      <CreatedTimestamp>2023-12-15.18:48:20.993</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.033</ModifiedTimestamp>
+      <ObjectId>370100359</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5579" parent="5572" name="AspNetUserClaims">
-      <CreatedTimestamp>2023-10-09.11:27:12.697</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.710</ModifiedTimestamp>
-      <ObjectId>1445580188</ObjectId>
+    <table id="5580" parent="5573" name="AspNetUserClaims">
+      <CreatedTimestamp>2023-12-15.18:48:21.023</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.037</ModifiedTimestamp>
+      <ObjectId>578101100</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5580" parent="5572" name="AspNetUserLogins">
-      <CreatedTimestamp>2023-10-09.11:27:12.700</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.713</ModifiedTimestamp>
-      <ObjectId>1493580359</ObjectId>
+    <table id="5581" parent="5573" name="AspNetUserLogins">
+      <CreatedTimestamp>2023-12-15.18:48:21.027</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.037</ModifiedTimestamp>
+      <ObjectId>626101271</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5581" parent="5572" name="AspNetUserRoles">
-      <CreatedTimestamp>2023-10-09.11:27:12.700</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.713</ModifiedTimestamp>
-      <ObjectId>1541580530</ObjectId>
+    <table id="5582" parent="5573" name="AspNetUserRoles">
+      <CreatedTimestamp>2023-12-15.18:48:21.030</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.037</ModifiedTimestamp>
+      <ObjectId>674101442</ObjectId>
+      <LobDataSpaceId>0</LobDataSpaceId>
     </table>
-    <table id="5582" parent="5572" name="AspNetUserTokens">
-      <CreatedTimestamp>2023-10-09.11:27:12.703</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.703</ModifiedTimestamp>
-      <ObjectId>1605580758</ObjectId>
+    <table id="5583" parent="5573" name="AspNetUserTokens">
+      <CreatedTimestamp>2023-12-15.18:48:21.030</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.030</ModifiedTimestamp>
+      <ObjectId>738101670</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5583" parent="5572" name="AspNetUsers">
-      <CreatedTimestamp>2023-10-09.11:27:12.687</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.760</ModifiedTimestamp>
-      <ObjectId>1269579561</ObjectId>
+    <table id="5584" parent="5573" name="AspNetUsers">
+      <CreatedTimestamp>2023-12-15.18:48:21</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.077</ModifiedTimestamp>
+      <ObjectId>402100473</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5584" parent="5572" name="Branding">
-      <CreatedTimestamp>2023-10-09.11:27:12.757</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.760</ModifiedTimestamp>
-      <ObjectId>1685581043</ObjectId>
+    <table id="5585" parent="5573" name="Branding">
+      <CreatedTimestamp>2023-12-15.18:48:21.070</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.073</ModifiedTimestamp>
+      <ObjectId>818101955</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5585" parent="5572" name="DailyOpenClose">
-      <CreatedTimestamp>2023-10-09.11:27:13.003</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.367</ModifiedTimestamp>
-      <ObjectId>1973582069</ObjectId>
+    <table id="5586" parent="5573" name="DailyOpenClose">
+      <CreatedTimestamp>2023-12-15.18:48:21.273</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.653</ModifiedTimestamp>
+      <ObjectId>1106102981</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5586" parent="5572" name="DeviceCodes">
-      <CreatedTimestamp>2023-10-09.11:27:12.687</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.720</ModifiedTimestamp>
-      <ObjectId>1301579675</ObjectId>
+    <table id="5587" parent="5573" name="DeviceCodes">
+      <CreatedTimestamp>2023-12-15.18:48:21.010</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.043</ModifiedTimestamp>
+      <ObjectId>434100587</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5587" parent="5572" name="Keys">
-      <CreatedTimestamp>2023-10-09.11:27:12.690</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.720</ModifiedTimestamp>
-      <ObjectId>1333579789</ObjectId>
+    <table id="5588" parent="5573" name="Keys">
+      <CreatedTimestamp>2023-12-15.18:48:21.013</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.040</ModifiedTimestamp>
+      <ObjectId>466100701</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5588" parent="5572" name="Logo">
-      <CreatedTimestamp>2023-10-09.11:27:12.920</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.997</ModifiedTimestamp>
-      <ObjectId>1877581727</ObjectId>
+    <table id="5589" parent="5573" name="Logo">
+      <CreatedTimestamp>2023-12-15.18:48:21.187</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.263</ModifiedTimestamp>
+      <ObjectId>1010102639</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5589" parent="5572" name="NewsImage">
-      <CreatedTimestamp>2023-10-09.11:27:13.150</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.180</ModifiedTimestamp>
-      <ObjectId>98099390</ObjectId>
+    <table id="5590" parent="5573" name="NewsImage">
+      <CreatedTimestamp>2023-12-15.18:48:21.427</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.457</ModifiedTimestamp>
+      <ObjectId>1378103950</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5590" parent="5572" name="NewsResult">
-      <CreatedTimestamp>2023-10-09.11:27:13.060</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.153</ModifiedTimestamp>
-      <ObjectId>2133582639</ObjectId>
+    <table id="5591" parent="5573" name="NewsResult">
+      <CreatedTimestamp>2023-12-15.18:48:21.330</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.430</ModifiedTimestamp>
+      <ObjectId>1266103551</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5591" parent="5572" name="NewsResultTickerResults">
-      <CreatedTimestamp>2023-10-09.11:27:13.060</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.063</ModifiedTimestamp>
-      <ObjectId>34099162</ObjectId>
+    <table id="5592" parent="5573" name="NewsResultTickerResults">
+      <CreatedTimestamp>2023-12-15.18:48:21.333</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.337</ModifiedTimestamp>
+      <ObjectId>1314103722</ObjectId>
+      <LobDataSpaceId>0</LobDataSpaceId>
     </table>
-    <table id="5592" parent="5572" name="PersistedGrants">
-      <CreatedTimestamp>2023-10-09.11:27:12.690</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.730</ModifiedTimestamp>
-      <ObjectId>1365579903</ObjectId>
+    <table id="5593" parent="5573" name="PersistedGrants">
+      <CreatedTimestamp>2023-12-15.18:48:21.020</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.053</ModifiedTimestamp>
+      <ObjectId>498100815</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5593" parent="5572" name="Publisher">
-      <CreatedTimestamp>2023-10-09.11:27:13.060</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.063</ModifiedTimestamp>
-      <ObjectId>2101582525</ObjectId>
+    <table id="5594" parent="5573" name="Publisher">
+      <CreatedTimestamp>2023-12-15.18:48:21.330</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.333</ModifiedTimestamp>
+      <ObjectId>1234103437</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5594" parent="5572" name="StockChartData">
-      <CreatedTimestamp>2023-10-09.11:27:13.020</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.050</ModifiedTimestamp>
-      <ObjectId>2021582240</ObjectId>
+    <table id="5595" parent="5573" name="StockChartData">
+      <CreatedTimestamp>2023-12-15.18:48:21.290</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.323</ModifiedTimestamp>
+      <ObjectId>1154103152</ObjectId>
+      <LobDataSpaceId>0</LobDataSpaceId>
     </table>
-    <table id="5595" parent="5572" name="TickerListItem">
-      <CreatedTimestamp>2023-10-09.11:27:12.903</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.270</ModifiedTimestamp>
-      <ObjectId>1845581613</ObjectId>
+    <table id="5596" parent="5573" name="TickerListItem">
+      <CreatedTimestamp>2023-12-15.18:48:21.167</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.560</ModifiedTimestamp>
+      <ObjectId>978102525</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5596" parent="5572" name="TickerResults">
-      <CreatedTimestamp>2023-10-09.11:27:12.757</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.063</ModifiedTimestamp>
-      <ObjectId>1717581157</ObjectId>
+    <table id="5597" parent="5573" name="TickerResults">
+      <CreatedTimestamp>2023-12-15.18:48:21.073</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:21.337</ModifiedTimestamp>
+      <ObjectId>850102069</ObjectId>
+      <LobDataSpaceId>1</LobDataSpaceId>
     </table>
-    <table id="5597" parent="5572" name="__EFMigrationsHistory">
-      <CreatedTimestamp>2023-10-09.11:27:12.610</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.610</ModifiedTimestamp>
-      <ObjectId>1205579333</ObjectId>
+    <table id="5598" parent="5573" name="__EFMigrationsHistory">
+      <CreatedTimestamp>2023-12-15.18:48:20.923</CreatedTimestamp>
+      <DataRetentionPeriod>-1</DataRetentionPeriod>
+      <ModifiedTimestamp>2023-12-15.18:48:20.923</ModifiedTimestamp>
+      <ObjectId>338100245</ObjectId>
+      <LobDataSpaceId>0</LobDataSpaceId>
     </table>
-    <column id="5598" parent="5575" name="Address1">
+    <column id="5599" parent="5576" name="Address1">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5599" parent="5575" name="City">
+    <column id="5600" parent="5576" name="City">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="5600" parent="5575" name="State">
+    <column id="5601" parent="5576" name="State">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="5601" parent="5575" name="PostalCode">
+    <column id="5602" parent="5576" name="PostalCode">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>4</Position>
     </column>
-    <index id="5602" parent="5575" name="PK_Address">
+    <index id="5603" parent="5576" name="PK_Address">
       <Clustering>1</Clustering>
       <ColNames>Address1</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5603" parent="5575" name="PK_Address">
-      <CreatedTimestamp>2023-10-09.11:27:12.757</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.757</ModifiedTimestamp>
-      <ObjectId>1669580986</ObjectId>
+    <key id="5604" parent="5576" name="PK_Address">
+      <CreatedTimestamp>2023-12-15.18:48:21.070</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.070</ModifiedTimestamp>
+      <ObjectId>802101898</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_Address</UnderlyingIndexName>
     </key>
-    <column id="5604" parent="5576" name="ApplicationUsersId">
+    <column id="5605" parent="5577" name="ApplicationUsersId">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5605" parent="5576" name="TickerWatchlistTicker">
+    <column id="5606" parent="5577" name="TickerWatchlistTicker">
       <DasType>nvarchar(4 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="5606" parent="5576" name="FK_ApplicationUserTickerResults_AspNetUsers_ApplicationUsersId">
+    <foreign-key id="5607" parent="5577" name="FK_ApplicationUserTickerResults_AspNetUsers_ApplicationUsersId">
       <ColNames>ApplicationUsersId</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:12.760</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.760</ModifiedTimestamp>
-      <ObjectId>1813581499</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.077</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.077</ModifiedTimestamp>
+      <ObjectId>946102411</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>Id</RefColNames>
-      <RefTableId>1269579561</RefTableId>
+      <RefTableId>402100473</RefTableId>
       <RefTableName>AspNetUsers</RefTableName>
     </foreign-key>
-    <foreign-key id="5607" parent="5576" name="FK_ApplicationUserTickerResults_TickerResults_TickerWatchlistTicker">
+    <foreign-key id="5608" parent="5577" name="FK_ApplicationUserTickerResults_TickerResults_TickerWatchlistTicker">
       <ColNames>TickerWatchlistTicker</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:12.760</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.760</ModifiedTimestamp>
-      <ObjectId>1829581556</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.077</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.077</ModifiedTimestamp>
+      <ObjectId>962102468</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>Ticker</RefColNames>
-      <RefTableId>1717581157</RefTableId>
+      <RefTableId>850102069</RefTableId>
       <RefTableName>TickerResults</RefTableName>
     </foreign-key>
-    <index id="5608" parent="5576" name="PK_ApplicationUserTickerResults">
+    <index id="5609" parent="5577" name="PK_ApplicationUserTickerResults">
       <Clustering>1</Clustering>
       <ColNames>ApplicationUsersId
 TickerWatchlistTicker</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5609" parent="5576" name="IX_ApplicationUserTickerResults_TickerWatchlistTicker">
+    <index id="5610" parent="5577" name="IX_ApplicationUserTickerResults_TickerWatchlistTicker">
       <ColNames>TickerWatchlistTicker</ColNames>
       <Position>2</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5610" parent="5576" name="PK_ApplicationUserTickerResults">
-      <CreatedTimestamp>2023-10-09.11:27:12.760</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.760</ModifiedTimestamp>
-      <ObjectId>1797581442</ObjectId>
+    <key id="5611" parent="5577" name="PK_ApplicationUserTickerResults">
+      <CreatedTimestamp>2023-12-15.18:48:21.077</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.077</ModifiedTimestamp>
+      <ObjectId>930102354</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_ApplicationUserTickerResults</UnderlyingIndexName>
     </key>
-    <column id="5611" parent="5577" name="Id">
+    <column id="5612" parent="5578" name="Id">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="5612" parent="5577" name="RoleId">
+    <column id="5613" parent="5578" name="RoleId">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="5613" parent="5577" name="ClaimType">
+    <column id="5614" parent="5578" name="ClaimType">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="5614" parent="5577" name="ClaimValue">
+    <column id="5615" parent="5578" name="ClaimValue">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="5615" parent="5577" name="FK_AspNetRoleClaims_AspNetRoles_RoleId">
+    <foreign-key id="5616" parent="5578" name="FK_AspNetRoleClaims_AspNetRoles_RoleId">
       <ColNames>RoleId</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:12.693</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.693</ModifiedTimestamp>
-      <ObjectId>1429580131</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.020</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.020</ModifiedTimestamp>
+      <ObjectId>562101043</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>Id</RefColNames>
-      <RefTableId>1237579447</RefTableId>
+      <RefTableId>370100359</RefTableId>
       <RefTableName>AspNetRoles</RefTableName>
     </foreign-key>
-    <index id="5616" parent="5577" name="PK_AspNetRoleClaims">
+    <index id="5617" parent="5578" name="PK_AspNetRoleClaims">
       <Clustering>1</Clustering>
       <ColNames>Id</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5617" parent="5577" name="IX_AspNetRoleClaims_RoleId">
+    <index id="5618" parent="5578" name="IX_AspNetRoleClaims_RoleId">
       <ColNames>RoleId</ColNames>
       <Position>2</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5618" parent="5577" name="PK_AspNetRoleClaims">
-      <CreatedTimestamp>2023-10-09.11:27:12.693</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.693</ModifiedTimestamp>
-      <ObjectId>1413580074</ObjectId>
+    <key id="5619" parent="5578" name="PK_AspNetRoleClaims">
+      <CreatedTimestamp>2023-12-15.18:48:21.020</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.020</ModifiedTimestamp>
+      <ObjectId>546100986</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_AspNetRoleClaims</UnderlyingIndexName>
     </key>
-    <column id="5619" parent="5578" name="Id">
+    <column id="5620" parent="5579" name="Id">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5620" parent="5578" name="Name">
+    <column id="5621" parent="5579" name="Name">
       <DasType>nvarchar(256 char)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="5621" parent="5578" name="NormalizedName">
+    <column id="5622" parent="5579" name="NormalizedName">
       <DasType>nvarchar(256 char)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="5622" parent="5578" name="ConcurrencyStamp">
+    <column id="5623" parent="5579" name="ConcurrencyStamp">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>4</Position>
     </column>
-    <index id="5623" parent="5578" name="PK_AspNetRoles">
+    <index id="5624" parent="5579" name="PK_AspNetRoles">
       <Clustering>1</Clustering>
       <ColNames>Id</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5624" parent="5578" name="RoleNameIndex">
+    <index id="5625" parent="5579" name="RoleNameIndex">
       <ColNames>NormalizedName</ColNames>
       <Condition>[NormalizedName] IS NOT NULL</Condition>
       <Position>2</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5625" parent="5578" name="PK_AspNetRoles">
-      <CreatedTimestamp>2023-10-09.11:27:12.687</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.687</ModifiedTimestamp>
-      <ObjectId>1253579504</ObjectId>
+    <key id="5626" parent="5579" name="PK_AspNetRoles">
+      <CreatedTimestamp>2023-12-15.18:48:20.997</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:20.997</ModifiedTimestamp>
+      <ObjectId>386100416</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_AspNetRoles</UnderlyingIndexName>
     </key>
-    <column id="5626" parent="5579" name="Id">
+    <column id="5627" parent="5580" name="Id">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="5627" parent="5579" name="UserId">
+    <column id="5628" parent="5580" name="UserId">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="5628" parent="5579" name="ClaimType">
+    <column id="5629" parent="5580" name="ClaimType">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="5629" parent="5579" name="ClaimValue">
+    <column id="5630" parent="5580" name="ClaimValue">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="5630" parent="5579" name="FK_AspNetUserClaims_AspNetUsers_UserId">
+    <foreign-key id="5631" parent="5580" name="FK_AspNetUserClaims_AspNetUsers_UserId">
       <ColNames>UserId</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:12.697</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.697</ModifiedTimestamp>
-      <ObjectId>1477580302</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.027</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.027</ModifiedTimestamp>
+      <ObjectId>610101214</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>Id</RefColNames>
-      <RefTableId>1269579561</RefTableId>
+      <RefTableId>402100473</RefTableId>
       <RefTableName>AspNetUsers</RefTableName>
     </foreign-key>
-    <index id="5631" parent="5579" name="PK_AspNetUserClaims">
+    <index id="5632" parent="5580" name="PK_AspNetUserClaims">
       <Clustering>1</Clustering>
       <ColNames>Id</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5632" parent="5579" name="IX_AspNetUserClaims_UserId">
+    <index id="5633" parent="5580" name="IX_AspNetUserClaims_UserId">
       <ColNames>UserId</ColNames>
       <Position>2</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5633" parent="5579" name="PK_AspNetUserClaims">
-      <CreatedTimestamp>2023-10-09.11:27:12.697</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.697</ModifiedTimestamp>
-      <ObjectId>1461580245</ObjectId>
+    <key id="5634" parent="5580" name="PK_AspNetUserClaims">
+      <CreatedTimestamp>2023-12-15.18:48:21.023</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.023</ModifiedTimestamp>
+      <ObjectId>594101157</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_AspNetUserClaims</UnderlyingIndexName>
     </key>
-    <column id="5634" parent="5580" name="LoginProvider">
+    <column id="5635" parent="5581" name="LoginProvider">
       <DasType>nvarchar(128 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5635" parent="5580" name="ProviderKey">
+    <column id="5636" parent="5581" name="ProviderKey">
       <DasType>nvarchar(128 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="5636" parent="5580" name="ProviderDisplayName">
+    <column id="5637" parent="5581" name="ProviderDisplayName">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="5637" parent="5580" name="UserId">
+    <column id="5638" parent="5581" name="UserId">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <foreign-key id="5638" parent="5580" name="FK_AspNetUserLogins_AspNetUsers_UserId">
+    <foreign-key id="5639" parent="5581" name="FK_AspNetUserLogins_AspNetUsers_UserId">
       <ColNames>UserId</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:12.700</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.700</ModifiedTimestamp>
-      <ObjectId>1525580473</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.027</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.027</ModifiedTimestamp>
+      <ObjectId>658101385</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>Id</RefColNames>
-      <RefTableId>1269579561</RefTableId>
+      <RefTableId>402100473</RefTableId>
       <RefTableName>AspNetUsers</RefTableName>
     </foreign-key>
-    <index id="5639" parent="5580" name="PK_AspNetUserLogins">
+    <index id="5640" parent="5581" name="PK_AspNetUserLogins">
       <Clustering>1</Clustering>
       <ColNames>LoginProvider
 ProviderKey</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5640" parent="5580" name="IX_AspNetUserLogins_UserId">
+    <index id="5641" parent="5581" name="IX_AspNetUserLogins_UserId">
       <ColNames>UserId</ColNames>
       <Position>2</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5641" parent="5580" name="PK_AspNetUserLogins">
-      <CreatedTimestamp>2023-10-09.11:27:12.700</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.700</ModifiedTimestamp>
-      <ObjectId>1509580416</ObjectId>
+    <key id="5642" parent="5581" name="PK_AspNetUserLogins">
+      <CreatedTimestamp>2023-12-15.18:48:21.027</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.027</ModifiedTimestamp>
+      <ObjectId>642101328</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_AspNetUserLogins</UnderlyingIndexName>
     </key>
-    <column id="5642" parent="5581" name="UserId">
+    <column id="5643" parent="5582" name="UserId">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5643" parent="5581" name="RoleId">
+    <column id="5644" parent="5582" name="RoleId">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="5644" parent="5581" name="FK_AspNetUserRoles_AspNetUsers_UserId">
+    <foreign-key id="5645" parent="5582" name="FK_AspNetUserRoles_AspNetUsers_UserId">
       <ColNames>UserId</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:12.700</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.700</ModifiedTimestamp>
-      <ObjectId>1589580701</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.030</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.030</ModifiedTimestamp>
+      <ObjectId>722101613</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>Id</RefColNames>
-      <RefTableId>1269579561</RefTableId>
+      <RefTableId>402100473</RefTableId>
       <RefTableName>AspNetUsers</RefTableName>
     </foreign-key>
-    <foreign-key id="5645" parent="5581" name="FK_AspNetUserRoles_AspNetRoles_RoleId">
+    <foreign-key id="5646" parent="5582" name="FK_AspNetUserRoles_AspNetRoles_RoleId">
       <ColNames>RoleId</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:12.700</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.700</ModifiedTimestamp>
-      <ObjectId>1573580644</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.030</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.030</ModifiedTimestamp>
+      <ObjectId>706101556</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>Id</RefColNames>
-      <RefTableId>1237579447</RefTableId>
+      <RefTableId>370100359</RefTableId>
       <RefTableName>AspNetRoles</RefTableName>
     </foreign-key>
-    <index id="5646" parent="5581" name="PK_AspNetUserRoles">
+    <index id="5647" parent="5582" name="PK_AspNetUserRoles">
       <Clustering>1</Clustering>
       <ColNames>UserId
 RoleId</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5647" parent="5581" name="IX_AspNetUserRoles_RoleId">
+    <index id="5648" parent="5582" name="IX_AspNetUserRoles_RoleId">
       <ColNames>RoleId</ColNames>
       <Position>2</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5648" parent="5581" name="PK_AspNetUserRoles">
-      <CreatedTimestamp>2023-10-09.11:27:12.700</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.700</ModifiedTimestamp>
-      <ObjectId>1557580587</ObjectId>
+    <key id="5649" parent="5582" name="PK_AspNetUserRoles">
+      <CreatedTimestamp>2023-12-15.18:48:21.030</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.030</ModifiedTimestamp>
+      <ObjectId>690101499</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_AspNetUserRoles</UnderlyingIndexName>
     </key>
-    <column id="5649" parent="5582" name="UserId">
+    <column id="5650" parent="5583" name="UserId">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5650" parent="5582" name="LoginProvider">
+    <column id="5651" parent="5583" name="LoginProvider">
       <DasType>nvarchar(128 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="5651" parent="5582" name="Name">
+    <column id="5652" parent="5583" name="Name">
       <DasType>nvarchar(128 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="5652" parent="5582" name="Value">
+    <column id="5653" parent="5583" name="Value">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="5653" parent="5582" name="FK_AspNetUserTokens_AspNetUsers_UserId">
+    <foreign-key id="5654" parent="5583" name="FK_AspNetUserTokens_AspNetUsers_UserId">
       <ColNames>UserId</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:12.703</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.703</ModifiedTimestamp>
-      <ObjectId>1637580872</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.030</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.030</ModifiedTimestamp>
+      <ObjectId>770101784</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>Id</RefColNames>
-      <RefTableId>1269579561</RefTableId>
+      <RefTableId>402100473</RefTableId>
       <RefTableName>AspNetUsers</RefTableName>
     </foreign-key>
-    <index id="5654" parent="5582" name="PK_AspNetUserTokens">
+    <index id="5655" parent="5583" name="PK_AspNetUserTokens">
       <Clustering>1</Clustering>
       <ColNames>UserId
 LoginProvider
 Name</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5655" parent="5582" name="PK_AspNetUserTokens">
-      <CreatedTimestamp>2023-10-09.11:27:12.703</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.703</ModifiedTimestamp>
-      <ObjectId>1621580815</ObjectId>
+    <key id="5656" parent="5583" name="PK_AspNetUserTokens">
+      <CreatedTimestamp>2023-12-15.18:48:21.030</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.030</ModifiedTimestamp>
+      <ObjectId>754101727</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_AspNetUserTokens</UnderlyingIndexName>
     </key>
-    <column id="5656" parent="5583" name="Id">
+    <column id="5657" parent="5584" name="Id">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5657" parent="5583" name="UserName">
+    <column id="5658" parent="5584" name="UserName">
       <DasType>nvarchar(256 char)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="5658" parent="5583" name="NormalizedUserName">
+    <column id="5659" parent="5584" name="NormalizedUserName">
       <DasType>nvarchar(256 char)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="5659" parent="5583" name="Email">
+    <column id="5660" parent="5584" name="Email">
       <DasType>nvarchar(256 char)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="5660" parent="5583" name="NormalizedEmail">
+    <column id="5661" parent="5584" name="NormalizedEmail">
       <DasType>nvarchar(256 char)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="5661" parent="5583" name="EmailConfirmed">
+    <column id="5662" parent="5584" name="EmailConfirmed">
       <DasType>bit|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="5662" parent="5583" name="PasswordHash">
+    <column id="5663" parent="5584" name="PasswordHash">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="5663" parent="5583" name="SecurityStamp">
+    <column id="5664" parent="5584" name="SecurityStamp">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>8</Position>
     </column>
-    <column id="5664" parent="5583" name="ConcurrencyStamp">
+    <column id="5665" parent="5584" name="ConcurrencyStamp">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>9</Position>
     </column>
-    <column id="5665" parent="5583" name="PhoneNumber">
+    <column id="5666" parent="5584" name="PhoneNumber">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>10</Position>
     </column>
-    <column id="5666" parent="5583" name="PhoneNumberConfirmed">
+    <column id="5667" parent="5584" name="PhoneNumberConfirmed">
       <DasType>bit|0s</DasType>
       <NotNull>1</NotNull>
       <Position>11</Position>
     </column>
-    <column id="5667" parent="5583" name="TwoFactorEnabled">
+    <column id="5668" parent="5584" name="TwoFactorEnabled">
       <DasType>bit|0s</DasType>
       <NotNull>1</NotNull>
       <Position>12</Position>
     </column>
-    <column id="5668" parent="5583" name="LockoutEnd">
+    <column id="5669" parent="5584" name="LockoutEnd">
       <DasType>datetimeoffset|0s</DasType>
       <Position>13</Position>
     </column>
-    <column id="5669" parent="5583" name="LockoutEnabled">
+    <column id="5670" parent="5584" name="LockoutEnabled">
       <DasType>bit|0s</DasType>
       <NotNull>1</NotNull>
       <Position>14</Position>
     </column>
-    <column id="5670" parent="5583" name="AccessFailedCount">
+    <column id="5671" parent="5584" name="AccessFailedCount">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>15</Position>
     </column>
-    <index id="5671" parent="5583" name="PK_AspNetUsers">
+    <index id="5672" parent="5584" name="PK_AspNetUsers">
       <Clustering>1</Clustering>
       <ColNames>Id</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5672" parent="5583" name="EmailIndex">
+    <index id="5673" parent="5584" name="EmailIndex">
       <ColNames>NormalizedEmail</ColNames>
       <Position>2</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5673" parent="5583" name="UserNameIndex">
+    <index id="5674" parent="5584" name="UserNameIndex">
       <ColNames>NormalizedUserName</ColNames>
       <Condition>[NormalizedUserName] IS NOT NULL</Condition>
       <Position>3</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5674" parent="5583" name="PK_AspNetUsers">
-      <CreatedTimestamp>2023-10-09.11:27:12.687</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.687</ModifiedTimestamp>
-      <ObjectId>1285579618</ObjectId>
+    <key id="5675" parent="5584" name="PK_AspNetUsers">
+      <CreatedTimestamp>2023-12-15.18:48:21.007</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.007</ModifiedTimestamp>
+      <ObjectId>418100530</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_AspNetUsers</UnderlyingIndexName>
     </key>
-    <column id="5675" parent="5584" name="LogoUrl">
+    <column id="5676" parent="5585" name="LogoUrl">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5676" parent="5584" name="IconUrl">
+    <column id="5677" parent="5585" name="IconUrl">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>2</Position>
     </column>
-    <index id="5677" parent="5584" name="PK_Branding">
+    <index id="5678" parent="5585" name="PK_Branding">
       <Clustering>1</Clustering>
       <ColNames>LogoUrl</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5678" parent="5584" name="PK_Branding">
-      <CreatedTimestamp>2023-10-09.11:27:12.757</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.757</ModifiedTimestamp>
-      <ObjectId>1701581100</ObjectId>
+    <key id="5679" parent="5585" name="PK_Branding">
+      <CreatedTimestamp>2023-12-15.18:48:21.070</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.070</ModifiedTimestamp>
+      <ObjectId>834102012</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_Branding</UnderlyingIndexName>
     </key>
-    <column id="5679" parent="5585" name="Ticker">
+    <column id="5680" parent="5586" name="Ticker">
       <DasType>nvarchar(4 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5680" parent="5585" name="From">
+    <column id="5681" parent="5586" name="From">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="5681" parent="5585" name="Status">
+    <column id="5682" parent="5586" name="Status">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="5682" parent="5585" name="Symbol">
+    <column id="5683" parent="5586" name="Symbol">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="5683" parent="5585" name="Open">
+    <column id="5684" parent="5586" name="Open">
       <DasType>float|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="5684" parent="5585" name="High">
+    <column id="5685" parent="5586" name="High">
       <DasType>float|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="5685" parent="5585" name="Low">
+    <column id="5686" parent="5586" name="Low">
       <DasType>float|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="5686" parent="5585" name="Close">
+    <column id="5687" parent="5586" name="Close">
       <DasType>float|0s</DasType>
       <Position>8</Position>
     </column>
-    <column id="5687" parent="5585" name="Volume">
+    <column id="5688" parent="5586" name="Volume">
       <DasType>bigint|0s</DasType>
       <Position>9</Position>
     </column>
-    <column id="5688" parent="5585" name="AfterHours">
+    <column id="5689" parent="5586" name="AfterHours">
       <DasType>float|0s</DasType>
       <Position>10</Position>
     </column>
-    <column id="5689" parent="5585" name="PreMarket">
+    <column id="5690" parent="5586" name="PreMarket">
       <DasType>float|0s</DasType>
       <Position>11</Position>
     </column>
-    <foreign-key id="5690" parent="5585" name="FK_DailyOpenClose_TickerResults_Ticker">
+    <foreign-key id="5691" parent="5586" name="FK_DailyOpenClose_TickerResults_Ticker">
       <ColNames>Ticker</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:13.007</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.007</ModifiedTimestamp>
-      <ObjectId>2005582183</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.277</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.277</ModifiedTimestamp>
+      <ObjectId>1138103095</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>Ticker</RefColNames>
-      <RefTableId>1717581157</RefTableId>
+      <RefTableId>850102069</RefTableId>
       <RefTableName>TickerResults</RefTableName>
     </foreign-key>
-    <index id="5691" parent="5585" name="PK_DailyOpenClose">
+    <index id="5692" parent="5586" name="PK_DailyOpenClose">
       <Clustering>1</Clustering>
       <ColNames>Ticker
 From</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5692" parent="5585" name="PK_DailyOpenClose">
-      <CreatedTimestamp>2023-10-09.11:27:13.007</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.007</ModifiedTimestamp>
-      <ObjectId>1989582126</ObjectId>
+    <key id="5693" parent="5586" name="PK_DailyOpenClose">
+      <CreatedTimestamp>2023-12-15.18:48:21.277</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.277</ModifiedTimestamp>
+      <ObjectId>1122103038</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_DailyOpenClose</UnderlyingIndexName>
     </key>
-    <column id="5693" parent="5586" name="UserCode">
+    <column id="5694" parent="5587" name="UserCode">
       <DasType>nvarchar(200 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5694" parent="5586" name="DeviceCode">
+    <column id="5695" parent="5587" name="DeviceCode">
       <DasType>nvarchar(200 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="5695" parent="5586" name="SubjectId">
+    <column id="5696" parent="5587" name="SubjectId">
       <DasType>nvarchar(200 char)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="5696" parent="5586" name="SessionId">
+    <column id="5697" parent="5587" name="SessionId">
       <DasType>nvarchar(100 char)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="5697" parent="5586" name="ClientId">
+    <column id="5698" parent="5587" name="ClientId">
       <DasType>nvarchar(200 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="5698" parent="5586" name="Description">
+    <column id="5699" parent="5587" name="Description">
       <DasType>nvarchar(200 char)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="5699" parent="5586" name="CreationTime">
+    <column id="5700" parent="5587" name="CreationTime">
       <DasType>datetime2|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="5700" parent="5586" name="Expiration">
+    <column id="5701" parent="5587" name="Expiration">
       <DasType>datetime2|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <column id="5701" parent="5586" name="Data">
+    <column id="5702" parent="5587" name="Data">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>9</Position>
     </column>
-    <index id="5702" parent="5586" name="PK_DeviceCodes">
+    <index id="5703" parent="5587" name="PK_DeviceCodes">
       <Clustering>1</Clustering>
       <ColNames>UserCode</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5703" parent="5586" name="IX_DeviceCodes_DeviceCode">
+    <index id="5704" parent="5587" name="IX_DeviceCodes_DeviceCode">
       <ColNames>DeviceCode</ColNames>
       <Position>2</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5704" parent="5586" name="IX_DeviceCodes_Expiration">
+    <index id="5705" parent="5587" name="IX_DeviceCodes_Expiration">
       <ColNames>Expiration</ColNames>
       <Position>3</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5705" parent="5586" name="PK_DeviceCodes">
-      <CreatedTimestamp>2023-10-09.11:27:12.690</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.690</ModifiedTimestamp>
-      <ObjectId>1317579732</ObjectId>
+    <key id="5706" parent="5587" name="PK_DeviceCodes">
+      <CreatedTimestamp>2023-12-15.18:48:21.010</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.010</ModifiedTimestamp>
+      <ObjectId>450100644</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_DeviceCodes</UnderlyingIndexName>
     </key>
-    <column id="5706" parent="5587" name="Id">
+    <column id="5707" parent="5588" name="Id">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5707" parent="5587" name="Version">
+    <column id="5708" parent="5588" name="Version">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="5708" parent="5587" name="Created">
+    <column id="5709" parent="5588" name="Created">
       <DasType>datetime2|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="5709" parent="5587" name="Use">
+    <column id="5710" parent="5588" name="Use">
       <DasType>nvarchar(450 char)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="5710" parent="5587" name="Algorithm">
+    <column id="5711" parent="5588" name="Algorithm">
       <DasType>nvarchar(100 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="5711" parent="5587" name="IsX509Certificate">
+    <column id="5712" parent="5588" name="IsX509Certificate">
       <DasType>bit|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="5712" parent="5587" name="DataProtected">
+    <column id="5713" parent="5588" name="DataProtected">
       <DasType>bit|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="5713" parent="5587" name="Data">
+    <column id="5714" parent="5588" name="Data">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <index id="5714" parent="5587" name="PK_Keys">
+    <index id="5715" parent="5588" name="PK_Keys">
       <Clustering>1</Clustering>
       <ColNames>Id</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5715" parent="5587" name="IX_Keys_Use">
+    <index id="5716" parent="5588" name="IX_Keys_Use">
       <ColNames>Use</ColNames>
       <Position>2</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5716" parent="5587" name="PK_Keys">
-      <CreatedTimestamp>2023-10-09.11:27:12.690</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.690</ModifiedTimestamp>
-      <ObjectId>1349579846</ObjectId>
+    <key id="5717" parent="5588" name="PK_Keys">
+      <CreatedTimestamp>2023-12-15.18:48:21.017</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.017</ModifiedTimestamp>
+      <ObjectId>482100758</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_Keys</UnderlyingIndexName>
     </key>
-    <column id="5717" parent="5588" name="Data">
+    <column id="5718" parent="5589" name="Data">
       <DasType>varbinary(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="5718" parent="5588" name="Format">
+    <column id="5719" parent="5589" name="Format">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="5719" parent="5588" name="Ticker">
+    <column id="5720" parent="5589" name="Ticker">
       <DasType>nvarchar(4 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <DefaultConstraintId>1925581898</DefaultConstraintId>
-      <DefaultConstraintName>DF__Logo__Ticker__72C60C4A</DefaultConstraintName>
+      <DefaultConstraintId>1058102810</DefaultConstraintId>
+      <DefaultConstraintName>DF__Logo__Ticker__3F115E1A</DefaultConstraintName>
     </column>
-    <default id="5720" parent="5588" name="DF__Logo__Ticker__72C60C4A">
+    <default id="5721" parent="5589" name="DF__Logo__Ticker__3F115E1A">
       <ColNames>Ticker</ColNames>
       <DefaultExpression>N&apos;&apos;</DefaultExpression>
-      <ModifiedTimestamp>2023-10-09.11:27:12.987</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.253</ModifiedTimestamp>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>1925581898</ObjectId>
+      <ObjectId>1058102810</ObjectId>
     </default>
-    <foreign-key id="5721" parent="5588" name="FK_Logo_TickerResults_Ticker">
+    <foreign-key id="5722" parent="5589" name="FK_Logo_TickerResults_Ticker">
       <ColNames>Ticker</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:12.990</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.990</ModifiedTimestamp>
-      <ObjectId>1957582012</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.260</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.260</ModifiedTimestamp>
+      <ObjectId>1090102924</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>Ticker</RefColNames>
-      <RefTableId>1717581157</RefTableId>
+      <RefTableId>850102069</RefTableId>
       <RefTableName>TickerResults</RefTableName>
     </foreign-key>
-    <index id="5722" parent="5588" name="PK_Logo">
+    <index id="5723" parent="5589" name="PK_Logo">
       <Clustering>1</Clustering>
       <ColNames>Ticker</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5723" parent="5588" name="PK_Logo">
-      <CreatedTimestamp>2023-10-09.11:27:12.990</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.990</ModifiedTimestamp>
-      <ObjectId>1941581955</ObjectId>
+    <key id="5724" parent="5589" name="PK_Logo">
+      <CreatedTimestamp>2023-12-15.18:48:21.257</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.257</ModifiedTimestamp>
+      <ObjectId>1074102867</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_Logo</UnderlyingIndexName>
     </key>
-    <column id="5724" parent="5589" name="IdNews">
+    <column id="5725" parent="5590" name="IdNews">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5725" parent="5589" name="Data">
+    <column id="5726" parent="5590" name="Data">
       <DasType>varbinary(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="5726" parent="5589" name="Format">
+    <column id="5727" parent="5590" name="Format">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>3</Position>
     </column>
-    <foreign-key id="5727" parent="5589" name="FK_NewsImage_NewsResult_IdNews">
+    <foreign-key id="5728" parent="5590" name="FK_NewsImage_NewsResult_IdNews">
       <ColNames>IdNews</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:13.150</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.150</ModifiedTimestamp>
-      <ObjectId>130099504</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.430</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.430</ModifiedTimestamp>
+      <ObjectId>1410104064</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>IdNews</RefColNames>
-      <RefTableId>2133582639</RefTableId>
+      <RefTableId>1266103551</RefTableId>
       <RefTableName>NewsResult</RefTableName>
     </foreign-key>
-    <index id="5728" parent="5589" name="PK_NewsImage">
+    <index id="5729" parent="5590" name="PK_NewsImage">
       <Clustering>1</Clustering>
       <ColNames>IdNews</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5729" parent="5589" name="PK_NewsImage">
-      <CreatedTimestamp>2023-10-09.11:27:13.150</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.150</ModifiedTimestamp>
-      <ObjectId>114099447</ObjectId>
+    <key id="5730" parent="5590" name="PK_NewsImage">
+      <CreatedTimestamp>2023-12-15.18:48:21.427</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.427</ModifiedTimestamp>
+      <ObjectId>1394104007</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_NewsImage</UnderlyingIndexName>
     </key>
-    <column id="5730" parent="5590" name="IdNews">
+    <column id="5731" parent="5591" name="IdNews">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5731" parent="5590" name="PublisherName">
+    <column id="5732" parent="5591" name="PublisherName">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="5732" parent="5590" name="Title">
+    <column id="5733" parent="5591" name="Title">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="5733" parent="5590" name="Author">
+    <column id="5734" parent="5591" name="Author">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="5734" parent="5590" name="PublishedUtc">
+    <column id="5735" parent="5591" name="PublishedUtc">
       <DasType>datetime2|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="5735" parent="5590" name="ArticleUrl">
+    <column id="5736" parent="5591" name="ArticleUrl">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="5736" parent="5590" name="Description">
+    <column id="5737" parent="5591" name="Description">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>9</Position>
     </column>
-    <foreign-key id="5737" parent="5590" name="FK_NewsResult_Publisher_PublisherName">
+    <foreign-key id="5738" parent="5591" name="FK_NewsResult_Publisher_PublisherName">
       <ColNames>PublisherName</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:13.060</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.060</ModifiedTimestamp>
-      <ObjectId>18099105</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.333</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.333</ModifiedTimestamp>
+      <ObjectId>1298103665</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>Name</RefColNames>
-      <RefTableId>2101582525</RefTableId>
+      <RefTableId>1234103437</RefTableId>
       <RefTableName>Publisher</RefTableName>
     </foreign-key>
-    <index id="5738" parent="5590" name="PK_NewsResult">
+    <index id="5739" parent="5591" name="PK_NewsResult">
       <Clustering>1</Clustering>
       <ColNames>IdNews</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5739" parent="5590" name="IX_NewsResult_PublisherName">
+    <index id="5740" parent="5591" name="IX_NewsResult_PublisherName">
       <ColNames>PublisherName</ColNames>
       <Position>2</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5740" parent="5590" name="PK_NewsResult">
-      <CreatedTimestamp>2023-10-09.11:27:13.060</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.060</ModifiedTimestamp>
-      <ObjectId>2099048</ObjectId>
+    <key id="5741" parent="5591" name="PK_NewsResult">
+      <CreatedTimestamp>2023-12-15.18:48:21.333</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.333</ModifiedTimestamp>
+      <ObjectId>1282103608</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_NewsResult</UnderlyingIndexName>
     </key>
-    <column id="5741" parent="5591" name="NewsResultsIdNews">
+    <column id="5742" parent="5592" name="NewsResultsIdNews">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5742" parent="5591" name="TickerResultsTicker">
+    <column id="5743" parent="5592" name="TickerResultsTicker">
       <DasType>nvarchar(4 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="5743" parent="5591" name="FK_NewsResultTickerResults_NewsResult_NewsResultsIdNews">
+    <foreign-key id="5744" parent="5592" name="FK_NewsResultTickerResults_NewsResult_NewsResultsIdNews">
       <ColNames>NewsResultsIdNews</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:13.063</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.063</ModifiedTimestamp>
-      <ObjectId>66099276</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.333</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.333</ModifiedTimestamp>
+      <ObjectId>1346103836</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>IdNews</RefColNames>
-      <RefTableId>2133582639</RefTableId>
+      <RefTableId>1266103551</RefTableId>
       <RefTableName>NewsResult</RefTableName>
     </foreign-key>
-    <foreign-key id="5744" parent="5591" name="FK_NewsResultTickerResults_TickerResults_TickerResultsTicker">
+    <foreign-key id="5745" parent="5592" name="FK_NewsResultTickerResults_TickerResults_TickerResultsTicker">
       <ColNames>TickerResultsTicker</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:13.063</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.063</ModifiedTimestamp>
-      <ObjectId>82099333</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.333</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.333</ModifiedTimestamp>
+      <ObjectId>1362103893</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>Ticker</RefColNames>
-      <RefTableId>1717581157</RefTableId>
+      <RefTableId>850102069</RefTableId>
       <RefTableName>TickerResults</RefTableName>
     </foreign-key>
-    <index id="5745" parent="5591" name="PK_NewsResultTickerResults">
+    <index id="5746" parent="5592" name="PK_NewsResultTickerResults">
       <Clustering>1</Clustering>
       <ColNames>NewsResultsIdNews
 TickerResultsTicker</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5746" parent="5591" name="IX_NewsResultTickerResults_TickerResultsTicker">
+    <index id="5747" parent="5592" name="IX_NewsResultTickerResults_TickerResultsTicker">
       <ColNames>TickerResultsTicker</ColNames>
       <Position>2</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5747" parent="5591" name="PK_NewsResultTickerResults">
-      <CreatedTimestamp>2023-10-09.11:27:13.063</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.063</ModifiedTimestamp>
-      <ObjectId>50099219</ObjectId>
+    <key id="5748" parent="5592" name="PK_NewsResultTickerResults">
+      <CreatedTimestamp>2023-12-15.18:48:21.333</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.333</ModifiedTimestamp>
+      <ObjectId>1330103779</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_NewsResultTickerResults</UnderlyingIndexName>
     </key>
-    <column id="5748" parent="5592" name="Key">
+    <column id="5749" parent="5593" name="Key">
       <DasType>nvarchar(200 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5749" parent="5592" name="Type">
+    <column id="5750" parent="5593" name="Type">
       <DasType>nvarchar(50 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="5750" parent="5592" name="SubjectId">
+    <column id="5751" parent="5593" name="SubjectId">
       <DasType>nvarchar(200 char)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="5751" parent="5592" name="SessionId">
+    <column id="5752" parent="5593" name="SessionId">
       <DasType>nvarchar(100 char)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="5752" parent="5592" name="ClientId">
+    <column id="5753" parent="5593" name="ClientId">
       <DasType>nvarchar(200 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="5753" parent="5592" name="Description">
+    <column id="5754" parent="5593" name="Description">
       <DasType>nvarchar(200 char)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="5754" parent="5592" name="CreationTime">
+    <column id="5755" parent="5593" name="CreationTime">
       <DasType>datetime2|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="5755" parent="5592" name="Expiration">
+    <column id="5756" parent="5593" name="Expiration">
       <DasType>datetime2|0s</DasType>
       <Position>8</Position>
     </column>
-    <column id="5756" parent="5592" name="ConsumedTime">
+    <column id="5757" parent="5593" name="ConsumedTime">
       <DasType>datetime2|0s</DasType>
       <Position>9</Position>
     </column>
-    <column id="5757" parent="5592" name="Data">
+    <column id="5758" parent="5593" name="Data">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>10</Position>
     </column>
-    <index id="5758" parent="5592" name="PK_PersistedGrants">
+    <index id="5759" parent="5593" name="PK_PersistedGrants">
       <Clustering>1</Clustering>
       <ColNames>Key</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5759" parent="5592" name="IX_PersistedGrants_ConsumedTime">
+    <index id="5760" parent="5593" name="IX_PersistedGrants_ConsumedTime">
       <ColNames>ConsumedTime</ColNames>
       <Position>2</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5760" parent="5592" name="IX_PersistedGrants_Expiration">
+    <index id="5761" parent="5593" name="IX_PersistedGrants_Expiration">
       <ColNames>Expiration</ColNames>
       <Position>3</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5761" parent="5592" name="IX_PersistedGrants_SubjectId_ClientId_Type">
+    <index id="5762" parent="5593" name="IX_PersistedGrants_SubjectId_ClientId_Type">
       <ColNames>SubjectId
 ClientId
 Type</ColNames>
       <Position>4</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5762" parent="5592" name="IX_PersistedGrants_SubjectId_SessionId_Type">
+    <index id="5763" parent="5593" name="IX_PersistedGrants_SubjectId_SessionId_Type">
       <ColNames>SubjectId
 SessionId
 Type</ColNames>
       <Position>5</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5763" parent="5592" name="PK_PersistedGrants">
-      <CreatedTimestamp>2023-10-09.11:27:12.690</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.690</ModifiedTimestamp>
-      <ObjectId>1381579960</ObjectId>
+    <key id="5764" parent="5593" name="PK_PersistedGrants">
+      <CreatedTimestamp>2023-12-15.18:48:21.020</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.020</ModifiedTimestamp>
+      <ObjectId>514100872</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_PersistedGrants</UnderlyingIndexName>
     </key>
-    <column id="5764" parent="5593" name="Name">
+    <column id="5765" parent="5594" name="Name">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5765" parent="5593" name="HomepageUrl">
+    <column id="5766" parent="5594" name="HomepageUrl">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="5766" parent="5593" name="LogoUrl">
+    <column id="5767" parent="5594" name="LogoUrl">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="5767" parent="5593" name="FaviconUrl">
+    <column id="5768" parent="5594" name="FaviconUrl">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>4</Position>
     </column>
-    <index id="5768" parent="5593" name="PK_Publisher">
+    <index id="5769" parent="5594" name="PK_Publisher">
       <Clustering>1</Clustering>
       <ColNames>Name</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5769" parent="5593" name="PK_Publisher">
-      <CreatedTimestamp>2023-10-09.11:27:13.060</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.060</ModifiedTimestamp>
-      <ObjectId>2117582582</ObjectId>
+    <key id="5770" parent="5594" name="PK_Publisher">
+      <CreatedTimestamp>2023-12-15.18:48:21.330</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.330</ModifiedTimestamp>
+      <ObjectId>1250103494</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_Publisher</UnderlyingIndexName>
     </key>
-    <column id="5770" parent="5594" name="Ticker">
+    <column id="5771" parent="5595" name="Ticker">
       <DasType>nvarchar(4 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5771" parent="5594" name="Timespan">
+    <column id="5772" parent="5595" name="Timespan">
       <DasType>nvarchar(15 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="5772" parent="5594" name="Multiplier">
+    <column id="5773" parent="5595" name="Multiplier">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="5773" parent="5594" name="Date">
+    <column id="5774" parent="5595" name="Date">
       <DasType>datetime2|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="5774" parent="5594" name="Open">
+    <column id="5775" parent="5595" name="Open">
       <DasType>float|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="5775" parent="5594" name="Low">
+    <column id="5776" parent="5595" name="Low">
       <DasType>float|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="5776" parent="5594" name="Close">
+    <column id="5777" parent="5595" name="Close">
       <DasType>float|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="5777" parent="5594" name="High">
+    <column id="5778" parent="5595" name="High">
       <DasType>float|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <column id="5778" parent="5594" name="Volume">
+    <column id="5779" parent="5595" name="Volume">
       <DasType>decimal(20)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>9</Position>
     </column>
-    <column id="5779" parent="5594" name="QueryDate">
+    <column id="5780" parent="5595" name="QueryDate">
       <DasType>datetime2|0s</DasType>
       <NotNull>1</NotNull>
       <Position>10</Position>
-      <DefaultConstraintId>2069582411</DefaultConstraintId>
-      <DefaultConstraintName>DF__StockChar__Query__7B5B524B</DefaultConstraintName>
+      <DefaultConstraintId>1202103323</DefaultConstraintId>
+      <DefaultConstraintName>DF__StockChar__Query__47A6A41B</DefaultConstraintName>
     </column>
-    <default id="5780" parent="5594" name="DF__StockChar__Query__7B5B524B">
+    <default id="5781" parent="5595" name="DF__StockChar__Query__47A6A41B">
       <ColNames>QueryDate</ColNames>
       <DefaultExpression>&apos;0001-01-01T00:00:00.0000000&apos;</DefaultExpression>
-      <ModifiedTimestamp>2023-10-09.11:27:13.040</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.310</ModifiedTimestamp>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>2069582411</ObjectId>
+      <ObjectId>1202103323</ObjectId>
     </default>
-    <foreign-key id="5781" parent="5594" name="FK_StockChartData_TickerResults_Ticker">
+    <foreign-key id="5782" parent="5595" name="FK_StockChartData_TickerResults_Ticker">
       <ColNames>Ticker</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:13.023</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.023</ModifiedTimestamp>
-      <ObjectId>2053582354</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.293</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.293</ModifiedTimestamp>
+      <ObjectId>1186103266</ObjectId>
       <OnDelete>cascade</OnDelete>
       <RefColNames>Ticker</RefColNames>
-      <RefTableId>1717581157</RefTableId>
+      <RefTableId>850102069</RefTableId>
       <RefTableName>TickerResults</RefTableName>
     </foreign-key>
-    <index id="5782" parent="5594" name="PK_StockChartData">
+    <index id="5783" parent="5595" name="PK_StockChartData">
       <Clustering>1</Clustering>
       <ColNames>Ticker
 Timespan
@@ -17984,281 +18073,455 @@ QueryDate
 Date</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5783" parent="5594" name="PK_StockChartData">
-      <CreatedTimestamp>2023-10-09.11:27:13.040</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:13.040</ModifiedTimestamp>
-      <ObjectId>2085582468</ObjectId>
+    <key id="5784" parent="5595" name="PK_StockChartData">
+      <CreatedTimestamp>2023-12-15.18:48:21.313</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.313</ModifiedTimestamp>
+      <ObjectId>1218103380</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_StockChartData</UnderlyingIndexName>
     </key>
-    <column id="5784" parent="5595" name="Ticker">
+    <column id="5785" parent="5596" name="Ticker">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5785" parent="5595" name="Name">
+    <column id="5786" parent="5596" name="Name">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <DefaultConstraintId>146099561</DefaultConstraintId>
-      <DefaultConstraintName>DF__TickerList__Name__08B54D69</DefaultConstraintName>
+      <DefaultConstraintId>1426104121</DefaultConstraintId>
+      <DefaultConstraintName>DF__TickerList__Name__55009F39</DefaultConstraintName>
     </column>
-    <column id="5786" parent="5595" name="Market">
+    <column id="5787" parent="5596" name="Market">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <DefaultConstraintId>162099618</DefaultConstraintId>
-      <DefaultConstraintName>DF__TickerLis__Marke__09A971A2</DefaultConstraintName>
+      <DefaultConstraintId>1442104178</DefaultConstraintId>
+      <DefaultConstraintName>DF__TickerLis__Marke__55F4C372</DefaultConstraintName>
     </column>
-    <column id="5787" parent="5595" name="Locale">
+    <column id="5788" parent="5596" name="Locale">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <DefaultConstraintId>178099675</DefaultConstraintId>
-      <DefaultConstraintName>DF__TickerLis__Local__0A9D95DB</DefaultConstraintName>
+      <DefaultConstraintId>1458104235</DefaultConstraintId>
+      <DefaultConstraintName>DF__TickerLis__Local__56E8E7AB</DefaultConstraintName>
     </column>
-    <column id="5788" parent="5595" name="PrimaryExchange">
+    <column id="5789" parent="5596" name="PrimaryExchange">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="5789" parent="5595" name="Type">
+    <column id="5790" parent="5596" name="Type">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="5790" parent="5595" name="Active">
+    <column id="5791" parent="5596" name="Active">
       <DasType>bit|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="5791" parent="5595" name="CurrencyName">
+    <column id="5792" parent="5596" name="CurrencyName">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
-      <DefaultConstraintId>194099732</DefaultConstraintId>
-      <DefaultConstraintName>DF__TickerLis__Curre__0B91BA14</DefaultConstraintName>
+      <DefaultConstraintId>1474104292</DefaultConstraintId>
+      <DefaultConstraintName>DF__TickerLis__Curre__57DD0BE4</DefaultConstraintName>
     </column>
-    <column id="5792" parent="5595" name="Cik">
+    <column id="5793" parent="5596" name="Cik">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>9</Position>
     </column>
-    <column id="5793" parent="5595" name="CompositeFigi">
+    <column id="5794" parent="5596" name="CompositeFigi">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>10</Position>
     </column>
-    <column id="5794" parent="5595" name="ShareClassFigi">
+    <column id="5795" parent="5596" name="ShareClassFigi">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>11</Position>
     </column>
-    <column id="5795" parent="5595" name="LastUpdatedUtc">
+    <column id="5796" parent="5596" name="LastUpdatedUtc">
       <DasType>datetime2|0s</DasType>
       <Position>12</Position>
     </column>
-    <default id="5796" parent="5595" name="DF__TickerList__Name__08B54D69">
+    <default id="5797" parent="5596" name="DF__TickerList__Name__55009F39">
       <ColNames>Name</ColNames>
       <DefaultExpression>N&apos;&apos;</DefaultExpression>
-      <ModifiedTimestamp>2023-10-09.11:27:13.223</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.510</ModifiedTimestamp>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>146099561</ObjectId>
+      <ObjectId>1426104121</ObjectId>
     </default>
-    <default id="5797" parent="5595" name="DF__TickerLis__Marke__09A971A2">
+    <default id="5798" parent="5596" name="DF__TickerLis__Marke__55F4C372">
       <ColNames>Market</ColNames>
       <DefaultExpression>N&apos;&apos;</DefaultExpression>
-      <ModifiedTimestamp>2023-10-09.11:27:13.237</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.527</ModifiedTimestamp>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>162099618</ObjectId>
+      <ObjectId>1442104178</ObjectId>
     </default>
-    <default id="5798" parent="5595" name="DF__TickerLis__Local__0A9D95DB">
+    <default id="5799" parent="5596" name="DF__TickerLis__Local__56E8E7AB">
       <ColNames>Locale</ColNames>
       <DefaultExpression>N&apos;&apos;</DefaultExpression>
-      <ModifiedTimestamp>2023-10-09.11:27:13.250</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.540</ModifiedTimestamp>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>178099675</ObjectId>
+      <ObjectId>1458104235</ObjectId>
     </default>
-    <default id="5799" parent="5595" name="DF__TickerLis__Curre__0B91BA14">
+    <default id="5800" parent="5596" name="DF__TickerLis__Curre__57DD0BE4">
       <ColNames>CurrencyName</ColNames>
       <DefaultExpression>N&apos;&apos;</DefaultExpression>
-      <ModifiedTimestamp>2023-10-09.11:27:13.267</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.560</ModifiedTimestamp>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>194099732</ObjectId>
+      <ObjectId>1474104292</ObjectId>
     </default>
-    <index id="5800" parent="5595" name="PK_TickerListItem">
+    <index id="5801" parent="5596" name="PK_TickerListItem">
       <Clustering>1</Clustering>
       <ColNames>Ticker</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5801" parent="5595" name="PK_TickerListItem">
-      <CreatedTimestamp>2023-10-09.11:27:12.903</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.903</ModifiedTimestamp>
-      <ObjectId>1861581670</ObjectId>
+    <key id="5802" parent="5596" name="PK_TickerListItem">
+      <CreatedTimestamp>2023-12-15.18:48:21.167</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.167</ModifiedTimestamp>
+      <ObjectId>994102582</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_TickerListItem</UnderlyingIndexName>
     </key>
-    <column id="5802" parent="5596" name="Ticker">
+    <column id="5803" parent="5597" name="Ticker">
       <DasType>nvarchar(4 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5803" parent="5596" name="Name">
+    <column id="5804" parent="5597" name="Name">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="5804" parent="5596" name="Market">
+    <column id="5805" parent="5597" name="Market">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="5805" parent="5596" name="Locale">
+    <column id="5806" parent="5597" name="Locale">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="5806" parent="5596" name="PrimaryExchange">
+    <column id="5807" parent="5597" name="PrimaryExchange">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="5807" parent="5596" name="Type">
+    <column id="5808" parent="5597" name="Type">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="5808" parent="5596" name="Active">
+    <column id="5809" parent="5597" name="Active">
       <DasType>bit|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <column id="5809" parent="5596" name="CurrencyName">
+    <column id="5810" parent="5597" name="CurrencyName">
       <DasType>nvarchar(max)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <column id="5810" parent="5596" name="Cik">
+    <column id="5811" parent="5597" name="Cik">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>9</Position>
     </column>
-    <column id="5811" parent="5596" name="CompositeFigi">
+    <column id="5812" parent="5597" name="CompositeFigi">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>10</Position>
     </column>
-    <column id="5812" parent="5596" name="ShareClassFigi">
+    <column id="5813" parent="5597" name="ShareClassFigi">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>11</Position>
     </column>
-    <column id="5813" parent="5596" name="MarketCap">
+    <column id="5814" parent="5597" name="MarketCap">
       <DasType>float|0s</DasType>
       <Position>12</Position>
     </column>
-    <column id="5814" parent="5596" name="PhoneNumber">
+    <column id="5815" parent="5597" name="PhoneNumber">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>13</Position>
     </column>
-    <column id="5815" parent="5596" name="Address1">
+    <column id="5816" parent="5597" name="Address1">
       <DasType>nvarchar(450 char)|0s</DasType>
       <Position>14</Position>
     </column>
-    <column id="5816" parent="5596" name="Description">
+    <column id="5817" parent="5597" name="Description">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>15</Position>
     </column>
-    <column id="5817" parent="5596" name="SicCode">
+    <column id="5818" parent="5597" name="SicCode">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>16</Position>
     </column>
-    <column id="5818" parent="5596" name="SicDescription">
+    <column id="5819" parent="5597" name="SicDescription">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>17</Position>
     </column>
-    <column id="5819" parent="5596" name="TickerRoot">
+    <column id="5820" parent="5597" name="TickerRoot">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>18</Position>
     </column>
-    <column id="5820" parent="5596" name="HomepageUrl">
+    <column id="5821" parent="5597" name="HomepageUrl">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>19</Position>
     </column>
-    <column id="5821" parent="5596" name="TotalEmployees">
+    <column id="5822" parent="5597" name="TotalEmployees">
       <DasType>int|0s</DasType>
       <Position>20</Position>
     </column>
-    <column id="5822" parent="5596" name="ListDate">
+    <column id="5823" parent="5597" name="ListDate">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>21</Position>
     </column>
-    <column id="5823" parent="5596" name="BrandingLogoUrl">
+    <column id="5824" parent="5597" name="BrandingLogoUrl">
       <DasType>nvarchar(450 char)|0s</DasType>
       <Position>22</Position>
     </column>
-    <column id="5824" parent="5596" name="ShareClassSharesOutstanding">
+    <column id="5825" parent="5597" name="ShareClassSharesOutstanding">
       <DasType>bigint|0s</DasType>
       <Position>23</Position>
     </column>
-    <column id="5825" parent="5596" name="WeightedSharesOutstanding">
+    <column id="5826" parent="5597" name="WeightedSharesOutstanding">
       <DasType>bigint|0s</DasType>
       <Position>24</Position>
     </column>
-    <foreign-key id="5826" parent="5596" name="FK_TickerResults_Address_Address1">
+    <foreign-key id="5827" parent="5597" name="FK_TickerResults_Address_Address1">
       <ColNames>Address1</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:12.760</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.760</ModifiedTimestamp>
-      <ObjectId>1749581271</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.073</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.073</ModifiedTimestamp>
+      <ObjectId>882102183</ObjectId>
       <RefColNames>Address1</RefColNames>
-      <RefTableId>1653580929</RefTableId>
+      <RefTableId>786101841</RefTableId>
       <RefTableName>Address</RefTableName>
     </foreign-key>
-    <foreign-key id="5827" parent="5596" name="FK_TickerResults_Branding_BrandingLogoUrl">
+    <foreign-key id="5828" parent="5597" name="FK_TickerResults_Branding_BrandingLogoUrl">
       <ColNames>BrandingLogoUrl</ColNames>
-      <CreatedTimestamp>2023-10-09.11:27:12.760</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.760</ModifiedTimestamp>
-      <ObjectId>1765581328</ObjectId>
+      <CreatedTimestamp>2023-12-15.18:48:21.073</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.073</ModifiedTimestamp>
+      <ObjectId>898102240</ObjectId>
       <RefColNames>LogoUrl</RefColNames>
-      <RefTableId>1685581043</RefTableId>
+      <RefTableId>818101955</RefTableId>
       <RefTableName>Branding</RefTableName>
     </foreign-key>
-    <index id="5828" parent="5596" name="PK_TickerResults">
+    <index id="5829" parent="5597" name="PK_TickerResults">
       <Clustering>1</Clustering>
       <ColNames>Ticker</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5829" parent="5596" name="IX_TickerResults_Address1">
+    <index id="5830" parent="5597" name="IX_TickerResults_Address1">
       <ColNames>Address1</ColNames>
       <Position>2</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <index id="5830" parent="5596" name="IX_TickerResults_BrandingLogoUrl">
+    <index id="5831" parent="5597" name="IX_TickerResults_BrandingLogoUrl">
       <ColNames>BrandingLogoUrl</ColNames>
       <Position>3</Position>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5831" parent="5596" name="PK_TickerResults">
-      <CreatedTimestamp>2023-10-09.11:27:12.760</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.760</ModifiedTimestamp>
-      <ObjectId>1733581214</ObjectId>
+    <key id="5832" parent="5597" name="PK_TickerResults">
+      <CreatedTimestamp>2023-12-15.18:48:21.073</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:21.073</ModifiedTimestamp>
+      <ObjectId>866102126</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_TickerResults</UnderlyingIndexName>
     </key>
-    <column id="5832" parent="5597" name="MigrationId">
+    <column id="5833" parent="5598" name="MigrationId">
       <DasType>nvarchar(150 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5833" parent="5597" name="ProductVersion">
+    <column id="5834" parent="5598" name="ProductVersion">
       <DasType>nvarchar(32 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <index id="5834" parent="5597" name="PK___EFMigrationsHistory">
+    <index id="5835" parent="5598" name="PK___EFMigrationsHistory">
       <Clustering>1</Clustering>
       <ColNames>MigrationId</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
+      <PartitionDataSpaceId>1</PartitionDataSpaceId>
     </index>
-    <key id="5835" parent="5597" name="PK___EFMigrationsHistory">
-      <CreatedTimestamp>2023-10-09.11:27:12.610</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-09.11:27:12.610</ModifiedTimestamp>
-      <ObjectId>1221579390</ObjectId>
+    <key id="5836" parent="5598" name="PK___EFMigrationsHistory">
+      <CreatedTimestamp>2023-12-15.18:48:20.930</CreatedTimestamp>
+      <ModifiedTimestamp>2023-12-15.18:48:20.930</ModifiedTimestamp>
+      <ObjectId>354100302</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK___EFMigrationsHistory</UnderlyingIndexName>
     </key>
+    <partition id="5837" parent="5603">
+      <ObjectId>72057594050445312</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5838" parent="5609">
+      <ObjectId>72057594050641920</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5839" parent="5610">
+      <ObjectId>72057594050707456</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5840" parent="5617">
+      <ObjectId>72057594049200128</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5841" parent="5618">
+      <ObjectId>72057594049527808</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5842" parent="5624">
+      <ObjectId>72057594048872448</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5843" parent="5625">
+      <ObjectId>72057594049593344</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5844" parent="5632">
+      <ObjectId>72057594049265664</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5845" parent="5633">
+      <ObjectId>72057594049658880</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5846" parent="5640">
+      <ObjectId>72057594049331200</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5847" parent="5641">
+      <ObjectId>72057594049724416</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5848" parent="5647">
+      <ObjectId>72057594049396736</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5849" parent="5648">
+      <ObjectId>72057594049789952</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5850" parent="5655">
+      <ObjectId>72057594049462272</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5851" parent="5672">
+      <ObjectId>72057594048937984</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5852" parent="5673">
+      <ObjectId>72057594049855488</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5853" parent="5674">
+      <ObjectId>72057594049921024</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5854" parent="5678">
+      <ObjectId>72057594050510848</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5855" parent="5692">
+      <ObjectId>72057594051231744</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5856" parent="5703">
+      <ObjectId>72057594049003520</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5857" parent="5704">
+      <ObjectId>72057594049986560</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5858" parent="5705">
+      <ObjectId>72057594050052096</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5859" parent="5715">
+      <ObjectId>72057594049069056</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5860" parent="5716">
+      <ObjectId>72057594050117632</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5861" parent="5723">
+      <ObjectId>72057594051166208</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5862" parent="5729">
+      <ObjectId>72057594051821568</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5863" parent="5739">
+      <ObjectId>72057594051559424</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5864" parent="5740">
+      <ObjectId>72057594051690496</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5865" parent="5746">
+      <ObjectId>72057594051624960</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5866" parent="5747">
+      <ObjectId>72057594051756032</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5867" parent="5759">
+      <ObjectId>72057594049134592</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5868" parent="5760">
+      <ObjectId>72057594050183168</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5869" parent="5761">
+      <ObjectId>72057594050248704</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5870" parent="5762">
+      <ObjectId>72057594050314240</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5871" parent="5763">
+      <ObjectId>72057594050379776</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5872" parent="5769">
+      <ObjectId>72057594051493888</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5873" parent="5783">
+      <ObjectId>72057594051428352</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5874" parent="5801">
+      <ObjectId>72057594050904064</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5875" parent="5829">
+      <ObjectId>72057594050576384</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5876" parent="5830">
+      <ObjectId>72057594050772992</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5877" parent="5831">
+      <ObjectId>72057594050838528</ObjectId>
+      <Position>1</Position>
+    </partition>
+    <partition id="5878" parent="5835">
+      <ObjectId>72057594048806912</ObjectId>
+      <Position>1</Position>
+    </partition>
   </database-model>
 </dataSource>

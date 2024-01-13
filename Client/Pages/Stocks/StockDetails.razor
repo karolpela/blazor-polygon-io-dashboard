@@ -29,37 +29,30 @@
                         </MudPaper>
                         @if (tickerResultsLogoDto.TickerResultsDto != null)
                         {
-                            <MudContainer Class="d-flex">
+                            <MudContainer Class="d-flex pa-0 pa-md-auto">
 
                                 <StockOpenClose OnDateSelected="LoadChartDataAsync"/>
 
                             </MudContainer>
                         }
                     </MudPaper>
-                    @if (StockChartDetails != null && StockChartDetails.Count != 0)
-                    {
-                        <MudPaper Elevation="2">
-                            <SfStockChart @ref="sfStockChart"
-                                          EnableSelector="false" EnablePeriodSelector="false"
-                                          Theme="@(IsDarkMode ? Theme.FluentDark : Theme.Fluent)">
-                                <StockChartChartBorder Color="transparent"></StockChartChartBorder>
-                                <StockChartPrimaryXAxis>
-                                    <StockChartAxisMajorGridLines Width="0"></StockChartAxisMajorGridLines>
-                                    <StockChartAxisMinorGridLines Width="0"></StockChartAxisMinorGridLines>
-                                </StockChartPrimaryXAxis>
-                                <StockChartSeriesCollection>
-                                    <StockChartSeries DataSource="@StockChartDetails" Type="ChartSeriesType.HiloOpenClose"
-                                                      Name="Series"
-                                                      XName="Date" YName="Close" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume">
-                                    </StockChartSeries>
-                                </StockChartSeriesCollection>
-                            </SfStockChart>
-                        </MudPaper>
-                    }
-                    else
-                    {
-                        <MudText Typo="Typo.body1">Loading chart...</MudText>
-                    }
+                    <MudPaper Elevation="2">
+                        <SfStockChart @ref="sfStockChart"
+                                      EnableSelector="false" EnablePeriodSelector="false"
+                                      Theme="@(IsDarkMode ? Theme.FluentDark : Theme.Fluent)">
+                            <StockChartChartBorder Color="transparent"></StockChartChartBorder>
+                            <StockChartPrimaryXAxis>
+                                <StockChartAxisMajorGridLines Width="0"></StockChartAxisMajorGridLines>
+                                <StockChartAxisMinorGridLines Width="0"></StockChartAxisMinorGridLines>
+                            </StockChartPrimaryXAxis>
+                            <StockChartSeriesCollection>
+                                <StockChartSeries DataSource="@StockChartDetails" Type="ChartSeriesType.HiloOpenClose"
+                                                  Name="Series"
+                                                  XName="Date" YName="Close" High="High" Low="Low" Open="Open" Close="Close" Volume="Volume">
+                                </StockChartSeries>
+                            </StockChartSeriesCollection>
+                        </SfStockChart>
+                    </MudPaper>
                 </MudStack>
                 <MudPaper class="news-list overflow-scroll" Elevation="2">
                     <ErrorBoundary>
@@ -165,7 +158,8 @@
         }
         catch (HttpRequestException)
         {
-            StockChartDetails = null;
+            StockChartDetails?.Clear();
+            Snackbar.Add("Unable to get chart data. Try again later if requests exceeded.", Severity.Warning);
         }
 
         sfStockChart?.Refresh();
@@ -177,13 +171,13 @@
         {
             tickerResultsLogoDto = null;
         }
-        
+
         // Don't perform the initial loading if the ticker parameter hasn't changed
         if (SelectedTicker == previousTicker) return;
 
         // Delete previous ticker's details to clear the page in case loading fails
-        StockChartDetails = null;
-        
+        StockChartDetails?.Clear();
+
         // Fetch ticker details
         try
         {
@@ -218,4 +212,5 @@
             Snackbar.Add("Unable to refresh watchlist status", Severity.Error);
         }
     }
+
 }

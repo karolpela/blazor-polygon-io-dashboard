@@ -39,7 +39,9 @@
         }
     </Authorized>
     <NotAuthorized>
-        <LoginDisplay/>
+        <div class="h-50 d-flex align-center justify-center">
+            <LoginDisplay/>
+        </div>
     </NotAuthorized>
 </AuthorizeView>
 
@@ -86,6 +88,7 @@
             {
                 return tickers;
             }
+
             return tickers.Where(t => t.Ticker.Contains(value, StringComparison.InvariantCultureIgnoreCase) ||
                                       t.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase));
         });

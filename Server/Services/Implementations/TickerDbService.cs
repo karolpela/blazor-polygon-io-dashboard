@@ -167,11 +167,14 @@ public class TickerDbService : ITickerDbService
     public async Task<IEnumerable<StockChartDataDto>> GetStockChartDataAsync(string ticker, string timespan,
         int multiplier, DateTime queryDate, DateTime from, DateTime to)
     {
+        // Get the data from database
         var chartDataFromDb = await _context.StockChartData
             .Where(cd => cd.Ticker == ticker && cd.Timespan == timespan
-                                             && cd.Multiplier == multiplier && cd.QueryDate == queryDate
+                                             && cd.Multiplier == multiplier
+                                             && cd.QueryDate == queryDate
                                              && cd.Date >= from && cd.Date <= to)
             .ToListAsync();
+        // Map and return the result
         return _mapper.Map<IEnumerable<StockChartDataDto>>(chartDataFromDb);
     }
 
@@ -261,7 +264,7 @@ public class TickerDbService : ITickerDbService
             .Include(nr => nr.NewsImage)
             .Include(nr => nr.Publisher)
             .OrderByDescending(nr => nr.PublishedUtc)
-            .Take(5)
+            .Take(count)
             .Select(nr => new NewsResultImageDto(
                 _mapper.Map<NewsResultDto>(nr),
                 nr.NewsImage == null ? null : new NewsImageDto(nr.NewsImage.Data, nr.NewsImage.Format)))

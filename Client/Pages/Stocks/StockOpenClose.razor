@@ -16,7 +16,6 @@
             @foreach (var property in dailyOpenClose.GetType().GetProperties())
             {
                 @if (property.Name == "Status") continue;
-
                 <MudItem xs="6" sm="4">
                     <MudPaper Elevation="1" Class="d-flex justify-space-between px-2 py-1">
                         <MudText Style="opacity: 0.8">@property.Name</MudText>
@@ -47,8 +46,7 @@
 
     MudButton? highlightedButton;
 
-    [Parameter]
-    public EventCallback<(DateTime,string,int)> OnDateSelected { get; set; }
+    [Parameter] public EventCallback<(DateTime, string, int)> OnDateSelected { get; set; }
 
     private DateTime previousDateTime;
 
@@ -72,8 +70,9 @@
                 DayOfWeek.Saturday => date.AddDays(-1),
                 DayOfWeek.Sunday => date.AddDays(-2),
                 _ => date
-                };
+            };
         }
+
         return date;
     }
 
@@ -83,6 +82,7 @@
         {
             return;
         }
+
         try
         {
             dailyOpenClose = await Http.GetFromJsonAsync<DailyOpenCloseDto>($"api/tickers/{SelectedTicker}/open-close/{date:yyyy-MM-dd}");
@@ -91,7 +91,7 @@
         catch (HttpRequestException)
         {
             dailyOpenClose = null;
-            Snackbar.Add("Failed to get details. Try again later if requests exceeded.", Severity.Warning);
+            Snackbar.Add("Unable to get stock details. Try again later if requests exceeded.", Severity.Warning);
         }
     }
 
@@ -99,11 +99,11 @@
     {
         return button == highlightedButton ? Color.Secondary : Color.Default;
     }
-    
+
     // Here the logic is split into two lifecycle methods because of
     // OnDateSelected which is a complex parameter and so it triggers OnParametersSetAsync on each update.
     // To prevent unnecessary calls a manual check is made to see if the ticker has changed.
-    
+
     protected override async Task OnInitializedAsync()
     {
         var yesterday = DateTime.Now.AddDays(-1);

@@ -5,8 +5,18 @@
 
 <AuthorizeView>
     <NotAuthorized>
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="authentication/login">Log in</MudButton>
-        <MudButton Variant="Variant.Filled" Color="Color.Secondary" Link="authentication/register">Register</MudButton>
+        <MudPaper Class="pa-8">
+            <MudStack Spacing="4" AlignItems="AlignItems.Center">
+                <MudText Align="Align.Center" Typo="Typo.body1">
+                    Viewing financial data requires signing into a user account. <br/>
+                    Use the buttons below to authenticate.
+                </MudText>
+                <MudStack Row="true" Spacing="2">
+                    <MudButton Size="Size.Large" Variant="Variant.Filled" Color="Color.Primary" Link="authentication/login">Log in</MudButton>
+                    <MudButton Size="Size.Large" Variant="Variant.Filled" Color="Color.Secondary" Link="authentication/register">Register</MudButton>
+                </MudStack>
+            </MudStack>
+        </MudPaper>
     </NotAuthorized>
 </AuthorizeView>
 

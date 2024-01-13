@@ -6,7 +6,7 @@
 <MudLayout>
     <MudToggleIconButton @bind-Toggled="@_isDarkMode"
                          Class="float-end mt-sm-4 mr-sm-4"
-                         Color="Color.Dark" ToggledColor="Color.Surface"
+                         Color="Color.Inherit"
                          Icon="@Icons.Material.Filled.DarkMode"
                          ToggledIcon="@Icons.Material.Filled.LightMode"/>
     <MudMainContent>
@@ -19,7 +19,6 @@
 </MudLayout>
 
 @code {
-
     private bool _isDarkMode;
     private MudThemeProvider _mudThemeProvider = null!;
 
@@ -31,5 +30,4 @@
             StateHasChanged();
         }
     }
-
 }

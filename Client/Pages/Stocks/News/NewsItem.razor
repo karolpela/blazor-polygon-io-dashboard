@@ -1,4 +1,5 @@
 ﻿@using FinanceApp.Shared.Models.News
+@inherits FinanceApp.Client.Pages.Utilities.ImageDecoder
 @if (ItemDto != null)
 {
     <MudCard>
@@ -38,12 +39,7 @@ else
     [Parameter]
     public NewsResultImageDto? ItemDto { get; set; }
 
-    private string ConvertToBase64(NewsImageDto imageDto)
-    {
-        if (imageDto.Format == null) imageDto.Format = "*";
-        else if (imageDto.Format == "svg") imageDto.Format = "svg+xml";
-        return $"data:image/{imageDto.Format};base64,{Convert.ToBase64String(imageDto.Data)}";
-    }
+   
 
     private static string TruncateString(string s, int length)
     {

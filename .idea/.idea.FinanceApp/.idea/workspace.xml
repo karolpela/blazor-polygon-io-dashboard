@@ -14,21 +14,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd917f78-56bc-431f-988b-d60323dd2b20" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Server/Areas/Identity/Pages/Shared/_LoginPartial.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/dataSources/a7004567-5664-458c-b8f6-d75df8793d34.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/dataSources/a7004567-5664-458c-b8f6-d75df8793d34.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/efCoreDialogsState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/efCoreDialogsState.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FinanceApp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/FinanceApp.Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Client/FinanceApp.Client.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/Dashboard.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/Dashboard.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/News/NewsItem.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/News/NewsItem.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/News/NewsList.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/News/NewsList.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/StockDetails.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/StockDetails.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/Watchlist.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/Watchlist.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/Pages/Stocks/StockOpenClose.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Stocks/StockOpenClose.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/Pages/Utilities/ImageDecoder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Pages/Utilities/ImageDecoder.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/Shared/LoginDisplay.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Shared/LoginDisplay.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/wwwroot/temp/MudBlazor.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/Client/wwwroot/temp/MudBlazor.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/wwwroot/temp/MudBlazor.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/wwwroot/temp/MudBlazor.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/Shared/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Shared/MainLayout.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Client/wwwroot/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Controllers/TickersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Controllers/TickersController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/FinanceApp.Server.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Server/FinanceApp.Server.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Pages/Shared/_Layout.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Pages/Shared/_LoginPartial.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Pages/Shared/_ValidationScriptsPartial.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Pages/_ViewImports.cshtml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Services/Implementations/PolygonApiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Services/Implementations/PolygonApiService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Services/Implementations/TickerDbService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Services/Implementations/TickerDbService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Server/compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/FinanceApp.Shared.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/FinanceApp.Shared.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/global.json" beforeDir="false" afterPath="$PROJECT_DIR$/global.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,10 +46,16 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0a71fbbc1c854310aca92d4deecf7b5d12000/ed/a61aaa8b/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e9d836087ea74ecdb589ef4c4d2dac478b2e00/29/8e9e464a/Color.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e9d836087ea74ecdb589ef4c4d2dac478b2e00/58/1ae0ee3e/Adornment.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3182ebe051d9b4bed148730ecd591e6f2d28d705821e6fbb3c16b51b51f15c7/Profile.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a13a23687b565d3b3ca279dd8e2bfd1d74d49132851d9dcc489eaad1431ff/ServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/karol/Repositories/blazor-polygon-io-dashboard/Client/Pages/Stocks/StockDetails.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/karol/Repositories/blazor-polygon-io-dashboard/Client/Pages/Stocks/StockOpenClose.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/karol/Repositories/blazor-polygon-io-dashboard/Shared/Models/DailyOpenCloseDto.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -69,7 +84,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.intentionPowerPack&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -182,6 +197,11 @@
       <workItem from="1702586740660" duration="2371000" />
       <workItem from="1702591288548" duration="618000" />
       <workItem from="1702649406634" duration="3000" />
+      <workItem from="1702996862721" duration="17000" />
+      <workItem from="1703078722863" duration="12953000" />
+      <workItem from="1704210890810" duration="8508000" />
+      <workItem from="1704396873664" duration="2472000" />
+      <workItem from="1705078463822" duration="6735000" />
     </task>
     <task id="LOCAL-00001" summary="Prepare to update .NET">
       <option name="closed" value="true" />
@@ -245,6 +265,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Prepare to update .NET" />
     <MESSAGE value="Responsive layout and other CSS tweaks" />
